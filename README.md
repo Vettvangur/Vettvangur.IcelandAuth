@@ -1,1 +1,1 @@
-# Vettvangur.IslandAuth
+# Vettvangur.IcelandAuth

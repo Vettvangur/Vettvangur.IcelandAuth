@@ -1,0 +1,21 @@
+﻿# editorconfig.org
+
+# top-most EditorConfig file
+root = true
+
+# Default settings:
+[*]
+charset = utf-8
+end_of_line = crlf
+indent_size = 4
+indent_style = space
+insert_final_newline = true
+
+[*.{js,jsx,ts,tsx}]
+indent_size = 2
+
+[*.{html,config}]
+indent_size = 2
+
+[*.{html,cshtml}]
+charset = utf-8-bom
