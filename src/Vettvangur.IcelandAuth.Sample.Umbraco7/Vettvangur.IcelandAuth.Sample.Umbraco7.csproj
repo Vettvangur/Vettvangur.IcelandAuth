@@ -327,10 +327,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Vettvangur.IcelandAuth.NetFramework\Vettvangur.IcelandAuth.NetFramework.csproj">
-      <Project>{57f6a7c9-aca0-4be1-8d6e-b76c5d32c9c1}</Project>
-      <Name>Vettvangur.IcelandAuth.NetFramework</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Vettvangur.IcelandAuth.Umbraco7\Vettvangur.IcelandAuth.Umbraco7.csproj">
       <Project>{1ff9b47a-d8a3-4516-8942-d55c86ecdbd3}</Project>
       <Name>Vettvangur.IcelandAuth.Umbraco7</Name>

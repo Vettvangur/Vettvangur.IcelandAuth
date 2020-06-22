@@ -1,6 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Configuration;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Cryptography.Xml;
@@ -35,6 +36,7 @@ namespace Vettvangur.IcelandAuth
 
         readonly protected ILogger Logger;
 
+#if NET461
         /// <summary>
         /// Intended for .NET Framework
         /// 
@@ -45,18 +47,13 @@ namespace Vettvangur.IcelandAuth
         public IcelandAuthService(ILogger logger = null)
         {
             Logger = logger;
-            //if (configuration == null)
-            //{
-               var configuration = new ConfigurationBuilder()
-                    .AddXmlFile("web.config")
-                    .Build();
-            //}
 
-            Audience = configuration["appSettings:add:IcelandAuth.Audience"];
-            Authentication = configuration["appSettings:add:IcelandAuth.Authentication"];
-            bool.TryParse(configuration["appSettings:add:IcelandAuth.NeverTraceXmlDocument"], out var shouldNeverTrace);
+            Audience = ConfigurationManager.AppSettings["IcelandAuth.Audience"];
+            Authentication = ConfigurationManager.AppSettings["IcelandAuth.Authentication"];
+            bool.TryParse(ConfigurationManager.AppSettings["IcelandAuth.NeverTraceXmlDocument"], out var shouldNeverTrace);
             NeverTraceXmlDocument = shouldNeverTrace;
         }
+#endif
 
         public IcelandAuthService(
             ILogger logger,
