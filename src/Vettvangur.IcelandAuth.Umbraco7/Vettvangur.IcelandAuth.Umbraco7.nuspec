@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package >
   <metadata>
-    <id>$id$</id>
-    <version>$version$</version>
-    <title>$title$</title>
-    <authors>$author$</authors>
-    <owners>$author$</owners>
+    <id>Vettvangur.IcelandAuth.Umbraco7</id>
+    <version>0.0.1</version>
+    <title>Vettvangur.IcelandAuth.Umbraco7</title>
+    <authors>Gunnar Már Óttarsson, Vettvangur</authors>
+    <owners>Vettvangur</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="expression">MIT</license>
-    <projectUrl>http://project_url_here_or_delete_this_line/</projectUrl>
-    <iconUrl>http://icon_url_here_or_delete_this_line/</iconUrl>
-    <description>$description$</description>
-    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <projectUrl>https://github.com/Vettvangur/Vettvangur.IcelandAuth</projectUrl>
+    <icon>images\VV_Logo.png</icon>
+    <description>Handle Ísland.is authentication</description>
+    <releaseNotes>Allows easy integration with the Ísland.is authentication service using Umbraco.</releaseNotes>
     <copyright>Copyright 2020</copyright>
-    <tags>Tag1 Tag2</tags>
+    <tags>Authentication DigitalCertificates NationalRegistry Iceland Umbraco Umbraco7</tags>
   </metadata>
+  <files>
+    <file src="..\..\VV_Logo.png" target="images\" />
+  </files>
 </package>

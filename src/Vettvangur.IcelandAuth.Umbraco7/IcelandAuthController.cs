@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml;
 using Umbraco.Web.Mvc;
 using Vettvangur.IcelandAuth.Umbraco7.Log4NetCompat;
 
@@ -28,17 +29,19 @@ namespace Vettvangur.IcelandAuth.Umbraco7
         protected readonly string ErrorRedirect;
 
         protected readonly IcelandAuthService IcelandAuthService;
+        protected readonly ILog Log;
+
 
         public IcelandAuthController()
         {
-            var log = LogManager.GetLogger(
+            Log = LogManager.GetLogger(
                     MethodBase.GetCurrentMethod().DeclaringType
                 );
-            var logger = new Log4NetLogger(log);
-            IcelandAuthService = new IcelandAuthService(logger);
+            var log = new Log4NetLogger(Log);
+            IcelandAuthService = new IcelandAuthService(log);
 
-            SuccessRedirect = ConfigurationManager.AppSettings["IcelandAuth.SuccessRedirect"];
-            ErrorRedirect = ConfigurationManager.AppSettings["IcelandAuth.ErrorRedirect"];
+            SuccessRedirect = ConfigurationManager.AppSettings["IcelandAuth.SuccessRedirect"] ?? "/";
+            ErrorRedirect = ConfigurationManager.AppSettings["IcelandAuth.ErrorRedirect"] ?? "/";
         }
 
         public virtual ActionResult Login()
@@ -46,15 +49,23 @@ namespace Vettvangur.IcelandAuth.Umbraco7
             string callbackRedirect;
 
             var samlString = Request["token"];
-            if (string.IsNullOrEmpty(samlString))
-            {
-                var login = IcelandAuthService.VerifySaml(samlString, Request.UserHostAddress);
 
-                if (login != null)
+            try
+            {
+                if (!string.IsNullOrEmpty(samlString))
                 {
-                    callbackRedirect = SuccessCallback?.Invoke(login, Request);
-                    return Redirect(callbackRedirect ?? SuccessRedirect);
+                    var login = IcelandAuthService.VerifySaml(samlString, Request.UserHostAddress);
+
+                    if (login != null)
+                    {
+                        callbackRedirect = SuccessCallback?.Invoke(login, Request);
+                        return Redirect(callbackRedirect ?? SuccessRedirect);
+                    }
                 }
+            }
+            catch(Exception ex) when (ex is FormatException || ex is XmlException || ex is System.Security.Cryptography.CryptographicException)
+            {
+                Log.Error(ex);
             }
 
             callbackRedirect = ErrorCallback?.Invoke(Request);

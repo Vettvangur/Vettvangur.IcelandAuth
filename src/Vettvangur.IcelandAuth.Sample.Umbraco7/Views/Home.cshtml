@@ -38,6 +38,23 @@
 
             </div>
 
+            @{
+                var m = Members.GetCurrentMember();
+
+                if (m != null)
+                {
+                    <div class="ta-center">
+                        <h2>@m.Name</h2>
+                        <p class="section__description mw-640 ma-h-auto">@Model.Content.FooterDescription</p>
+
+
+                        @using (Html.BeginUmbracoForm<Vettvangur.IcelandAuth.Sample.Umbraco7.Controllers.AuthController>("Logout"))
+                        {
+                            <button>Logout</button>
+                        }
+                    </div>
+                }
+            }
         </div>
     </div>
 

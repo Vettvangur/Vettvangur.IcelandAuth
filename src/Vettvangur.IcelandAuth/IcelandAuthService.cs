@@ -36,7 +36,7 @@ namespace Vettvangur.IcelandAuth
 
         readonly protected ILogger Logger;
 
-#if NET461
+#if NETFRAMEWORK
         /// <summary>
         /// Intended for .NET Framework
         /// 
@@ -76,6 +76,15 @@ namespace Vettvangur.IcelandAuth
         /// If provided with an IPv4 address, will verify ip address in SAML document matches
         /// </param>
         /// <returns></returns>
+        /// <exception cref="FormatException">
+        /// Indicates SAML response is incorrectly formatted
+        /// </exception>
+        /// <exception cref="XmlException">
+        /// Indicates SAML response is incorrectly formatted
+        /// </exception>
+        /// <exception cref="System.Security.Cryptography.CryptographicException">
+        /// Signature certificate invalid
+        /// </exception>
         public virtual SamlLogin VerifySaml(
             string samlString,
             string ipAddress = null)
@@ -84,7 +93,16 @@ namespace Vettvangur.IcelandAuth
             string message = string.Empty;
 
             byte[] data = Convert.FromBase64String(samlString);
-            string decodedString = Encoding.UTF8.GetString(data);
+            string decodedString;
+            try
+            {
+                decodedString = Encoding.UTF8.GetString(data);
+            }
+            catch (ArgumentException ex)
+            {
+                // Consolidate expected exception types
+                throw new FormatException("Invalid SAML response format", ex);
+            }
 
             XmlDocument doc = new XmlDocument
             {
@@ -95,8 +113,13 @@ namespace Vettvangur.IcelandAuth
             SignedXml signedXml = new SignedXml(doc);
 
             // Retrieve signature
-            XmlElement signedInfo = doc["Response"]["Signature"];
-            var certText = doc["Response"]["Signature"]["KeyInfo"]["X509Data"]["X509Certificate"].InnerText;
+            XmlElement signedInfo = doc["Response"]?["Signature"];
+            var certText = doc["Response"]?["Signature"]?["KeyInfo"]?["X509Data"]?["X509Certificate"]?.InnerText;
+            if (certText == null)
+            {
+                throw new FormatException("Invalid SAML response format");
+            }
+
             signedXml.LoadXml(signedInfo);
             byte[] certData = Encoding.UTF8.GetBytes(certText);
 
@@ -123,15 +146,21 @@ namespace Vettvangur.IcelandAuth
 
             DateTime nowTime = DateTime.UtcNow;
             // Retrieve time from conditions and compare
-            XmlElement conditions = doc["Response"]["Assertion"]["Conditions"];
+            XmlElement conditions = doc["Response"]?["Assertion"]?["Conditions"];
+            if (conditions?.Attributes["NotBefore"]?.Value == null
+            || conditions?.Attributes["NotOnOrAfter"].Value == null)
+            {
+                throw new FormatException("Invalid SAML format");
+            }
+
             DateTime fromTime =
                 DateTime.Parse(conditions.Attributes["NotBefore"].Value);
             DateTime toTime =
                 DateTime.Parse(conditions.Attributes["NotOnOrAfter"].Value);
 
             bool audienceOk = false;
-            if (conditions["AudienceRestriction"]["Audience"].InnerText
-                .Equals(Audience, StringComparison.InvariantCultureIgnoreCase))
+            if (conditions["AudienceRestriction"]?["Audience"]?.InnerText
+                .Equals(Audience, StringComparison.InvariantCultureIgnoreCase) == true)
             {
                 audienceOk = true;
                 message += "Audience is OK. ";
@@ -161,16 +190,16 @@ namespace Vettvangur.IcelandAuth
             bool ipOk = true;
             bool authMethodOk = true;
 
-            XmlNodeList attrList = doc["Response"]["Assertion"]["AttributeStatement"].ChildNodes;
+            XmlNodeList attrList = doc["Response"]["Assertion"]["AttributeStatement"]?.ChildNodes;
 
-            if (attrList.Count > 0)
+            if (attrList?.Count > 0)
             {
                 foreach (XmlNode attrNode in attrList)
                 {
                     XmlAttributeCollection attrCol = attrNode.Attributes;
 
                     // IPAddress
-                    if (attrCol["Name"].Value.Equals("IPAddress"))
+                    if (attrCol["Name"]?.Value.Equals("IPAddress") == true)
                     {
                         if (!string.IsNullOrEmpty(ipAddress))
                         {
@@ -179,7 +208,7 @@ namespace Vettvangur.IcelandAuth
                     }
 
                     // Authentication method used, f.x. phone certificate.
-                    else if (attrCol["Name"].Value.Equals("Authentication"))
+                    else if (attrCol["Name"]?.Value.Equals("Authentication") == true)
                     {
                         if (!string.IsNullOrEmpty(Authentication))
                         {
@@ -190,7 +219,7 @@ namespace Vettvangur.IcelandAuth
                     }
 
                     // UserSSN
-                    else if (attrCol["Name"].Value.Equals("UserSSN"))
+                    else if (attrCol["Name"]?.Value.Equals("UserSSN") == true)
                     {
                         if (!string.IsNullOrEmpty(attrNode.FirstChild.InnerText) &&
                             attrNode.FirstChild.InnerText.Length == 10)
@@ -201,7 +230,7 @@ namespace Vettvangur.IcelandAuth
                     }
 
                     // Name
-                    else if (attrCol["Name"].Value.Equals("Name"))
+                    else if (attrCol["Name"]?.Value.Equals("Name") == true)
                     {
                         if (!string.IsNullOrEmpty(attrNode.FirstChild.InnerText))
                         {
