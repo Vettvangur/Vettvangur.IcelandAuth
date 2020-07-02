@@ -122,3 +122,4 @@ Umbraco\.Frontend/\.vscode/
 Umbraco\.Site/Properties/PublishProfiles/Default Settings\.pubxml 
 
 
+*.snupkg

@@ -1,4 +1,5 @@
-using log4net;
+using Umbraco.Core;
+using Umbraco.Core.Logging;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -6,34 +7,35 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Vettvangur.IcelandAuth.Umbraco7.Log4NetCompat
+namespace Vettvangur.IcelandAuth.Umbraco8
 {
     /// <summary>
     /// The log4net logger class.
     /// Modified from https://dotnetthoughts.net/how-to-use-log4net-with-aspnetcore-for-logging/
     /// </summary>
-    class Log4NetLogger : ILogger
+    class UmbracoLogger : Microsoft.Extensions.Logging.ILogger
     {
         /// <summary>
         /// The log.
         /// </summary>
-        private readonly ILog log;
-
+        private readonly Umbraco.Core.Logging.ILogger log;
+        private readonly Type type;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Log4NetLogger"/> class.
         /// </summary>
         /// <param name="loggerRepository">The repository name.</param>
         /// <param name="name">The logger's name.</param>
-        public Log4NetLogger(ILog logger)
-            => this.log = logger;
-
+        public UmbracoLogger(Umbraco.Core.Logging.ILogger logger, Type t)
+        {
+            log = logger;
+            type = t;
+        }
 
         /// <summary>
         /// Gets the name.
         /// </summary>
-        public string Name
-            => this.log.Logger.Name;
+        public string Name => type.Name;
 
         /// <summary>
         /// Determines whether the logging level is enabled.
@@ -41,28 +43,8 @@ namespace Vettvangur.IcelandAuth.Umbraco7.Log4NetCompat
         /// <param name="logLevel">The log level.</param>
         /// <returns>The <see cref="bool"/> value indicating whether the logging level is enabled.</returns>
         /// <exception cref="ArgumentOutOfRangeException">Throws when <paramref name="logLevel"/> is outside allowed range</exception>
-        public bool IsEnabled(LogLevel logLevel)
-        {
-            switch (logLevel)
-            {
-                case LogLevel.Critical:
-                    return this.log.IsFatalEnabled;
-                case LogLevel.Debug:
-                case LogLevel.Trace:
-                    return this.log.IsDebugEnabled;
-                case LogLevel.Error:
-                    return this.log.IsErrorEnabled;
-                case LogLevel.Information:
-                    return this.log.IsInfoEnabled;
-                case LogLevel.Warning:
-                    return this.log.IsWarnEnabled;
-                case LogLevel.None:
-                    return false;
-
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(logLevel));
-            }
-        }
+        public bool IsEnabled(Microsoft.Extensions.Logging.LogLevel logLevel)
+            => log.IsEnabled(type, (Umbraco.Core.Logging.LogLevel)logLevel);
 
         /// <summary>
         /// Logs an exception into the log.
@@ -75,13 +57,13 @@ namespace Vettvangur.IcelandAuth.Umbraco7.Log4NetCompat
         /// <typeparam name="TState">The type of the state.</typeparam>
         /// <exception cref="ArgumentNullException">Throws when the <paramref name="formatter"/> is null.</exception>
         public void Log<TState>(
-            LogLevel logLevel,
+            Microsoft.Extensions.Logging.LogLevel logLevel,
             EventId eventId,
             TState state,
             Exception exception,
             Func<TState, Exception, string> formatter)
         {
-            if (!this.IsEnabled(logLevel))
+            if (!IsEnabled(logLevel))
             {
                 return;
             }
@@ -94,29 +76,29 @@ namespace Vettvangur.IcelandAuth.Umbraco7.Log4NetCompat
             {
                 switch (logLevel)
                 {
-                    case LogLevel.Debug:
-                        this.log.Debug(message, exception);
+                    case Microsoft.Extensions.Logging.LogLevel.Debug:
+                        this.log.Debug(type, message + exception);
                         break;
 
-                    case LogLevel.Error:
-                        this.log.Error(message, exception);
+                    case Microsoft.Extensions.Logging.LogLevel.Error:
+                        this.log.Error(type, exception, message);
                         break;
 
-                    case LogLevel.Information:
-                        this.log.Info(message, exception);
+                    case Microsoft.Extensions.Logging.LogLevel.Information:
+                        this.log.Info(type, message + exception);
                         break;
 
-                    case LogLevel.Warning:
-                        this.log.Warn(message, exception);
+                    case Microsoft.Extensions.Logging.LogLevel.Warning:
+                        this.log.Warn(type, exception, message);
                         break;
 
-                    case LogLevel.None:
+                    case Microsoft.Extensions.Logging.LogLevel.None:
                         // Just ignore the message. But this option shouldn't be reached.
                         break;
 
                     default:
-                        this.log.Warn($"Encountered unknown log level {logLevel}, writing out as Info.");
-                        this.log.Info(message, exception);
+                        this.log.Warn(type, "Encountered unknown log level {logLevel}, writing out as Info.", logLevel);
+                        this.log.Info(type, message + exception);
                         break;
                 }
             }
@@ -130,7 +112,7 @@ namespace Vettvangur.IcelandAuth.Umbraco7.Log4NetCompat
             }
         }
 
-        IDisposable ILogger.BeginScope<TState>(TState state)
+        IDisposable Microsoft.Extensions.Logging.ILogger.BeginScope<TState>(TState state)
         {
             throw new NotImplementedException();
         }
