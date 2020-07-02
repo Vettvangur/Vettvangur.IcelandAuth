@@ -24,6 +24,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vettvangur.IcelandAuth.Umbr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vettvangur.IcelandAuth.Umbraco.Shared", "Vettvangur.IcelandAuth.Umbraco.Shared\Vettvangur.IcelandAuth.Umbraco.Shared.csproj", "{563B5CCB-A138-485D-9B9C-69ABE00E6773}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vettvangur.IcelandAuth.Sample.AspNetCore", "Vettvangur.IcelandAuth.Sample.AspNetCore\Vettvangur.IcelandAuth.Sample.AspNetCore.csproj", "{BB6AF6ED-ED58-4EA8-B939-132556DC1D28}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,12 +52,17 @@ Global
 		{563B5CCB-A138-485D-9B9C-69ABE00E6773}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{563B5CCB-A138-485D-9B9C-69ABE00E6773}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{563B5CCB-A138-485D-9B9C-69ABE00E6773}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB6AF6ED-ED58-4EA8-B939-132556DC1D28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB6AF6ED-ED58-4EA8-B939-132556DC1D28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB6AF6ED-ED58-4EA8-B939-132556DC1D28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB6AF6ED-ED58-4EA8-B939-132556DC1D28}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{11B18DD8-10EA-48D7-91E3-5CC972B26F63} = {8659C66E-8DC8-47CF-B2EB-E042227F53E2}
+		{BB6AF6ED-ED58-4EA8-B939-132556DC1D28} = {8659C66E-8DC8-47CF-B2EB-E042227F53E2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {021250CD-B3C9-4C20-B71E-143525F4586F}

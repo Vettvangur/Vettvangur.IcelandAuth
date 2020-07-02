@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Vettvangur.IcelandAuth.Umbraco8</id>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <title>Vettvangur.IcelandAuth.Umbraco8</title>
     <authors>Gunnar Már Óttarsson, Vettvangur</authors>
     <owners>Vettvangur</owners>
@@ -14,6 +14,9 @@
     <releaseNotes>Allows easy integration with the Ísland.is authentication service using Umbraco.</releaseNotes>
     <copyright>Copyright 2020</copyright>
     <tags>Authentication DigitalCertificates NationalRegistry Iceland Umbraco Umbraco8</tags>
+    <dependencies>
+      <dependency id="Vettvangur.IcelandAuth" version="[0.0.1]" />
+    </dependencies>
   </metadata>
   <files>
     <file src="..\..\VV_Logo.png" target="images\" />
