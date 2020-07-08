@@ -17,9 +17,8 @@ using Umbraco.Web.Mvc;
 namespace Vettvangur.IcelandAuth.Umbraco8
 {
     /// <summary>
-    /// /umbraco/icelandAuth/icelandAuth/Login
+    /// /umbraco/surface/icelandAuth/Login
     /// </summary>
-    [PluginController("IcelandAuth")]
     public class IcelandAuthController : SurfaceController
     {
         public static event SuccessCallback SuccessCallback;
