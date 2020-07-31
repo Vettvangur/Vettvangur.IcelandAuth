@@ -81,7 +81,7 @@ namespace Vettvangur.IcelandAuth
             Audience = ConfigurationManager.AppSettings["IcelandAuth.Audience"];
             Destination = ConfigurationManager.AppSettings["IcelandAuth.Destination"];
             DestinationSSN = ConfigurationManager.AppSettings["IcelandAuth.DestinationSSN"];
-            AuthID = ConfigurationManager.AppSettings["IcelandAuth.AuthID"];
+            //AuthID = ConfigurationManager.AppSettings["IcelandAuth.AuthID"];
             Authentication = ConfigurationManager.AppSettings["IcelandAuth.Authentication"];
 
             bool.TryParse(ConfigurationManager.AppSettings["IcelandAuth.LogSamlResponse"], out var logSamlResponse);
@@ -99,7 +99,7 @@ namespace Vettvangur.IcelandAuth
             Audience = configuration["IcelandAuth:Audience"];
             Destination = configuration["IcelandAuth:Destination"];
             DestinationSSN = configuration["IcelandAuth:DestinationSSN"];
-            AuthID = configuration["IcelandAuth:AuthID"];
+            //AuthID = configuration["IcelandAuth:AuthID"];
             Authentication = configuration["IcelandAuth:Authentication"];
 
             bool.TryParse(configuration["IcelandAuth:LogSamlResponse"], out var logSamlResponse);
@@ -118,6 +118,8 @@ namespace Vettvangur.IcelandAuth
             string token,
             string ipAddress = null)
         {
+            Logger?.LogDebug("Verifying Saml");
+
             var login = new SamlLogin();
 
             if (string.IsNullOrEmpty(token))
@@ -148,6 +150,7 @@ namespace Vettvangur.IcelandAuth
                 return login;
             }
 
+
             XmlDocument doc = new XmlDocument
             {
                 PreserveWhitespace = true
@@ -161,6 +164,8 @@ namespace Vettvangur.IcelandAuth
                 Logger?.LogWarning(ex, "Invalid SAML response format");
                 return login;
             }
+
+            Logger?.LogDebug("Parsed SAML");
 
             SignedXml signedXml = new SignedXml(doc);
 
@@ -218,6 +223,8 @@ namespace Vettvangur.IcelandAuth
                 }
             }
 
+            Logger?.LogDebug("Certificate verified");
+
             DateTime nowTime = DateTime.UtcNow;
             // Retrieve time from conditions and compare
             XmlElement conditions = doc["Response"]?["Assertion"]?["Conditions"];
@@ -253,6 +260,8 @@ namespace Vettvangur.IcelandAuth
                 login.Message += "From time has not passed yet. ";
             else if (nowTime > toTime)
                 login.Message += "Too much time has passed. ";
+
+            Logger?.LogDebug("Timestamp verified");
 
             // Verify ip address and authentication method if provided
             XmlNodeList attrList = doc["Response"]["Assertion"]["AttributeStatement"]?.ChildNodes;
@@ -318,11 +327,14 @@ namespace Vettvangur.IcelandAuth
                     login.Message += "Correct authentication method. ";
                 else
                     login.Message += "Incorrect authentication method";
+
+                Logger?.LogDebug("Attributes read");
             }
             else
             {
                 login.Message += "No Attributes found";
             }
+
 
             if (LogSamlResponse)
             {

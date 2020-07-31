@@ -10,3 +10,7 @@
 {
     <a class="nav-link @(item.IsAncestorOrSelf(Model.Content) ? "nav-link--active" : null)" href="@item.Url">@item.Name</a>
 }
+
+<a class="nav-link" href="@System.Configuration.ConfigurationManager.AppSettings["IcelandAuth.Url"]">
+    Island.is Auðkenning
+</a>
