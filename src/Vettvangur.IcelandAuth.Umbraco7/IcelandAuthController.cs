@@ -17,9 +17,8 @@ using Vettvangur.IcelandAuth.Umbraco7.Log4NetCompat;
 namespace Vettvangur.IcelandAuth.Umbraco7
 {
     /// <summary>
-    /// /umbraco/icelandAuth/icelandAuth/Login
+    /// /umbraco/surface/icelandAuth/Login
     /// </summary>
-    [PluginController("IcelandAuth")]
     public class IcelandAuthController : SurfaceController
     {
         public static event SuccessCallback SuccessCallback;
