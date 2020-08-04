@@ -204,6 +204,7 @@ namespace Vettvangur.IcelandAuth
                     {
                         login.CertOk = true;
                         login.Message += "Certificate is OK. ";
+                        Logger?.LogDebug("Certificate verified");
                     }
                     else
                     {
@@ -222,8 +223,6 @@ namespace Vettvangur.IcelandAuth
                     Logger?.LogWarning("Signature/Certificate error, possible forgery attempt");
                 }
             }
-
-            Logger?.LogDebug("Certificate verified");
 
             DateTime nowTime = DateTime.UtcNow;
             // Retrieve time from conditions and compare

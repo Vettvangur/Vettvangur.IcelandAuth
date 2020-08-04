@@ -12,7 +12,7 @@ using Vettvangur.IcelandAuth.Umbraco7;
 
 namespace Vettvangur.IcelandAuth.Sample.Umbraco7.App_Start
 {
-    public class UmbracoStartup : ApplicationEventHandler
+    class UmbracoStartup : ApplicationEventHandler
     {
         protected static readonly ILog Logger = LogManager.GetLogger(
             MethodBase.GetCurrentMethod().DeclaringType
