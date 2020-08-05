@@ -285,7 +285,9 @@
     <Content Include="Config\Lang\zh-CN.user.xml" />
     <Content Include="Config\logviewer.searches.config.js" />
     <Content Include="Config\splashes\noNodes.aspx" />
+    <Content Include="css\umbraco-starterkit-style.css" />
     <Content Include="Global.asax" />
+    <Content Include="scripts\umbraco-starterkit-app.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

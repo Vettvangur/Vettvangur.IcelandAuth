@@ -39,8 +39,12 @@ namespace Vettvangur.IcelandAuth.Umbraco7
             var log = new Log4NetLogger(Log);
             IcelandAuthService = new IcelandAuthService(log);
 
-            SuccessRedirect = ConfigurationManager.AppSettings["IcelandAuth.SuccessRedirect"] ?? "/";
-            ErrorRedirect = ConfigurationManager.AppSettings["IcelandAuth.ErrorRedirect"] ?? "/";
+            SuccessRedirect = string.IsNullOrEmpty(ConfigurationManager.AppSettings["IcelandAuth.SuccessRedirect"])
+                ? "/"
+                : ConfigurationManager.AppSettings["IcelandAuth.SuccessRedirect"];
+            ErrorRedirect = string.IsNullOrEmpty(ConfigurationManager.AppSettings["IcelandAuth.ErrorRedirect"])
+                ? "/"
+                : ConfigurationManager.AppSettings["IcelandAuth.ErrorRedirect"];
         }
 
         public virtual ActionResult Login()
