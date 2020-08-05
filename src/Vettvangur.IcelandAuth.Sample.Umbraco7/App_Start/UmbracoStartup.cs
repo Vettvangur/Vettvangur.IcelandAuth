@@ -24,7 +24,7 @@ namespace Vettvangur.IcelandAuth.Sample.Umbraco7.App_Start
             IcelandAuthController.ErrorCallback += HandleError;
         }
 
-        private string HandleLogin(SamlLogin login, HttpRequestBase Request)
+        private string HandleLogin(HttpRequestBase Request, SamlLogin login)
         {
             var ms = ApplicationContext.Current.Services.MemberService;
 
@@ -42,6 +42,7 @@ namespace Vettvangur.IcelandAuth.Sample.Umbraco7.App_Start
                 );
 
                 // Create member with random pw
+                // This ensures users can only login using Ísland.is authentication method
                 byte[] pwBytes = new byte[32];
                 var rngCsp = new RNGCryptoServiceProvider();
                 rngCsp.GetBytes(pwBytes);
@@ -51,14 +52,27 @@ namespace Vettvangur.IcelandAuth.Sample.Umbraco7.App_Start
                 ms.Save(member);
             }
 
+            // This causes all subsequent requests for the user to be 
+            // authenticated as the given umbraco member
             FormsAuthentication.SetAuthCookie(login.UserSSN, true);
 
+            // Provide a way for views and services to access the sessions saml login result
             Request.RequestContext.HttpContext.Session["login"] = login;
+
+            // Return a custom redirect url
             return null;
         }
 
-        private string HandleError(HttpRequestBase Request)
+        private string HandleError(HttpRequestBase Request, SamlLogin login)
         {
+            Logger.Error("Error encountered while attempting Ísland.is authentication.");
+
+            // Handle erronous logins here
+            if (login != null)
+            {
+
+            }
+
             return null;
         }
     }

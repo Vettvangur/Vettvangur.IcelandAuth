@@ -22,8 +22,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vettvangur.IcelandAuth.Samp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vettvangur.IcelandAuth.Umbraco8", "Vettvangur.IcelandAuth.Umbraco8\Vettvangur.IcelandAuth.Umbraco8.csproj", "{37A1CCAF-93A1-4D8F-B843-6C93A442C8EC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vettvangur.IcelandAuth.Sample.AspNetCore", "Vettvangur.IcelandAuth.Sample.AspNetCore\Vettvangur.IcelandAuth.Sample.AspNetCore.csproj", "{BB6AF6ED-ED58-4EA8-B939-132556DC1D28}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vettvangur.IcelandAuth.Sample.Umbraco8", "Vettvangur.IcelandAuth.Sample.Umbraco8\Vettvangur.IcelandAuth.Sample.Umbraco8.csproj", "{CF9DC300-74F5-4578-B9A4-D46B8E736297}"
 EndProject
 Global
@@ -48,10 +46,6 @@ Global
 		{37A1CCAF-93A1-4D8F-B843-6C93A442C8EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37A1CCAF-93A1-4D8F-B843-6C93A442C8EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{37A1CCAF-93A1-4D8F-B843-6C93A442C8EC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BB6AF6ED-ED58-4EA8-B939-132556DC1D28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BB6AF6ED-ED58-4EA8-B939-132556DC1D28}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BB6AF6ED-ED58-4EA8-B939-132556DC1D28}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BB6AF6ED-ED58-4EA8-B939-132556DC1D28}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CF9DC300-74F5-4578-B9A4-D46B8E736297}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CF9DC300-74F5-4578-B9A4-D46B8E736297}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF9DC300-74F5-4578-B9A4-D46B8E736297}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -62,7 +56,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{11B18DD8-10EA-48D7-91E3-5CC972B26F63} = {8659C66E-8DC8-47CF-B2EB-E042227F53E2}
-		{BB6AF6ED-ED58-4EA8-B939-132556DC1D28} = {8659C66E-8DC8-47CF-B2EB-E042227F53E2}
 		{CF9DC300-74F5-4578-B9A4-D46B8E736297} = {8659C66E-8DC8-47CF-B2EB-E042227F53E2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

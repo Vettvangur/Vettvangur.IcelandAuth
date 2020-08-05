@@ -30,12 +30,10 @@ namespace Vettvangur.IcelandAuth.Sample.Umbraco8.App_Start
     class Startup : IComponent
     {
         protected readonly ILogger Logger;
-        protected readonly IFactory Factory;
         protected readonly IMemberService MemberService;
 
         public Startup(
             ILogger logger,
-            IFactory factory,
             IMemberService memberService
         )
         {
@@ -51,7 +49,7 @@ namespace Vettvangur.IcelandAuth.Sample.Umbraco8.App_Start
 
         public void Terminate() { }
 
-        private string HandleLogin(SamlLogin login, HttpRequestBase Request)
+        private string HandleLogin(HttpRequestBase Request, SamlLogin login)
         {
             var member = MemberService.GetByUsername(login.UserSSN);
 
@@ -67,6 +65,7 @@ namespace Vettvangur.IcelandAuth.Sample.Umbraco8.App_Start
                 );
 
                 // Create member with random pw
+                // This ensures users can only login using Ísland.is authentication method
                 byte[] pwBytes = new byte[32];
                 var rngCsp = new RNGCryptoServiceProvider();
                 rngCsp.GetBytes(pwBytes);
@@ -76,17 +75,27 @@ namespace Vettvangur.IcelandAuth.Sample.Umbraco8.App_Start
                 MemberService.Save(member);
             }
 
+            // This causes all subsequent requests for the user to be 
+            // authenticated as the given umbraco member
             FormsAuthentication.SetAuthCookie(login.UserSSN, true);
 
-            Request.RequestContext.HttpContext.Session["login"] = login;
+            // Provide a way for views and services to access the sessions saml login result
+            Request.RequestContext.HttpContext.Session["samlLogin"] = login;
 
             // Return a custom redirect url
             return null;
         }
 
-        private string HandleError(HttpRequestBase Request)
+        private string HandleError(HttpRequestBase Request, SamlLogin login)
         {
             Logger.Error<Startup>("Error encountered while attempting Ísland.is authentication.");
+            
+            // Handle erronous logins here
+            if (login != null)
+            {
+
+            }
+
             return null;
         }
     }

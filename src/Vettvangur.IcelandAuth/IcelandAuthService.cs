@@ -44,7 +44,7 @@ namespace Vettvangur.IcelandAuth
         readonly protected string Audience;
 
         /// <summary>
-        /// SAML response url destination. F.x. https://icelandauth.vettvangur.is/umbraco/icelandauth/icelandauth/login
+        /// SAML response url destination. F.x. https://icelandauth.vettvangur.is/umbraco/surface/icelandauth/login
         /// </summary>
         readonly protected string Destination;
 
@@ -55,6 +55,7 @@ namespace Vettvangur.IcelandAuth
 
         /// <summary>
         /// Unique identifier for this contract with Ísland.is in Guid format
+        /// Not always included in Saml attributes
         /// </summary>
         readonly protected string AuthID;
 
@@ -174,7 +175,8 @@ namespace Vettvangur.IcelandAuth
             var certText = doc["Response"]?["Signature"]?["KeyInfo"]?["X509Data"]?["X509Certificate"]?.InnerText;
             if (certText == null)
             {
-                throw new FormatException("Invalid SAML response format");
+                Logger?.LogWarning("Invalid SAML response format");
+                return login;
             }
 
             signedXml.LoadXml(signedInfo);
@@ -230,7 +232,8 @@ namespace Vettvangur.IcelandAuth
             if (conditions?.Attributes["NotBefore"]?.Value == null
             || conditions?.Attributes["NotOnOrAfter"].Value == null)
             {
-                throw new FormatException("Invalid SAML format");
+                Logger?.LogWarning("Invalid SAML response format");
+                return login;
             }
 
             DateTime fromTime =
@@ -249,6 +252,29 @@ namespace Vettvangur.IcelandAuth
                 login.Message += "Audience not OK. ";
                 Logger?.LogWarning($"Audience mismatch, received {conditions["AudienceRestriction"]?["Audience"]?.InnerText}");
             }
+
+            if (!string.IsNullOrEmpty(Destination))
+            {
+                var destination = doc.DocumentElement.Attributes["Destination"].Value.ToLower();
+
+                if (Destination == destination)
+                {
+                    login.DestinationOk = true;
+                }
+                else
+                {
+                    Logger?.LogWarning("Destination mismatch, received " + destination);
+                }
+            }
+            else
+            {
+                login.DestinationOk = true;
+            }
+
+            if (login.DestinationOk)
+                login.Message += "Correct Destination. ";
+            else
+                login.Message += "Incorrect Destination";
 
             if (nowTime > fromTime && toTime > nowTime)
             {
@@ -279,10 +305,10 @@ namespace Vettvangur.IcelandAuth
                 }
 
                 // IPAddress
-                var ipAddressAttr = login.Attributes.FirstOrDefault(x => x.Name == "IPAddress");
+                var ipAddressAttr = login.Attributes.First(x => x.Name == "IPAddress");
                 if (!string.IsNullOrEmpty(ipAddress))
                 {
-                    login.IpOk = ipAddressAttr?.Value.Equals(ipAddress) == true;
+                    login.IpOk = ipAddressAttr.Value.Equals(ipAddress);
                 }
                 else
                 {
@@ -290,16 +316,50 @@ namespace Vettvangur.IcelandAuth
                 }
 
                 // Authentication method used, f.x. phone certificate.
-                var authenticationAttr = login.Attributes.FirstOrDefault(x => x.Name == "Authentication");
+                var authenticationResp = login.Attributes.First(x => x.Name == "Authentication").Value;
                 if (!string.IsNullOrEmpty(Authentication))
                 {
-                    login.AuthMethodOk = authenticationAttr?.Value == Authentication;
+                    login.AuthMethodOk = authenticationResp == Authentication;
 
-                    login.Authentication = authenticationAttr?.Value;
+                    login.Authentication = authenticationResp;
                 }
                 else
                 {
                     login.AuthMethodOk = true;
+                }
+
+                var authIdResp = login.Attributes.FirstOrDefault(x => x.Name == "AuthID")?.Value;
+                if (!string.IsNullOrEmpty(AuthID) && !string.IsNullOrEmpty(authIdResp))
+                {
+                    if (AuthID == authIdResp)
+                    {
+                        login.AuthIdOk = true;
+                    }
+                    else
+                    {
+                        Logger?.LogWarning("AuthId mismatch, received " + authIdResp);
+                    }
+                }
+                else
+                {
+                    login.AuthIdOk = true;
+                }
+
+                var destSsnResp = login.Attributes.First(x => x.Name == "DestinationSSN").Value;
+                if (!string.IsNullOrEmpty(DestinationSSN))
+                {
+                    if (DestinationSSN == destSsnResp)
+                    {
+                        login.DestinationSsnOk = true;
+                    }
+                    else
+                    {
+                        Logger?.LogWarning("DestinationSSN mismatch, received " + destSsnResp);
+                    }
+                }
+                else
+                {
+                    login.DestinationSsnOk = true;
                 }
 
                 login.UserSSN = login.Attributes.FirstOrDefault(x => x.Name == "UserSSN")?.Value;
@@ -327,13 +387,22 @@ namespace Vettvangur.IcelandAuth
                 else
                     login.Message += "Incorrect authentication method";
 
+                if (login.AuthIdOk)
+                    login.Message += "Correct auth id. ";
+                else
+                    login.Message += "Incorrect auth id";
+
+                if (login.DestinationSsnOk)
+                    login.Message += "Correct DestinationSSN. ";
+                else
+                    login.Message += "Incorrect DestinationSSN";
+
                 Logger?.LogDebug("Attributes read");
             }
             else
             {
                 login.Message += "No Attributes found";
             }
-
 
             if (LogSamlResponse)
             {

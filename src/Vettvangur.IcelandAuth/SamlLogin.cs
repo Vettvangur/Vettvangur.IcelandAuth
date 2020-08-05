@@ -38,10 +38,13 @@ namespace Vettvangur.IcelandAuth
 
         public bool IpOk { get; internal set; }
         public bool AuthMethodOk { get; internal set; }
+        public bool DestinationOk { get; internal set; }
+        public bool DestinationSsnOk { get; internal set; }
+        public bool AuthIdOk { get; internal set; }
 
         public List<IcelandAuthAttribute> Attributes { get; } = new List<IcelandAuthAttribute>();
 
         public bool Valid =>
-            SignatureOk && CertOk && TimeOk && IpOk && AuthMethodOk && AudienceOk;
+            SignatureOk && CertOk && TimeOk && IpOk && AuthMethodOk && AudienceOk && AuthIdOk && DestinationOk && DestinationSsnOk;
     }
 }

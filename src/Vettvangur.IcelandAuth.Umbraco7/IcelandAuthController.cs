@@ -49,30 +49,24 @@ namespace Vettvangur.IcelandAuth.Umbraco7
 
             var samlString = Request["token"];
 
-            try
+            SamlLogin login = null;
+            if (!string.IsNullOrEmpty(samlString))
             {
-                if (!string.IsNullOrEmpty(samlString))
-                {
-                    var login = IcelandAuthService.VerifySaml(samlString, Request.UserHostAddress);
+                login = IcelandAuthService.VerifySaml(samlString, Request.UserHostAddress);
 
-                    if (login != null)
-                    {
-                        callbackRedirect = SuccessCallback?.Invoke(login, Request);
-                        return Redirect(callbackRedirect ?? SuccessRedirect);
-                    }
+                if (login?.Valid == true)
+                {
+                    callbackRedirect = SuccessCallback?.Invoke(Request, login);
+                    return Redirect(callbackRedirect ?? SuccessRedirect);
                 }
             }
-            catch(Exception ex) when (ex is FormatException || ex is XmlException || ex is System.Security.Cryptography.CryptographicException)
-            {
-                Log.Error(ex);
-            }
 
-            callbackRedirect = ErrorCallback?.Invoke(Request);
+            callbackRedirect = ErrorCallback?.Invoke(Request, login);
 
             return Redirect(callbackRedirect ?? ErrorRedirect);
         }
     }
 
-    public delegate string SuccessCallback(SamlLogin login, HttpRequestBase Request);
-    public delegate string ErrorCallback(HttpRequestBase Request);
+    public delegate string SuccessCallback(HttpRequestBase Request, SamlLogin login);
+    public delegate string ErrorCallback(HttpRequestBase Request, SamlLogin login);
 }
