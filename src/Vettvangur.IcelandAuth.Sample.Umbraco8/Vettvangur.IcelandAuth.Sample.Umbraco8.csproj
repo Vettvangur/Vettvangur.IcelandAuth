@@ -287,6 +287,7 @@
     <Content Include="Config\splashes\noNodes.aspx" />
     <Content Include="css\umbraco-starterkit-style.css" />
     <Content Include="Global.asax" />
+    <Content Include="robots.txt" />
     <Content Include="scripts\umbraco-starterkit-app.js" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -350,9 +351,7 @@
       <Name>Vettvangur.IcelandAuth</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\PublishProfiles\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
