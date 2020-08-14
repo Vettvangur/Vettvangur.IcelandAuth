@@ -7,7 +7,7 @@
         
         <!-- Package properties -->
         <PackageId>Vettvangur.IcelandAuth</PackageId>
-        <PackageVersion>0.0.1</PackageVersion>
+        <Version>0.0.1</Version>
         <Title>Vettvangur.IcelandAuth</Title>
         <Authors>Gunnar Már Óttarsson, Vettvangur</Authors>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>

@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Vettvangur.IcelandAuth.Umbraco8</id>
-    <version>0.0.2</version>
+    <version>$version$</version>
     <title>Vettvangur.IcelandAuth.Umbraco8</title>
     <authors>Gunnar Már Óttarsson, Vettvangur</authors>
     <owners>Vettvangur</owners>
