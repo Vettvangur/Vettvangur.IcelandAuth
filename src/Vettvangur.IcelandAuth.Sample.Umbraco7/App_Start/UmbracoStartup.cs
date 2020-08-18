@@ -20,8 +20,8 @@ namespace Vettvangur.IcelandAuth.Sample.Umbraco7.App_Start
 
         protected override void ApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
         {
-            IcelandAuthController.SuccessCallback += HandleLogin;
-            IcelandAuthController.ErrorCallback += HandleError;
+            IcelandAuthController.Success += HandleLogin;
+            IcelandAuthController.Error += HandleError;
         }
 
         private string HandleLogin(HttpRequestBase Request, SamlLogin login)

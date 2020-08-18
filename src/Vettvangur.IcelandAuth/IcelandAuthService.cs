@@ -319,7 +319,7 @@ namespace Vettvangur.IcelandAuth
                 var authenticationResp = login.Attributes.First(x => x.Name == "Authentication").Value;
                 if (!string.IsNullOrEmpty(Authentication))
                 {
-                    login.AuthMethodOk = authenticationResp == Authentication;
+                    login.AuthMethodOk = Authentication.Split(',').Contains(authenticationResp);
 
                     login.Authentication = authenticationResp;
                 }

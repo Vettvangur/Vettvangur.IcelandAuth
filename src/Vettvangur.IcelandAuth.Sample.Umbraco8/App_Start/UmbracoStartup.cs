@@ -43,8 +43,8 @@ namespace Vettvangur.IcelandAuth.Sample.Umbraco8.App_Start
 
         public void Initialize()
         {
-            IcelandAuthController.SuccessCallback += HandleLogin;
-            IcelandAuthController.ErrorCallback += HandleError;
+            IcelandAuthController.Success += HandleLogin;
+            IcelandAuthController.Error += HandleError;
         }
 
         public void Terminate() { }

@@ -21,8 +21,8 @@ namespace Vettvangur.IcelandAuth.Umbraco7
     /// </summary>
     public class IcelandAuthController : SurfaceController
     {
-        public static event SuccessCallback SuccessCallback;
-        public static event ErrorCallback ErrorCallback;
+        public static event SuccessCallback Success;
+        public static event ErrorCallback Error;
 
         protected readonly string SuccessRedirect;
         protected readonly string ErrorRedirect;
@@ -60,12 +60,12 @@ namespace Vettvangur.IcelandAuth.Umbraco7
 
                 if (login?.Valid == true)
                 {
-                    callbackRedirect = SuccessCallback?.Invoke(Request, login);
+                    callbackRedirect = Success?.Invoke(Request, login);
                     return Redirect(callbackRedirect ?? SuccessRedirect);
                 }
             }
 
-            callbackRedirect = ErrorCallback?.Invoke(Request, login);
+            callbackRedirect = Error?.Invoke(Request, login);
 
             return Redirect(callbackRedirect ?? ErrorRedirect);
         }
