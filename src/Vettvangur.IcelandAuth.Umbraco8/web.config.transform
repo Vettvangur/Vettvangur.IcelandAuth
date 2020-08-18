@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <appSettings>
+
+        <!-- Ísland.is contract values Start -->
+        <!-- The following settings can be read from your Island.is management page: https://innskraning.island.is/thjonustuveitendur/Login.aspx?ReturnUrl=%2fthjonustuveitendur%2f-->
+
+        <!-- Used by the frontpage login link -->
+        <add key="IcelandAuth.Url" value="https://innskraning.island.is/?id=[site_id]" />
+
+        <!-- Constrain audience - Required-->
+        <add key="IcelandAuth.Audience" value="" />
+        <!-- Ensure SAML response url matches f.x. SAML response url destination. - Optional-->
+        <add key="IcelandAuth.Destination" value="" />
+        <!-- The SSN used for contract with Ísland.is. - Optional-->
+        <add key="IcelandAuth.DestinationSSN" value="" />
+
+        <!-- Ísland.is contract values End -->
+
+        <!--
+            Constrain authentication method used on Ísland.is
+            Possible values include:
+            "Rafræn skilríki"
+            "Rafræn símaskilríki"
+            "Íslykill"
+        -->
+        <add key="IcelandAuth.Authentication" value="" />
+        <add key="IcelandAuth.LogSamlResponse" value="False" />
+
+        <!-- 
+            Configure an absolute or relative url to redirect successful or erronous logins to.
+            Can also be configured on a per-login basis using the event callbacks of IcelandAuthController
+        -->
+
+        <add key="IcelandAuth.SuccessRedirect" value="" />
+        <add key="IcelandAuth.ErrorRedirect" value="" />
+    </appSettings>
+</configuration>

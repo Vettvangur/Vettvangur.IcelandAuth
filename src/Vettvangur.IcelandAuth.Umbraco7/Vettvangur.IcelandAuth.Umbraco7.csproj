@@ -230,6 +230,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Vettvangur.IcelandAuth.Umbraco7.nuspec" />
+    <Content Include="web.config.transform" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Vettvangur.IcelandAuth\Vettvangur.IcelandAuth.csproj">
