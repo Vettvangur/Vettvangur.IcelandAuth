@@ -34,7 +34,7 @@ namespace Vettvangur.IcelandAuth.Umbraco8
         public IcelandAuthController()
         {
             Log = Current.Logger;
-            var log = new UmbracoLogger(Log, typeof(IcelandAuthController));
+            var log = new UmbracoLogger(Log, typeof(IcelandAuthService));
             IcelandAuthService = new IcelandAuthService(log);
 
             SuccessRedirect = string.IsNullOrEmpty(ConfigurationManager.AppSettings["IcelandAuth.SuccessRedirect"])

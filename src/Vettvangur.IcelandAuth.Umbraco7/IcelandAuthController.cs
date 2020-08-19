@@ -33,9 +33,7 @@ namespace Vettvangur.IcelandAuth.Umbraco7
 
         public IcelandAuthController()
         {
-            Log = LogManager.GetLogger(
-                    MethodBase.GetCurrentMethod().DeclaringType
-                );
+            Log = LogManager.GetLogger(typeof(IcelandAuthService));
             var log = new Log4NetLogger(Log);
             IcelandAuthService = new IcelandAuthService(log);
 

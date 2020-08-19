@@ -15,7 +15,7 @@
     <copyright>Copyright 2020</copyright>
     <tags>Authentication DigitalCertificates NationalRegistry Iceland Umbraco Umbraco7</tags>
     <dependencies>
-      <dependency id="Vettvangur.IcelandAuth" version="[0.0.2]" />
+      <dependency id="Vettvangur.IcelandAuth" version="[0.0.5]" />
     </dependencies>
   </metadata>
   <files>

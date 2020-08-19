@@ -60,7 +60,14 @@ namespace Vettvangur.IcelandAuth
         readonly protected string AuthID;
 
         /// <summary>
-        /// Take care when enabling this setting, sensitive data will be exposed.
+        /// Check if the users IP matches the one seen at authentication.
+        /// Not always a reliable check, breaks when site is hosted on internal network
+        /// Default true
+        /// </summary>
+        readonly protected bool VerifyIPAddress;
+
+        /// <summary>
+        /// Take care when enabling this setting, sensitive data will be logged.
         /// Never enable in production!
         /// </summary>
         readonly protected bool LogSamlResponse;
@@ -84,6 +91,9 @@ namespace Vettvangur.IcelandAuth
             DestinationSSN = ConfigurationManager.AppSettings["IcelandAuth.DestinationSSN"];
             //AuthID = ConfigurationManager.AppSettings["IcelandAuth.AuthID"];
             Authentication = ConfigurationManager.AppSettings["IcelandAuth.Authentication"];
+            VerifyIPAddress = bool.TryParse(ConfigurationManager.AppSettings["IcelandAuth.VerifyIPAddress"], out var verifyIpAddress)
+                ? verifyIpAddress
+                : true;
 
             bool.TryParse(ConfigurationManager.AppSettings["IcelandAuth.LogSamlResponse"], out var logSamlResponse);
             LogSamlResponse = logSamlResponse;
@@ -102,6 +112,9 @@ namespace Vettvangur.IcelandAuth
             DestinationSSN = configuration["IcelandAuth:DestinationSSN"];
             //AuthID = configuration["IcelandAuth:AuthID"];
             Authentication = configuration["IcelandAuth:Authentication"];
+            VerifyIPAddress = bool.TryParse(configuration["IcelandAuth:VerifyIPAddress"], out var verifyIpAddress)
+                ? verifyIpAddress
+                : true;
 
             bool.TryParse(configuration["IcelandAuth:LogSamlResponse"], out var logSamlResponse);
             LogSamlResponse = logSamlResponse;
@@ -112,12 +125,13 @@ namespace Vettvangur.IcelandAuth
         /// </summary>
         /// <param name="token"></param>
         /// <param name="ipAddress">
-        /// If provided with an IPv4 address, will verify ip address in SAML document matches
+        /// Verify ip address in SAML document matches, 
+        /// can be disabled with IcelandAuth.VerifyIPAddress appSetting
         /// </param>
         /// <returns></returns>
         public virtual SamlLogin VerifySaml(
             string token,
-            string ipAddress = null)
+            string ipAddress)
         {
             Logger?.LogDebug("Verifying Saml");
 
@@ -255,9 +269,9 @@ namespace Vettvangur.IcelandAuth
 
             if (!string.IsNullOrEmpty(Destination))
             {
-                var destination = doc.DocumentElement.Attributes["Destination"].Value.ToLower();
+                var destination = doc.DocumentElement.Attributes["Destination"].Value;
 
-                if (Destination == destination)
+                if (Destination.Equals(destination, StringComparison.InvariantCultureIgnoreCase))
                 {
                     login.DestinationOk = true;
                 }
@@ -272,9 +286,9 @@ namespace Vettvangur.IcelandAuth
             }
 
             if (login.DestinationOk)
-                login.Message += "Correct Destination. ";
+                login.Message += "Destination is OK. ";
             else
-                login.Message += "Incorrect Destination";
+                login.Message += "Destination not OK. ";
 
             if (nowTime > fromTime && toTime > nowTime)
             {
@@ -305,9 +319,9 @@ namespace Vettvangur.IcelandAuth
                 }
 
                 // IPAddress
-                var ipAddressAttr = login.Attributes.First(x => x.Name == "IPAddress");
-                if (!string.IsNullOrEmpty(ipAddress))
+                if (VerifyIPAddress && !string.IsNullOrEmpty(ipAddress))
                 {
+                    var ipAddressAttr = login.Attributes.First(x => x.Name == "IPAddress");
                     login.IpOk = ipAddressAttr.Value.Equals(ipAddress);
                 }
                 else
@@ -378,24 +392,24 @@ namespace Vettvangur.IcelandAuth
                 }
 
                 if (login.IpOk)
-                    login.Message += "Correct ip address. ";
+                    login.Message += "IP address is OK. ";
                 else
-                    login.Message += "Incorrect ip address. ";
+                    login.Message += "IP address not OK. ";
 
                 if (login.AuthMethodOk)
-                    login.Message += "Correct authentication method. ";
+                    login.Message += "Authentication method is OK. ";
                 else
-                    login.Message += "Incorrect authentication method";
+                    login.Message += "Authentication method not OK. ";
 
                 if (login.AuthIdOk)
-                    login.Message += "Correct auth id. ";
+                    login.Message += "Auth id is OK. ";
                 else
-                    login.Message += "Incorrect auth id";
+                    login.Message += "Auth id not OK. ";
 
                 if (login.DestinationSsnOk)
-                    login.Message += "Correct DestinationSSN. ";
+                    login.Message += "DestinationSSN is OK. ";
                 else
-                    login.Message += "Incorrect DestinationSSN";
+                    login.Message += "DestinationSSN not OK. ";
 
                 Logger?.LogDebug("Attributes read");
             }
@@ -415,8 +429,19 @@ namespace Vettvangur.IcelandAuth
                     Logger?.LogDebug("SAML Response: \r\n" + stringWriter.GetStringBuilder().ToString());
                 }
             }
-
+            
             Logger?.LogDebug(login.Message);
+
+            // Replace after logging refactor
+            //if (login.Valid)
+            //{
+            //    Logger?.LogDebug("Authentication valid");
+            //}
+            //else
+            //{
+            //    Logger?.LogDebug("Authentication invalid");
+            //}
+
             return login;
         }
     }
