@@ -22,6 +22,7 @@ namespace Vettvangur.IcelandAuth.Sample.Umbraco8.App_Start
         /// </summary>
         public void Compose(Composition composition)
         {
+            composition.Register<AuthHandler>();
             composition.Components()
                 .Append<Startup>()
                 ;

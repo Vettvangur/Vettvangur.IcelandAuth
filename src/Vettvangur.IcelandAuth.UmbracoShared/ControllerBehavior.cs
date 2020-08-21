@@ -22,12 +22,10 @@ namespace Vettvangur.IcelandAuth.UmbracoShared
         protected readonly string SuccessRedirect;
         protected readonly string ErrorRedirect;
 
-        protected readonly HttpRequestBase Request;
         protected readonly IcelandAuthService IcelandAuthService;
 
-        public ControllerBehavior(HttpRequestBase request, IcelandAuthService icelandAuthService)
+        public ControllerBehavior(IcelandAuthService icelandAuthService)
         {
-            Request = request;
             IcelandAuthService = icelandAuthService;
 
             SuccessRedirect = string.IsNullOrEmpty(ConfigurationManager.AppSettings["IcelandAuth.SuccessRedirect"])
@@ -38,16 +36,21 @@ namespace Vettvangur.IcelandAuth.UmbracoShared
                 : ConfigurationManager.AppSettings["IcelandAuth.ErrorRedirect"];
         }
 
-        public virtual string Login()
+        public virtual string Login(HttpRequestBase request = null)
         {
+            if (request == null)
+            {
+                request = new HttpRequestWrapper(HttpContext.Current.Request);
+            }
+
             string callbackRedirect;
 
-            var samlString = Request["token"];
+            var samlString = request["token"];
 
             SamlLogin login = null;
             if (!string.IsNullOrEmpty(samlString))
             {
-                login = IcelandAuthService.VerifySaml(samlString, Request.UserHostAddress);
+                login = IcelandAuthService.VerifySaml(samlString, request.UserHostAddress);
 
                 if (login?.Valid == true)
                 {

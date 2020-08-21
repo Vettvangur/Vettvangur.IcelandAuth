@@ -30,7 +30,7 @@ namespace Vettvangur.IcelandAuth.Umbraco8
             Log = logger;
             var log = new UmbracoLogger(Log, typeof(IcelandAuthService));
             var icelandAuthService = new IcelandAuthService(log);
-            AuthHandler = new ControllerBehavior(Request, icelandAuthService);
+            AuthHandler = new ControllerBehavior(icelandAuthService);
         }
 
         public virtual ActionResult Login()

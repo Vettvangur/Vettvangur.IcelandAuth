@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 namespace Vettvangur.IcelandAuth.Umbraco8
 {
     /// <summary>
-    /// The log4net logger class.
+    /// Umbraco logger compat for <see cref="Microsoft.Extensions.Logging.ILogger"/>.
     /// Modified from https://dotnetthoughts.net/how-to-use-log4net-with-aspnetcore-for-logging/
     /// </summary>
-    class UmbracoLogger : Microsoft.Extensions.Logging.ILogger
+    public class UmbracoLogger : Microsoft.Extensions.Logging.ILogger
     {
         /// <summary>
         /// The log.

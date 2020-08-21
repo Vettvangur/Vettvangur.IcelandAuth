@@ -2,13 +2,6 @@
 <configuration>
     <appSettings>
         <add key="IcelandAuth.Audience" value="" />
-        <add key="IcelandAuth.Destination" value="" />
-        <add key="IcelandAuth.DestinationSSN" value="" />
-        <add key="IcelandAuth.Authentication" value="" />
         <add key="IcelandAuth.VerifyIPAddress" value="True" />
-        <add key="IcelandAuth.LogSamlResponse" value="False" />
-
-        <add key="IcelandAuth.SuccessRedirect" value="" />
-        <add key="IcelandAuth.ErrorRedirect" value="" />
     </appSettings>
 </configuration>

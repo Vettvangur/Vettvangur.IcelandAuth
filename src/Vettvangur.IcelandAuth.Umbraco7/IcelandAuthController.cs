@@ -12,7 +12,6 @@ using System.Web;
 using System.Web.Mvc;
 using System.Xml;
 using Umbraco.Web.Mvc;
-using Vettvangur.IcelandAuth.Umbraco7.Log4NetCompat;
 using Vettvangur.IcelandAuth.UmbracoShared;
 
 namespace Vettvangur.IcelandAuth.Umbraco7
@@ -33,7 +32,7 @@ namespace Vettvangur.IcelandAuth.Umbraco7
             Log = LogManager.GetLogger(typeof(IcelandAuthService));
             var log = new Log4NetLogger(Log);
             var icelandAuthService = new IcelandAuthService(log);
-            AuthHandler = new ControllerBehavior(Request, icelandAuthService);
+            AuthHandler = new ControllerBehavior(icelandAuthService);
         }
 
         public virtual ActionResult Login()

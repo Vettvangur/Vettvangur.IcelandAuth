@@ -35,42 +35,42 @@ namespace Vettvangur.IcelandAuth
         /// "Rafræn símaskilríki"
         /// "Íslykill"
         /// </summary>
-        readonly protected string Authentication;
+        public virtual string Authentication { get; set; }
 
         /// <summary>
         /// Audience will most likely be the sites host name.
         /// F.x. Vettvangur demo is icelandauth.vettvangur.is
         /// </summary>
-        readonly protected string Audience;
+        public virtual string Audience { get; set; }
 
         /// <summary>
         /// SAML response url destination. F.x. https://icelandauth.vettvangur.is/umbraco/surface/icelandauth/login
         /// </summary>
-        readonly protected string Destination;
+        public virtual string Destination { get; set; }
 
         /// <summary>
         /// The SSN used for contract with Ísland.is. F.x 5208130550
         /// </summary>
-        readonly protected string DestinationSSN;
+        public virtual string DestinationSSN { get; set; }
 
         /// <summary>
         /// Unique identifier for this contract with Ísland.is in Guid format
         /// Not always included in Saml attributes
         /// </summary>
-        readonly protected string AuthID;
+        public virtual string AuthID { get; set; }
 
         /// <summary>
         /// Check if the users IP matches the one seen at authentication.
         /// Not always a reliable check, breaks when site is hosted on internal network
         /// Default true
         /// </summary>
-        readonly protected bool VerifyIPAddress;
+        public virtual bool VerifyIPAddress { get; set; }
 
         /// <summary>
         /// Take care when enabling this setting, sensitive data will be logged.
         /// Never enable in production!
         /// </summary>
-        readonly protected bool LogSamlResponse;
+        public virtual bool LogSamlResponse { get; set; }
 
         readonly protected ILogger Logger;
 

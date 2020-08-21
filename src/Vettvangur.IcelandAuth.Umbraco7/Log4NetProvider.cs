@@ -6,19 +6,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Vettvangur.IcelandAuth.Umbraco7.Log4NetCompat
+namespace Vettvangur.IcelandAuth.Umbraco7
 {
     /// <summary>
-    /// The log4net logger class.
+    /// Log4net compat for <see cref="Microsoft.Extensions.Logging.ILogger"/>.
     /// Modified from https://dotnetthoughts.net/how-to-use-log4net-with-aspnetcore-for-logging/
     /// </summary>
-    class Log4NetLogger : ILogger
+    public class Log4NetLogger : ILogger
     {
         /// <summary>
         /// The log.
         /// </summary>
         private readonly ILog log;
-
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Log4NetLogger"/> class.
