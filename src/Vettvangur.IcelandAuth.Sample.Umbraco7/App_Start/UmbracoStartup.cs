@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Security;
 using Umbraco.Core;
 using Umbraco.Web;
-using Vettvangur.IcelandAuth.Umbraco7;
+using Vettvangur.IcelandAuth.UmbracoShared;
 
 namespace Vettvangur.IcelandAuth.Sample.Umbraco7.App_Start
 {
@@ -20,11 +20,11 @@ namespace Vettvangur.IcelandAuth.Sample.Umbraco7.App_Start
 
         protected override void ApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
         {
-            IcelandAuthController.Success += HandleLogin;
-            IcelandAuthController.Error += HandleError;
+            ControllerBehavior.Success += HandleLogin;
+            ControllerBehavior.Error += HandleError;
         }
 
-        private string HandleLogin(HttpRequestBase Request, SamlLogin login)
+        private static string HandleLogin(SamlLogin login)
         {
             var ms = ApplicationContext.Current.Services.MemberService;
 
@@ -57,13 +57,13 @@ namespace Vettvangur.IcelandAuth.Sample.Umbraco7.App_Start
             FormsAuthentication.SetAuthCookie(login.UserSSN, true);
 
             // Provide a way for views and services to access the sessions saml login result
-            Request.RequestContext.HttpContext.Session["login"] = login;
+            HttpContext.Current.Session["login"] = login;
 
             // Return a custom redirect url
             return null;
         }
 
-        private string HandleError(HttpRequestBase Request, SamlLogin login)
+        private static string HandleError(SamlLogin login)
         {
             Logger.Error("Error encountered while attempting Ísland.is authentication.");
 

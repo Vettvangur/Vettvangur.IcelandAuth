@@ -222,6 +222,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Vettvangur.IcelandAuth.UmbracoShared\ControllerBehavior.cs">
+      <Link>ControllerBehavior.cs</Link>
+    </Compile>
     <Compile Include="IcelandAuthController.cs" />
     <Compile Include="Log4NetProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

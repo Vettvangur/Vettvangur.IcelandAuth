@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Vettvangur.IcelandAuth.Umbraco8")]
+[assembly: AssemblyTitle("Vettvangur.IcelandAuth.UmbracoShared")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Vettvangur.IcelandAuth.Umbraco8")]
+[assembly: AssemblyProduct("Vettvangur.IcelandAuth.UmbracoShared")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("37a1ccaf-93a1-4d8f-b843-6c93a442c8ec")]
+[assembly: Guid("28fba9d5-073f-42d3-9339-a59460abc1e1")]
 
 // Version information for an assembly consists of the following four values:
 //

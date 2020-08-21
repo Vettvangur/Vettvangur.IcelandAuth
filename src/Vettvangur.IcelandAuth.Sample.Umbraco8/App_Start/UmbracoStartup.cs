@@ -10,7 +10,8 @@ using Umbraco.Core.Composing;
 using Umbraco.Core.Logging;
 using Umbraco.Core.Services;
 using Umbraco.Web;
-using Vettvangur.IcelandAuth.Umbraco8;
+using Umbraco.Web.Composing;
+using Vettvangur.IcelandAuth.UmbracoShared;
 
 namespace Vettvangur.IcelandAuth.Sample.Umbraco8.App_Start
 {
@@ -30,26 +31,53 @@ namespace Vettvangur.IcelandAuth.Sample.Umbraco8.App_Start
     class Startup : IComponent
     {
         protected readonly ILogger Logger;
-        protected readonly IMemberService MemberService;
+        protected readonly IFactory Factory;
 
         public Startup(
             ILogger logger,
-            IMemberService memberService
+            IFactory factory
         )
         {
             Logger = logger;
-            MemberService = memberService;
+            Factory = factory;
         }
 
         public void Initialize()
         {
-            IcelandAuthController.Success += HandleLogin;
-            IcelandAuthController.Error += HandleError;
+            ControllerBehavior.Success += HandleLogin;
+            ControllerBehavior.Error += HandleError;
         }
 
         public void Terminate() { }
 
-        private string HandleLogin(HttpRequestBase Request, SamlLogin login)
+        private string HandleLogin(SamlLogin login)
+        {
+           return Factory.GetInstance<AuthHandler>().HandleLogin(login);
+        }
+
+        private string HandleError(SamlLogin login)
+        {
+            return Factory.GetInstance<AuthHandler>().HandleError(login);
+        }
+    }
+
+    class AuthHandler
+    {
+        protected readonly ILogger Logger;
+        protected readonly IMemberService MemberService;
+        protected readonly HttpSessionStateBase Session;
+
+        public AuthHandler(
+            ILogger logger,
+            IMemberService memberService,
+            HttpSessionStateBase session)
+        {
+            Logger = logger;
+            MemberService = memberService;
+            Session = session;
+        }
+
+        public string HandleLogin(SamlLogin login)
         {
             var member = MemberService.GetByUsername(login.UserSSN);
 
@@ -80,16 +108,16 @@ namespace Vettvangur.IcelandAuth.Sample.Umbraco8.App_Start
             FormsAuthentication.SetAuthCookie(login.UserSSN, true);
 
             // Provide a way for views and services to access the sessions saml login result
-            Request.RequestContext.HttpContext.Session["samlLogin"] = login;
+            Session["samlLogin"] = login;
 
             // Return a custom redirect url
             return null;
         }
 
-        private string HandleError(HttpRequestBase Request, SamlLogin login)
+        public string HandleError(SamlLogin login)
         {
             Logger.Error<Startup>("Error encountered while attempting Ísland.is authentication.");
-            
+
             // Handle erronous logins here
             if (login != null)
             {

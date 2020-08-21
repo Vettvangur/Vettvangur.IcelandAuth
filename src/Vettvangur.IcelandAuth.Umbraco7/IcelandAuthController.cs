@@ -13,6 +13,7 @@ using System.Web.Mvc;
 using System.Xml;
 using Umbraco.Web.Mvc;
 using Vettvangur.IcelandAuth.Umbraco7.Log4NetCompat;
+using Vettvangur.IcelandAuth.UmbracoShared;
 
 namespace Vettvangur.IcelandAuth.Umbraco7
 {
@@ -21,54 +22,23 @@ namespace Vettvangur.IcelandAuth.Umbraco7
     /// </summary>
     public class IcelandAuthController : SurfaceController
     {
-        public static event SuccessCallback Success;
-        public static event ErrorCallback Error;
-
         protected readonly string SuccessRedirect;
         protected readonly string ErrorRedirect;
 
-        protected readonly IcelandAuthService IcelandAuthService;
+        protected readonly ControllerBehavior AuthHandler;
         protected readonly ILog Log;
-
 
         public IcelandAuthController()
         {
             Log = LogManager.GetLogger(typeof(IcelandAuthService));
             var log = new Log4NetLogger(Log);
-            IcelandAuthService = new IcelandAuthService(log);
-
-            SuccessRedirect = string.IsNullOrEmpty(ConfigurationManager.AppSettings["IcelandAuth.SuccessRedirect"])
-                ? "/"
-                : ConfigurationManager.AppSettings["IcelandAuth.SuccessRedirect"];
-            ErrorRedirect = string.IsNullOrEmpty(ConfigurationManager.AppSettings["IcelandAuth.ErrorRedirect"])
-                ? "/"
-                : ConfigurationManager.AppSettings["IcelandAuth.ErrorRedirect"];
+            var icelandAuthService = new IcelandAuthService(log);
+            AuthHandler = new ControllerBehavior(Request, icelandAuthService);
         }
 
         public virtual ActionResult Login()
         {
-            string callbackRedirect;
-
-            var samlString = Request["token"];
-
-            SamlLogin login = null;
-            if (!string.IsNullOrEmpty(samlString))
-            {
-                login = IcelandAuthService.VerifySaml(samlString, Request.UserHostAddress);
-
-                if (login?.Valid == true)
-                {
-                    callbackRedirect = Success?.Invoke(Request, login);
-                    return Redirect(callbackRedirect ?? SuccessRedirect);
-                }
-            }
-
-            callbackRedirect = Error?.Invoke(Request, login);
-
-            return Redirect(callbackRedirect ?? ErrorRedirect);
+            return Redirect(AuthHandler.Login());
         }
     }
-
-    public delegate string SuccessCallback(HttpRequestBase Request, SamlLogin login);
-    public delegate string ErrorCallback(HttpRequestBase Request, SamlLogin login);
 }
