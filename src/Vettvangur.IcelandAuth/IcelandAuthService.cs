@@ -256,11 +256,10 @@ namespace Vettvangur.IcelandAuth
 
                 // Authentication method used, f.x. phone certificate.
                 var authenticationResp = login.Attributes.First(x => x.Name == "Authentication").Value;
+                login.Authentication = authenticationResp;
                 if (!string.IsNullOrEmpty(Authentication))
                 {
                     login.AuthMethodOk = Authentication.Split(',').Contains(authenticationResp);
-
-                    login.Authentication = authenticationResp;
                 }
                 else
                 {

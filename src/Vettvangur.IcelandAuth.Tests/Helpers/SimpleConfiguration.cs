@@ -8,14 +8,15 @@ namespace Vettvangur.IcelandAuth.Tests
 {
     static class SimpleConfiguration
     {
-        public static Mock<IConfiguration> Create() => new Mock<IConfiguration>();
-
-        public static void SetSection(Mock<IConfiguration> config, string section, string value)
+        public static Mock<IConfiguration> Create()
         {
-            var configurationSection = new Mock<IConfigurationSection>();
-            configurationSection.Setup(a => a.Value).Returns(value);
+            var conf = new Mock<IConfiguration>();
+            return conf;
+        }
 
-            config.Setup(x => x.GetSection(section)).Returns(configurationSection.Object);
+        public static void SetSection(Mock<IConfiguration> config, string key, string value)
+        {
+            config.SetupGet(x => x[key]).Returns(value);
         }
     }
 }
