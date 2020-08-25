@@ -48,10 +48,7 @@ namespace Vettvangur.IcelandAuth.Tests
         [TestMethod]
         public void VerifiesSignature()
         {
-            var login = svc.VerifySaml(Resources.OnetimeValidSaml, "194.144.213.209");
-
-            // is in the past
-            Assert.IsFalse(login.Valid);
+            var login = svc.VerifySaml(Resources.OnetimeValidSaml, null);
 
             Assert.IsTrue(login.SignatureOk);
         }

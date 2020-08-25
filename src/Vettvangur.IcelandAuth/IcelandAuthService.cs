@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
@@ -29,13 +30,24 @@ namespace Vettvangur.IcelandAuth
         /// </summary>
         protected const string IssuerSSN = "5210002790";
 
+        private IEnumerable<string> _authentication;
         /// <summary>
         /// Possible values include:
         /// "Rafræn skilríki"
         /// "Rafræn símaskilríki"
         /// "Íslykill"
         /// </summary>
-        public virtual string Authentication { get; set; }
+        public virtual IEnumerable<string> Authentication 
+        {
+            get => _authentication; 
+            set
+            {
+                if (value != null)
+                {
+                    _authentication = value.Select(x => x.Trim(' '));
+                }
+            }
+        }
 
         /// <summary>
         /// Audience will most likely be the sites host name.
@@ -90,7 +102,7 @@ namespace Vettvangur.IcelandAuth
             Destination = ConfigurationManager.AppSettings["IcelandAuth.Destination"];
             DestinationSSN = ConfigurationManager.AppSettings["IcelandAuth.DestinationSSN"];
             //AuthID = ConfigurationManager.AppSettings["IcelandAuth.AuthID"];
-            Authentication = ConfigurationManager.AppSettings["IcelandAuth.Authentication"];
+            Authentication = ConfigurationManager.AppSettings["IcelandAuth.Authentication"]?.Split(',');
             VerifyIPAddress = bool.TryParse(ConfigurationManager.AppSettings["IcelandAuth.VerifyIPAddress"], out var verifyIpAddress)
                 ? verifyIpAddress
                 : true;
@@ -111,7 +123,7 @@ namespace Vettvangur.IcelandAuth
             Destination = configuration["IcelandAuth:Destination"];
             DestinationSSN = configuration["IcelandAuth:DestinationSSN"];
             //AuthID = configuration["IcelandAuth:AuthID"];
-            Authentication = configuration["IcelandAuth:Authentication"];
+            Authentication = configuration["IcelandAuth:Authentication"]?.Split(',');
             VerifyIPAddress = bool.TryParse(configuration["IcelandAuth:VerifyIPAddress"], out var verifyIpAddress)
                 ? verifyIpAddress
                 : true;
@@ -257,9 +269,9 @@ namespace Vettvangur.IcelandAuth
                 // Authentication method used, f.x. phone certificate.
                 var authenticationResp = login.Attributes.First(x => x.Name == "Authentication").Value;
                 login.Authentication = authenticationResp;
-                if (!string.IsNullOrEmpty(Authentication))
+                if (Authentication?.Any() == true)
                 {
-                    login.AuthMethodOk = Authentication.Split(',').Contains(authenticationResp);
+                    login.AuthMethodOk = Authentication.Contains(authenticationResp);
                 }
                 else
                 {
