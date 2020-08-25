@@ -143,47 +143,14 @@ namespace Vettvangur.IcelandAuth
                 return login;
             }
 
-            byte[] data;
-            try
+            var doc = ParseToken(token);
+            if (doc == null)
             {
-                data = Convert.FromBase64String(token);
-            }
-            catch (FormatException ex)
-            {
-                Logger?.LogWarning(ex, "Invalid SAML response format");
                 return login;
             }
 
-            string decodedString;
-            try
-            {
-                decodedString = Encoding.UTF8.GetString(data);
-            }
-            catch (ArgumentException ex)
-            {
-                Logger?.LogWarning(ex, "Invalid SAML response format");
-                return login;
-            }
-
-
-            XmlDocument doc = new XmlDocument
-            {
-                PreserveWhitespace = true
-            };
-            try
-            {
-                doc.LoadXml(decodedString);
-            }
-            catch (XmlException ex)
-            {
-                Logger?.LogWarning(ex, "Invalid SAML response format");
-                return login;
-            }
-
-            Logger?.LogDebug("Parsed SAML");
-
-            SignedXml signedXml = new SignedXml(doc);
-
+            var signedXml = new SignedXml(doc);
+            
             // Retrieve signature
             XmlElement signedInfo = doc["Response"]?["Signature"];
             var certText = doc["Response"]?["Signature"]?["KeyInfo"]?["X509Data"]?["X509Certificate"]?.InnerText;
@@ -196,49 +163,7 @@ namespace Vettvangur.IcelandAuth
             signedXml.LoadXml(signedInfo);
             byte[] certData = Encoding.UTF8.GetBytes(certText);
 
-            try
-            {
-                using (X509Certificate2 cert = new X509Certificate2(certData))
-                {
-                    // Verify signature
-                    login.SignatureOk = signedXml.CheckSignature(cert, false);
-                    if (login.SignatureOk)
-                        login.Message += "Signature OK. ";
-                    else
-                        login.Message += "Signature not OK. ";
-
-                    var issuerComponents = ADUtils.GetDNComponents(cert.Issuer);
-                    var subjectComponents = ADUtils.GetDNComponents(cert.Subject);
-                    var issuerNameComponent = issuerComponents.FirstOrDefault(x => x.Name == "CN");
-                    var issuerSerialComponent = issuerComponents.FirstOrDefault(x => x.Name == "SERIALNUMBER");
-                    var subjectSerialComponent = subjectComponents.FirstOrDefault(x => x.Name == "SERIALNUMBER");
-
-                    // default(<struct>) is never null, will also never match our constant values.
-                    if (issuerNameComponent.Value == IssuerName
-                    && issuerSerialComponent.Value == IssuerSSN
-                    && subjectSerialComponent.Value == SignerSSN)
-                    {
-                        login.CertOk = true;
-                        login.Message += "Certificate is OK. ";
-                        Logger?.LogDebug("Certificate verified");
-                    }
-                    else
-                    {
-                        login.Message += "Certificate not OK. ";
-                    }
-                }
-            }
-            catch (System.Security.Cryptography.CryptographicException)
-            {
-                login.Message += "Certificate not OK. ";
-            }
-            finally
-            {
-                if (!login.SignatureOk || !login.CertOk)
-                {
-                    Logger?.LogWarning("Signature/Certificate error, possible forgery attempt");
-                }
-            }
+            VerifySignature(login, signedXml, certData);
 
             DateTime nowTime = DateTime.UtcNow;
             // Retrieve time from conditions and compare
@@ -443,6 +368,98 @@ namespace Vettvangur.IcelandAuth
             //}
 
             return login;
+        }
+
+        protected virtual XmlDocument ParseToken(string token)
+        {
+            byte[] data;
+            try
+            {
+                data = Convert.FromBase64String(token);
+            }
+            catch (FormatException ex)
+            {
+                Logger?.LogWarning(ex, "Invalid SAML response format");
+                return null;
+            }
+
+            string decodedString;
+            try
+            {
+                decodedString = Encoding.UTF8.GetString(data);
+            }
+            catch (ArgumentException ex)
+            {
+                Logger?.LogWarning(ex, "Invalid SAML response format");
+                return null;
+            }
+
+
+            var doc = new XmlDocument
+            {
+                PreserveWhitespace = true
+            };
+            try
+            {
+                doc.LoadXml(decodedString);
+            }
+            catch (XmlException ex)
+            {
+                Logger?.LogWarning(ex, "Invalid SAML response format");
+                return null;
+            }
+
+            Logger?.LogDebug("Parsed SAML");
+
+
+            return doc;
+        }
+
+        protected virtual void VerifySignature(SamlLogin login, SignedXml signedXml, byte[] certData)
+        {
+            try
+            {
+                using (X509Certificate2 cert = new X509Certificate2(certData))
+                {
+                    // Verify signature
+                    login.SignatureOk = signedXml.CheckSignature(cert, false);
+                    if (login.SignatureOk)
+                        login.Message += "Signature OK. ";
+                    else
+                        login.Message += "Signature not OK. ";
+
+                    var issuerComponents = ADUtils.GetDNComponents(cert.Issuer);
+                    var subjectComponents = ADUtils.GetDNComponents(cert.Subject);
+                    var issuerNameComponent = issuerComponents.FirstOrDefault(x => x.Name == "CN");
+                    var issuerSerialComponent = issuerComponents.FirstOrDefault(x => x.Name == "SERIALNUMBER");
+                    var subjectSerialComponent = subjectComponents.FirstOrDefault(x => x.Name == "SERIALNUMBER");
+
+                    // default(<struct>) is never null, will also never match our constant values.
+                    if (issuerNameComponent.Value == IssuerName
+                    && issuerSerialComponent.Value == IssuerSSN
+                    && subjectSerialComponent.Value == SignerSSN)
+                    {
+                        login.CertOk = true;
+                        login.Message += "Certificate is OK. ";
+                        Logger?.LogDebug("Certificate verified");
+                    }
+                    else
+                    {
+                        login.Message += "Certificate not OK. ";
+                    }
+                }
+            }
+            catch (System.Security.Cryptography.CryptographicException)
+            {
+                login.Message += "Certificate not OK. ";
+            }
+            finally
+            {
+                if (!login.SignatureOk || !login.CertOk)
+                {
+                    Logger?.LogWarning("Signature/Certificate error, possible forgery attempt");
+                }
+            }
         }
     }
 }
