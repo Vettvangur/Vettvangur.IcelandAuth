@@ -29,8 +29,6 @@ namespace Vettvangur.IcelandAuth
         /// </summary>
         public string Authentication { get; set; }
 
-        public string Message { get; set; }
-
         public bool SignatureOk { get; set; }
         public bool CertOk { get; set; }
         public bool TimeOk { get; set; }

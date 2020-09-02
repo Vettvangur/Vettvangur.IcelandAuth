@@ -196,11 +196,9 @@ namespace Vettvangur.IcelandAuth
                 .Equals(Audience, StringComparison.InvariantCultureIgnoreCase) == true)
             {
                 login.AudienceOk = true;
-                login.Message += "Audience is OK. ";
             }
             else
             {
-                login.Message += "Audience not OK. ";
                 Logger?.LogWarning($"Audience mismatch, received {conditions["AudienceRestriction"]?["Audience"]?.InnerText}");
             }
 
@@ -222,20 +220,18 @@ namespace Vettvangur.IcelandAuth
                 login.DestinationOk = true;
             }
 
-            if (login.DestinationOk)
-                login.Message += "Destination is OK. ";
-            else
-                login.Message += "Destination not OK. ";
-
             if (nowTime > fromTime && toTime > nowTime)
             {
                 login.TimeOk = true;
-                login.Message += "SAML time valid. ";
             }
             else if (nowTime < fromTime)
-                login.Message += "From time has not passed yet. ";
+            {
+                Logger?.LogWarning("From time has not passed yet.");
+            }
             else if (nowTime > toTime)
-                login.Message += "Too much time has passed. ";
+            {
+                Logger?.LogInformation("Too much time has passed.");
+            }
 
             Logger?.LogDebug("Timestamp verified");
 
@@ -260,6 +256,11 @@ namespace Vettvangur.IcelandAuth
                 {
                     var ipAddressAttr = login.Attributes.First(x => x.Name == "IPAddress");
                     login.IpOk = ipAddressAttr.Value.Equals(ipAddress);
+
+                    if (!login.IpOk)
+                    {
+                        Logger?.LogWarning($"IP Address mismatch, received {ipAddress} but read {ipAddressAttr.Value} from Saml");
+                    }
                 }
                 else
                 {
@@ -272,6 +273,11 @@ namespace Vettvangur.IcelandAuth
                 if (Authentication?.Any() == true)
                 {
                     login.AuthMethodOk = Authentication.Contains(authenticationResp);
+
+                    if (!login.AuthMethodOk)
+                    {
+                        Logger?.LogInformation($"Authentication method not OK, received {authenticationResp}");
+                    }
                 }
                 else
                 {
@@ -327,31 +333,11 @@ namespace Vettvangur.IcelandAuth
                     login.OnbehalfValidity = val;
                 }
 
-                if (login.IpOk)
-                    login.Message += "IP address is OK. ";
-                else
-                    login.Message += "IP address not OK. ";
-
-                if (login.AuthMethodOk)
-                    login.Message += "Authentication method is OK. ";
-                else
-                    login.Message += "Authentication method not OK. ";
-
-                if (login.AuthIdOk)
-                    login.Message += "Auth id is OK. ";
-                else
-                    login.Message += "Auth id not OK. ";
-
-                if (login.DestinationSsnOk)
-                    login.Message += "DestinationSSN is OK. ";
-                else
-                    login.Message += "DestinationSSN not OK. ";
-
                 Logger?.LogDebug("Attributes read");
             }
             else
             {
-                login.Message += "No Attributes found";
+                Logger?.LogWarning("No Attributes found");
             }
 
             if (LogSamlResponse)
@@ -365,18 +351,15 @@ namespace Vettvangur.IcelandAuth
                     Logger?.LogDebug("SAML Response: \r\n" + stringWriter.GetStringBuilder().ToString());
                 }
             }
-            
-            Logger?.LogDebug(login.Message);
 
-            // Replace after logging refactor
-            //if (login.Valid)
-            //{
-            //    Logger?.LogDebug("Authentication valid");
-            //}
-            //else
-            //{
-            //    Logger?.LogDebug("Authentication invalid");
-            //}
+            if (login.Valid)
+            {
+                Logger?.LogInformation("Authentication valid");
+            }
+            else
+            {
+                Logger?.LogInformation("Authentication invalid");
+            }
 
             return login;
         }
@@ -434,10 +417,6 @@ namespace Vettvangur.IcelandAuth
                 {
                     // Verify signature
                     login.SignatureOk = signedXml.CheckSignature(cert, false);
-                    if (login.SignatureOk)
-                        login.Message += "Signature OK. ";
-                    else
-                        login.Message += "Signature not OK. ";
 
                     var issuerComponents = ADUtils.GetDNComponents(cert.Issuer);
                     var subjectComponents = ADUtils.GetDNComponents(cert.Subject);
@@ -451,24 +430,21 @@ namespace Vettvangur.IcelandAuth
                     && subjectSerialComponent.Value == SignerSSN)
                     {
                         login.CertOk = true;
-                        login.Message += "Certificate is OK. ";
                         Logger?.LogDebug("Certificate verified");
-                    }
-                    else
-                    {
-                        login.Message += "Certificate not OK. ";
                     }
                 }
             }
-            catch (System.Security.Cryptography.CryptographicException)
-            {
-                login.Message += "Certificate not OK. ";
-            }
+            // Invalid certificate, continue on for further logging but validation has failed at this point.
+            catch (System.Security.Cryptography.CryptographicException) { }
             finally
             {
-                if (!login.SignatureOk || !login.CertOk)
+                if (!login.SignatureOk)
                 {
-                    Logger?.LogWarning("Signature/Certificate error, possible forgery attempt");
+                    Logger?.LogWarning("Signature error, possible forgery attempt");
+                }
+                if (!login.CertOk)
+                {
+                    Logger?.LogWarning("Certificate error, possible forgery attempt");
                 }
             }
         }
