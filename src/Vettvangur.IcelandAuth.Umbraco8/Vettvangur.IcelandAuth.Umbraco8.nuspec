@@ -10,8 +10,8 @@
     <license type="expression">MIT</license>
     <projectUrl>https://github.com/Vettvangur/Vettvangur.IcelandAuth</projectUrl>
     <icon>images\VV_Logo.png</icon>
-    <description>Handle Ísland.is authentication</description>
-    <releaseNotes>Enables easy integration with the Ísland.is authentication service using Umbraco.</releaseNotes>
+    <description>Handle island.is authentication</description>
+    <releaseNotes>Enables easy integration with the island.is authentication service using Umbraco.</releaseNotes>
     <copyright>Copyright 2020</copyright>
     <tags>Authentication DigitalCertificates NationalRegistry Iceland Umbraco Umbraco8</tags>
     <dependencies>
