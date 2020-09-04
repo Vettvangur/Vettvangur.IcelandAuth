@@ -42,6 +42,9 @@ namespace Vettvangur.IcelandAuth
 
         public List<IcelandAuthAttribute> Attributes { get; } = new List<IcelandAuthAttribute>();
 
+        /// <summary>
+        /// Returns true if all validation is successful
+        /// </summary>
         public bool Valid =>
             SignatureOk && CertOk && TimeOk && IpOk && AuthMethodOk && AudienceOk && AuthIdOk && DestinationOk && DestinationSsnOk;
     }

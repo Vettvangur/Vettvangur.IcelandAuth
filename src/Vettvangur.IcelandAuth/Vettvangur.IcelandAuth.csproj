@@ -13,7 +13,7 @@
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageProjectUrl>https://github.com/Vettvangur/Vettvangur.IcelandAuth</PackageProjectUrl>
         <PackageIcon>images\VV_Logo.png</PackageIcon>
-        <Description>Allows easy integration with the Ísland.is authentication service</Description>
+        <Description>Enables easy integration with the island.is authentication service</Description>
         <PackageReleaseNotes>First release.</PackageReleaseNotes>
         <Copyright>Copyright 2020</Copyright>
         <PackageTags>Authentication;DigitalCertificates;NationalRegistry;Iceland</PackageTags>
