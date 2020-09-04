@@ -88,12 +88,9 @@ namespace Vettvangur.IcelandAuth
 
 #if NETFRAMEWORK
         /// <summary>
-        /// Intended for .NET Framework
-        /// 
-        /// Keys are read in the following form from <see cref="IConfiguration"/>, appSettings:add:IcelandAuth.Audience
+        /// .NET Framework constructor, reads key/values from <see cref="ConfigurationManager.AppSettings"/>.
         /// </summary>
         /// <param name="logger"></param>
-        ///// <param name="configuration">Optionally provide a ready built <see cref="IConfiguration"/></param>
         public IcelandAuthService(ILogger logger = null)
         {
             Logger = logger;
@@ -112,9 +109,13 @@ namespace Vettvangur.IcelandAuth
         }
 #endif
 
+        /// <summary>
+        /// .NET Core constructor
+        /// </summary>
+        /// <param name="logger"></param>
         public IcelandAuthService(
-            ILogger logger,
-            IConfiguration configuration
+            IConfiguration configuration,
+            ILogger logger = null
         )
         {
             Logger = logger;

@@ -16,7 +16,7 @@ namespace Vettvangur.IcelandAuth.Tests
             SimpleConfiguration.SetSection(configuration, "IcelandAuth:Destination", "https://icelandauth.vettvangur.is/umbraco/surface/icelandauth/login");
             SimpleConfiguration.SetSection(configuration, "IcelandAuth:DestinationSSN", "5208130550");
 
-            svc = new IcelandAuthService(null, configuration.Object);
+            svc = new IcelandAuthService(configuration.Object, null);
         }
 
         [TestMethod]
