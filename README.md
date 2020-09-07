@@ -4,16 +4,16 @@ Vettvangur.IcelandAuth is an open-source .Net project intended to simplify integ
 
 island.is's authentication service allows for authenticating icelandic nationals using digital certificates / Íslykill.
 
-A prior contract with island.is is needed before usage, see https://island.is/#permit-884 and general information on the island.is authentication service can be found [here](https://island.is/um-island-is/innskraningarthjonustan/).
+A prior contract with island.is is needed before usage, see https://island.is/#permit-884. General information on the island.is authentication service can be found [here](https://island.is/um-island-is/innskraningarthjonustan/).
 
-This project was developed according to fixes and suggestions from [Syndis](https://www.syndis.is/).
-
-It was also influenced by the work done [here](https://github.com/digitaliceland/innskraningar-daemi/).
+This project was developed according to fixes and suggestions from [Syndis](https://www.syndis.is/) and influenced in part by the work done [here](https://github.com/digitaliceland/innskraningar-daemi/).
 
 # Getting Started
 
 ## Requirements
-At least .Net Framework 4.6.1 or .Net Core 2
+At least .Net Framework 4.6.1 or .Net Core 2.
+
+The NetStandard library (NetStandard essentially just contains mappings) and some Microsoft.Extensions packages will be installed if missing. They have a light footprint and are used for abstractions made available in .Net Standard.
 
 ## Signature verification
 
@@ -27,7 +27,7 @@ Installing root certificates is outside the scope of this documentation but a de
 
 ## Configuration
 
-The sample projects included show how to integrate IcelandAuth with an Umbraco site. Those samples use the core library and additional umbraco helpers from Vettvangur.IcelandAuth.Umbraco7[/8].
+The sample projects in this repository show how to integrate IcelandAuth with an Umbraco site. Those samples use the core IcelandAuth library and additional umbraco helpers from Vettvangur.IcelandAuth.Umbraco7[/8].
 
 For .Net Core and custom integrations you can use the core library validation and inspect the ***Valid*** property of the returned SamlLogin object.
 
@@ -46,11 +46,19 @@ The following documentation shows all configurable keys preceding with 'IcelandA
 }
 ```
 
+### Umbraco specific configuration
+
+See a live demo of the Umbraco 8 sample [here](https://icelandauth.vettvangur.is).
+
+The Umbraco controllers listen for tokens on /umbraco/surface/icelandauth/login. 
+
+Code under App_Start shows how to auto-provision users from island.is authentication data.
+
 ### Configuration - From island.is contract
 
-The following options come from your island.is contract, you can view those values in the island.is control panel [here](https://innskraning.island.is/thjonustuveitendur/Login.aspx?ReturnUrl=%2fthjonustuveitendur%2f)
+The following options come from your island.is contract, you can view those values in the [island.is control panel](https://innskraning.island.is/thjonustuveitendur/Login.aspx?ReturnUrl=%2fthjonustuveitendur%2f). 
 
-##### Constrain audience - Required
+##### Constrain audience - Required (Audience is sometimes referred to as island.is ID.)
 ```xml
 IcelandAuth.Audience
 ```
