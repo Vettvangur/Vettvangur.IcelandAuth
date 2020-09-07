@@ -2,7 +2,7 @@
 
 Vettvangur.IcelandAuth is an open-source .Net project intended to simplify integrating with the island.is authentication service.
 
-island.is's authentication service allows for authenticating icelandic nationals using digital certificates / Õslykill.
+island.is's authentication service allows for authenticating icelandic nationals using digital certificates / √çslykill.
 
 A prior contract with island.is is needed before usage, see https://island.is/#permit-884 and general information on the island.is authentication service can be found [here](https://island.is/um-island-is/innskraningarthjonustan/).
 
@@ -12,11 +12,14 @@ It was also influenced by the work done [here](https://github.com/digitaliceland
 
 # Getting Started
 
+## Requirements
+At least .Net Framework 4.6.1 or .Net Core 2
+
 ## Signature verification
 
 To be able to verify the signature returned from island.is you will need to install the audkenni certificate chain, http://www.audkenni.is/adstod/skilrikjakedjur.cfm.
 
-The certificate AukennisrÛt needs to be installed into trusted roots in the server hosts certificate store.
+The certificate Au√∞kennisr√≥t needs to be installed into trusted roots in the server hosts certificate store.
 
 The intermediate certificates should be added to Intermediate Certification Authorities.
 
@@ -66,14 +69,14 @@ IcelandAuth.DestinationSSN
 
 Possible values include:
 
-* "RafrÊn skilrÌki"
-* "RafrÊn sÌmaskilrÌki"
-* "Õslykill"
+* "Rafr√¶n skilr√≠ki"
+* "Rafr√¶n s√≠maskilr√≠ki"
+* "√çslykill"
 
 Seperate multiple values with comma
 ```xml
 IcelandAuth.Authentication
-<!-- <add key="IcelandAuth.Authentication" value="RafrÊn skilrÌki,RafrÊn sÌmaskilrÌki" /> -->
+<!-- <add key="IcelandAuth.Authentication" value="Rafr√¶n skilr√≠ki,Rafr√¶n s√≠maskilr√≠ki" /> -->
 ```
 
 ##### Check if the users IP matches the one seen at authentication.
