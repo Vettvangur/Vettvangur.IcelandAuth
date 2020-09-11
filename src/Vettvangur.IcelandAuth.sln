@@ -51,6 +51,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Vettvangur.IcelandAuth.Samp
 		SlnRelativePath = "Samples\Vettvangur.IcelandAuth.Sample.Frontend\"
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vettvangur.IcelandAuth.Sample.AspNetCore", "Samples\Vettvangur.IcelandAuth.Sample.AspNetCore\Vettvangur.IcelandAuth.Sample.AspNetCore.csproj", "{665F0E91-9E97-4573-B7A1-464847DEEAC0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{246ED192-D031-466D-A263-F66C348D2706}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{246ED192-D031-466D-A263-F66C348D2706}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{246ED192-D031-466D-A263-F66C348D2706}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{665F0E91-9E97-4573-B7A1-464847DEEAC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{665F0E91-9E97-4573-B7A1-464847DEEAC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{665F0E91-9E97-4573-B7A1-464847DEEAC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{665F0E91-9E97-4573-B7A1-464847DEEAC0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -96,6 +102,7 @@ Global
 		{11B18DD8-10EA-48D7-91E3-5CC972B26F63} = {8659C66E-8DC8-47CF-B2EB-E042227F53E2}
 		{CF9DC300-74F5-4578-B9A4-D46B8E736297} = {8659C66E-8DC8-47CF-B2EB-E042227F53E2}
 		{246ED192-D031-466D-A263-F66C348D2706} = {8659C66E-8DC8-47CF-B2EB-E042227F53E2}
+		{665F0E91-9E97-4573-B7A1-464847DEEAC0} = {8659C66E-8DC8-47CF-B2EB-E042227F53E2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {021250CD-B3C9-4C20-B71E-143525F4586F}
