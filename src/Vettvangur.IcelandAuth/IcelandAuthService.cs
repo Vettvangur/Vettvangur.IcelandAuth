@@ -99,7 +99,9 @@ namespace Vettvangur.IcelandAuth
             Destination = ConfigurationManager.AppSettings["IcelandAuth.Destination"];
             DestinationSSN = ConfigurationManager.AppSettings["IcelandAuth.DestinationSSN"];
             //AuthID = ConfigurationManager.AppSettings["IcelandAuth.AuthID"];
-            Authentication = ConfigurationManager.AppSettings["IcelandAuth.Authentication"]?.Split(',');
+            Authentication = string.IsNullOrEmpty(ConfigurationManager.AppSettings["IcelandAuth.Authentication"])
+                ? null
+                : ConfigurationManager.AppSettings["IcelandAuth.Authentication"].Split(',');
             VerifyIPAddress = bool.TryParse(ConfigurationManager.AppSettings["IcelandAuth.VerifyIPAddress"], out var verifyIpAddress)
                 ? verifyIpAddress
                 : true;
@@ -124,7 +126,9 @@ namespace Vettvangur.IcelandAuth
             Destination = configuration["IcelandAuth:Destination"];
             DestinationSSN = configuration["IcelandAuth:DestinationSSN"];
             //AuthID = configuration["IcelandAuth:AuthID"];
-            Authentication = configuration["IcelandAuth:Authentication"]?.Split(',');
+            Authentication = string.IsNullOrEmpty(configuration["IcelandAuth.Authentication"])
+                ? null
+                : configuration["IcelandAuth.Authentication"].Split(',');
             VerifyIPAddress = bool.TryParse(configuration["IcelandAuth:VerifyIPAddress"], out var verifyIpAddress)
                 ? verifyIpAddress
                 : true;
