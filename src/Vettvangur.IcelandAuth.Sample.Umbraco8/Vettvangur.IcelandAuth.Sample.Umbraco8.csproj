@@ -264,6 +264,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\favicons\android-chrome-192x192.png" />
+    <Content Include="assets\favicons\android-chrome-512x512.png" />
+    <Content Include="assets\favicons\apple-touch-icon.png" />
+    <Content Include="assets\favicons\browserconfig.xml" />
+    <Content Include="assets\favicons\favicon-16x16.png" />
+    <Content Include="assets\favicons\favicon-32x32.png" />
+    <Content Include="assets\favicons\favicon.ico" />
+    <Content Include="assets\favicons\mstile-150x150.png" />
+    <Content Include="assets\favicons\safari-pinned-tab.svg" />
+    <Content Include="assets\fb-share.jpg" />
     <Content Include="Config\grid.editors.config.js" />
     <Content Include="Config\Lang\cs-CZ.user.xml" />
     <Content Include="Config\Lang\da-DK.user.xml" />
@@ -285,10 +295,11 @@
     <Content Include="Config\Lang\zh-CN.user.xml" />
     <Content Include="Config\logviewer.searches.config.js" />
     <Content Include="Config\splashes\noNodes.aspx" />
-    <Content Include="css\umbraco-starterkit-style.css" />
+    <Content Include="css\styles.css" />
+    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="robots.txt" />
-    <Content Include="scripts\umbraco-starterkit-app.js" />
+    <Content Include="scripts\scripts.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -308,6 +319,7 @@
     <Content Include="Config\tinyMceConfig.config" />
     <Content Include="Config\umbracoSettings.config" />
     <Content Include="Media\Web.config" />
+    <Content Include="assets\favicons\site.webmanifest" />
     <None Include="packages.config" />
     <Content Include="Views\Partials\Grid\Bootstrap3-Fluid.cshtml" />
     <Content Include="Views\Partials\Grid\Bootstrap3.cshtml" />
@@ -318,22 +330,8 @@
     <Content Include="Views\Partials\Grid\Editors\Rte.cshtml" />
     <Content Include="Views\Partials\Grid\Editors\Textstring.cshtml" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Blog.cshtml" />
-    <Content Include="Views\Blogpost.cshtml" />
-    <Content Include="Views\contact.cshtml" />
-    <Content Include="Views\contentPage.cshtml" />
     <Content Include="Views\home.cshtml" />
     <Content Include="Views\master.cshtml" />
-    <Content Include="Views\Partials\CategoryLinks.cshtml" />
-    <Content Include="Views\Partials\Navigation\SubNavigation.cshtml" />
-    <Content Include="Views\Partials\Navigation\TopNavigation.cshtml" />
-    <Content Include="Views\Partials\SectionHeader.cshtml" />
-    <Content Include="Views\people.cshtml" />
-    <Content Include="Views\Person.cshtml" />
-    <Content Include="Views\Product.cshtml" />
-    <Content Include="Views\Products.cshtml" />
-    <Content Include="Views\MacroPartials\FeaturedProducts.cshtml" />
-    <Content Include="Views\MacroPartials\LatestBlogposts.cshtml" />
     <None Include="Properties\PublishProfiles\GROOT.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -352,7 +350,10 @@
       <Name>Vettvangur.IcelandAuth</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\MacroPartials\" />
+    <Folder Include="Views\Partials\Navigation\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

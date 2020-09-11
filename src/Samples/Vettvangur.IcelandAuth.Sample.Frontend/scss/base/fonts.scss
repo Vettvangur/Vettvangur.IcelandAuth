@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600&display=swap');
+
+h1, h2, h3, h4, h5, h6,
+p, a {
+    font-family: 'Raleway', sans-serif;
+    color: #555;
+    line-height: 1.2;
+}
+
+a {
+    display: inline-block;
+    text-decoration: none;
+}
+
+
+
+h1 {
+    font-size: rem(40);
+
+    @media (min-width: 320px) {
+        font-size: between(40px, 80px, 320px, 1440px);
+    }
+
+    @media (min-width: 1440px) {
+        font-size: rem(80);
+    }
+}
+
+p {
+    font-weight: 300;
+    font-size: rem(14);
+    line-height: 1.8;
+
+    @media (min-width: 320px) {
+        font-size: between(14px, 20px, 320px, 1440px);
+    }
+
+    @media (min-width: 1440px) {
+        font-size: 20px;
+    }
+}
