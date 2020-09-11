@@ -18,17 +18,38 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{8659C66E-8DC8-47CF-B2EB-E042227F53E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vettvangur.IcelandAuth.Sample.Umbraco7", "Vettvangur.IcelandAuth.Sample.Umbraco7\Vettvangur.IcelandAuth.Sample.Umbraco7.csproj", "{11B18DD8-10EA-48D7-91E3-5CC972B26F63}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vettvangur.IcelandAuth.Umbraco8", "Vettvangur.IcelandAuth.Umbraco8\Vettvangur.IcelandAuth.Umbraco8.csproj", "{37A1CCAF-93A1-4D8F-B843-6C93A442C8EC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vettvangur.IcelandAuth.Sample.Umbraco8", "Vettvangur.IcelandAuth.Sample.Umbraco8\Vettvangur.IcelandAuth.Sample.Umbraco8.csproj", "{CF9DC300-74F5-4578-B9A4-D46B8E736297}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vettvangur.IcelandAuth.UmbracoShared", "Vettvangur.IcelandAuth.UmbracoShared\Vettvangur.IcelandAuth.UmbracoShared.csproj", "{28FBA9D5-073F-42D3-9339-A59460ABC1E1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6D9D6481-B6C3-4102-8FF7-8749CB44565B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vettvangur.IcelandAuth.Tests", "Vettvangur.IcelandAuth.Tests\Vettvangur.IcelandAuth.Tests.csproj", "{498177F8-02FF-4375-9728-BB22F5829BFA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vettvangur.IcelandAuth.Tests", "Vettvangur.IcelandAuth.Tests\Vettvangur.IcelandAuth.Tests.csproj", "{498177F8-02FF-4375-9728-BB22F5829BFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vettvangur.IcelandAuth.Sample.Umbraco7", "Samples\Vettvangur.IcelandAuth.Sample.Umbraco7\Vettvangur.IcelandAuth.Sample.Umbraco7.csproj", "{11B18DD8-10EA-48D7-91E3-5CC972B26F63}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vettvangur.IcelandAuth.Sample.Umbraco8", "Samples\Vettvangur.IcelandAuth.Sample.Umbraco8\Vettvangur.IcelandAuth.Sample.Umbraco8.csproj", "{CF9DC300-74F5-4578-B9A4-D46B8E736297}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Vettvangur.IcelandAuth.Sample.Frontend", "Samples\Vettvangur.IcelandAuth.Sample.Frontend\", "{246ED192-D031-466D-A263-F66C348D2706}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_13301"
+		Debug.AspNetCompiler.PhysicalPath = "Samples\Vettvangur.IcelandAuth.Sample.Frontend\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_13301\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_13301"
+		Release.AspNetCompiler.PhysicalPath = "Samples\Vettvangur.IcelandAuth.Sample.Frontend\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_13301\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "13301"
+		SlnRelativePath = "Samples\Vettvangur.IcelandAuth.Sample.Frontend\"
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,32 +65,37 @@ Global
 		{1FF9B47A-D8A3-4516-8942-D55C86ECDBD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1FF9B47A-D8A3-4516-8942-D55C86ECDBD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1FF9B47A-D8A3-4516-8942-D55C86ECDBD3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{11B18DD8-10EA-48D7-91E3-5CC972B26F63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{11B18DD8-10EA-48D7-91E3-5CC972B26F63}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{11B18DD8-10EA-48D7-91E3-5CC972B26F63}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{11B18DD8-10EA-48D7-91E3-5CC972B26F63}.Release|Any CPU.Build.0 = Release|Any CPU
 		{37A1CCAF-93A1-4D8F-B843-6C93A442C8EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{37A1CCAF-93A1-4D8F-B843-6C93A442C8EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37A1CCAF-93A1-4D8F-B843-6C93A442C8EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{37A1CCAF-93A1-4D8F-B843-6C93A442C8EC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CF9DC300-74F5-4578-B9A4-D46B8E736297}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CF9DC300-74F5-4578-B9A4-D46B8E736297}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CF9DC300-74F5-4578-B9A4-D46B8E736297}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CF9DC300-74F5-4578-B9A4-D46B8E736297}.Release|Any CPU.Build.0 = Release|Any CPU
 		{28FBA9D5-073F-42D3-9339-A59460ABC1E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{28FBA9D5-073F-42D3-9339-A59460ABC1E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{498177F8-02FF-4375-9728-BB22F5829BFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{498177F8-02FF-4375-9728-BB22F5829BFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{498177F8-02FF-4375-9728-BB22F5829BFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{498177F8-02FF-4375-9728-BB22F5829BFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11B18DD8-10EA-48D7-91E3-5CC972B26F63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11B18DD8-10EA-48D7-91E3-5CC972B26F63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11B18DD8-10EA-48D7-91E3-5CC972B26F63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11B18DD8-10EA-48D7-91E3-5CC972B26F63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF9DC300-74F5-4578-B9A4-D46B8E736297}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF9DC300-74F5-4578-B9A4-D46B8E736297}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF9DC300-74F5-4578-B9A4-D46B8E736297}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF9DC300-74F5-4578-B9A4-D46B8E736297}.Release|Any CPU.Build.0 = Release|Any CPU
+		{246ED192-D031-466D-A263-F66C348D2706}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{246ED192-D031-466D-A263-F66C348D2706}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{246ED192-D031-466D-A263-F66C348D2706}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{246ED192-D031-466D-A263-F66C348D2706}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{498177F8-02FF-4375-9728-BB22F5829BFA} = {6D9D6481-B6C3-4102-8FF7-8749CB44565B}
 		{11B18DD8-10EA-48D7-91E3-5CC972B26F63} = {8659C66E-8DC8-47CF-B2EB-E042227F53E2}
 		{CF9DC300-74F5-4578-B9A4-D46B8E736297} = {8659C66E-8DC8-47CF-B2EB-E042227F53E2}
-		{498177F8-02FF-4375-9728-BB22F5829BFA} = {6D9D6481-B6C3-4102-8FF7-8749CB44565B}
+		{246ED192-D031-466D-A263-F66C348D2706} = {8659C66E-8DC8-47CF-B2EB-E042227F53E2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {021250CD-B3C9-4C20-B71E-143525F4586F}
