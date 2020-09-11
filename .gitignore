@@ -123,3 +123,4 @@ Umbraco\.Site/Properties/PublishProfiles/Default Settings\.pubxml
 
 
 *.snupkg
+src/Samples/Vettvangur.IcelandAuth.Sample.Frontend/css/**/*.css

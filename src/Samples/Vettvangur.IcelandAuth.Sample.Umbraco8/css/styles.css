@@ -205,8 +205,6 @@ main {
 .button,
 .iceland-auth__info {
   padding: 0.625rem 1.25rem;
-  background: #ea0d0d;
-  color: #fff;
   font-size: 0.875rem;
   font-weight: 600;
   border: 1px dashed #b1b1b1;
@@ -222,13 +220,20 @@ main {
       padding: 1.25rem 2.5rem;
       font-size: 1.25rem; } }
 
-.iceland-auth__info p {
-  text-align: left; }
+.button {
+  background: #ea0d0d;
+  color: #fff; }
 
-.iceland-auth__info span {
-  color: #ea0d0d;
-  font-weight: 500;
-  padding-right: 1.25rem; }
+.iceland-auth__info {
+  display: flex;
+  justify-content: space-between;
+  background: #fff;
+  color: #ea0d0d; }
+  .iceland-auth__info p {
+    text-align: left; }
+  .iceland-auth__info span {
+    font-weight: 500;
+    padding-right: 1.25rem; }
 
 footer {
   display: flex;

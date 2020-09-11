@@ -66,16 +66,16 @@ namespace Vettvangur.IcelandAuth.Sample.Umbraco8.App_Start
     {
         protected readonly ILogger Logger;
         protected readonly IMemberService MemberService;
-        protected readonly HttpSessionStateBase Session;
+        protected readonly HttpContextBase HttpContext;
 
         public AuthHandler(
             ILogger logger,
             IMemberService memberService,
-            HttpSessionStateBase session)
+            HttpContextBase httpContext)
         {
             Logger = logger;
             MemberService = memberService;
-            Session = session;
+            HttpContext = httpContext;
         }
 
         public string HandleLogin(SamlLogin login)
@@ -109,7 +109,7 @@ namespace Vettvangur.IcelandAuth.Sample.Umbraco8.App_Start
             FormsAuthentication.SetAuthCookie(login.UserSSN, true);
 
             // Provide a way for views and services to access the sessions saml login result
-            Session["samlLogin"] = login;
+            HttpContext.Session["samlLogin"] = login;
 
             // Return a custom redirect url
             return null;

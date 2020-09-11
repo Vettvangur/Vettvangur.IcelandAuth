@@ -1,9 +1,9 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.Home>
 @using ContentModels = Umbraco.Web.PublishedModels;
-@{ 
+@{
     Layout = "master.cshtml";
 
-    var m = Members.GetCurrentMember(); 
+    var m = Members.GetCurrentMember();
 }
 
 <header>
@@ -110,22 +110,21 @@
             @{
                 if (m == null)
                 {
-                    <a class="button" href="https://innskraning.island.is/?id=icelandauth.vettvangur.is">Island.is sign in</a>
+                    <a class="button" href="@System.Configuration.ConfigurationManager.AppSettings["IcelandAuth.Url"]">Island.is sign in</a>
                 }
                 else
                 {
-                    <div class="ta-center">
-                        <div class="iceland-auth__info">
+                    <div class="iceland-auth__info">
+                        <div>
                             <p><span>Name:</span>@m.Name</p>
                             <p><span>Kennitala:</span>@Members.CurrentUserName</p>
                         </div>
-
                         @using (Html.BeginUmbracoForm<Vettvangur.IcelandAuth.Sample.Umbraco8.Controllers.AuthController>("Logout"))
                         {
-                            <button>Logout</button>
+                            <button class="button">Logout</button>
                         }
-                    </div> 
-                } 
+                    </div>
+                }
             }
 
         </div>

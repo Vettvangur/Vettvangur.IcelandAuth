@@ -182,8 +182,6 @@ main {
 .button,
 .iceland-auth__info {
     padding: rem(10 20);
-    background: $vttv;
-    color: $white;
     font-size: rem(14);
     font-weight: 600;
     border: 1px dashed $border;
@@ -200,14 +198,22 @@ main {
     }
 }
 
+.button {
+    background: $vttv;
+    color: $white;
+}
 .iceland-auth__info {
+    display: flex;
+    justify-content: space-between;
+    
+    background: $white;
+    color: $vttv;
 
     p {
         text-align: left;
     }
     
     span {
-        color: $vttv;
         font-weight: 500;
         padding-right: rem(20);
     }
