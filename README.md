@@ -58,11 +58,11 @@ Code under App_Start shows how to auto-provision users from island.is authentica
 
 The following options come from your island.is contract, you can view those values in the [island.is control panel](https://innskraning.island.is/thjonustuveitendur/Login.aspx?ReturnUrl=%2fthjonustuveitendur%2f). 
 
-##### Constrain audience - Required (Audience is sometimes referred to as island.is ID.)
+##### Constrain audience. Audience is the domain portion of the destination url (see next setting).- Required
 ```xml
 IcelandAuth.Audience
 ```
-##### Ensure SAML response url matches SAML response url destination. - Optional
+##### Ensure SAML response url matches SAML response url destination. Corresponds with "Innskráningarsíða" from the control panel - Optional
 ```xml
 IcelandAuth.Destination
 ```
