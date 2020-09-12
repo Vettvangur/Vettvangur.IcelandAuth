@@ -1,0 +1,21 @@
+﻿@model Vettvangur.IcelandAuth.SamlLogin
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    @if (Model == null)
+    {
+        <a class="button" href="https://innskraning.island.is/?id=icelandauth.vettvangur.is">Island.is sign in</a>
+    }
+    else
+    {
+        <p>@(Model.Valid ? "Authentication Valid" : "Authentication Invalid!")</p>
+        <p>@Model.Name</p>
+        <p>@Model.UserSSN</p>
+    }
+</div>

@@ -49,7 +49,7 @@ namespace Vettvangur.IcelandAuth.Sample.AspNetCore
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapRazorPages();
+                endpoints.MapDefaultControllerRoute();
             });
         }
     }
