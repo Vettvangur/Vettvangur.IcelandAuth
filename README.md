@@ -27,13 +27,14 @@ Installing root certificates is outside the scope of this documentation but a de
 
 ## Configuration
 
-The sample projects in this repository show how to integrate IcelandAuth with an Umbraco site. Those samples use the core IcelandAuth library and additional umbraco helpers from Vettvangur.IcelandAuth.Umbraco7[/8].
-
-For .Net Core and custom integrations you can use the core library validation and inspect the ***Valid*** property of the returned SamlLogin object.
+The sample projects in this repository show how to integrate IcelandAuth with AspNetCore/Umbraco. The Umbraco samples use the core IcelandAuth library and additional umbraco helpers from Vettvangur.IcelandAuth.Umbraco7[/8].
 
 IcelandAuth is configured using appSettings key values, these are commonly stored in Web.config for Asp.Net and appSettings.json for Asp.Net Core projects.
 
 The following documentation shows all configurable keys preceding with 'IcelandAuth.' as required in Web.config. Asp.Net Core appSettings configuration should instead be nested under the IcelandAuth section similar to the following:
+
+## Runtime Configuration
+It is also possible to override configured values using the public properties of the IcelandAuthService.
 
 ### Asp.Net Core appSettings.json structure
 
@@ -87,9 +88,9 @@ IcelandAuth.Authentication
 <!-- <add key="IcelandAuth.Authentication" value="Rafræn skilríki,Rafræn símaskilríki" /> -->
 ```
 
-##### Check if the users IP matches the one seen at authentication.
+##### Verify IP Address
 Check if the users IP matches the one seen at authentication.
-This usually fails during development, island.is will see the public ip the development machine communicates using while the development server, if hosted on your internal network, will see your intranet address.
+This usually fails during development as island.is will see the public ip of the development machine. Meanwhile the development server, if hosted on your internal network, will see your intranet address.
 
 Recommendation is to disable in development and enable live
 ```xml
@@ -116,7 +117,7 @@ IcelandAuth.ErrorRedirect
 
 Looking to contribute something? Pull requests are welcome!
 
-* .Net Core Sample is sorely missing!
+* Unit tests are lacking!
 
 ## License
 
