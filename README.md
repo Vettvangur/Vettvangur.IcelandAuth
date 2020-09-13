@@ -1,4 +1,4 @@
-# Vettvangur.IcelandAuth <sup>v1.0.0</sup>
+# IcelandAuth <sup>v1.0.0</sup>
 
 Vettvangur.IcelandAuth is an open-source .Net project intended to simplify integrating with the island.is authentication service.
 
