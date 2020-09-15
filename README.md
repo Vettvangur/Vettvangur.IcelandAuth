@@ -118,6 +118,7 @@ IcelandAuth.ErrorRedirect
 Looking to contribute something? Pull requests are welcome!
 
 * Unit tests are lacking!
+* Documentation in icelandic
 
 ## License
 
