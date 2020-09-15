@@ -66,8 +66,7 @@ namespace Vettvangur.IcelandAuth
         public virtual string DestinationSSN { get; set; }
 
         /// <summary>
-        /// Unique identifier for this contract with Ísland.is in Guid format
-        /// Not always included in Saml attributes
+        /// 
         /// </summary>
         public virtual string AuthID { get; set; }
 
@@ -98,7 +97,7 @@ namespace Vettvangur.IcelandAuth
             Audience = ConfigurationManager.AppSettings["IcelandAuth.Audience"];
             Destination = ConfigurationManager.AppSettings["IcelandAuth.Destination"];
             DestinationSSN = ConfigurationManager.AppSettings["IcelandAuth.DestinationSSN"];
-            //AuthID = ConfigurationManager.AppSettings["IcelandAuth.AuthID"];
+            AuthID = ConfigurationManager.AppSettings["IcelandAuth.AuthID"];
             Authentication = string.IsNullOrEmpty(ConfigurationManager.AppSettings["IcelandAuth.Authentication"])
                 ? null
                 : ConfigurationManager.AppSettings["IcelandAuth.Authentication"].Split(',');
@@ -125,7 +124,7 @@ namespace Vettvangur.IcelandAuth
             Audience = configuration["IcelandAuth:Audience"];
             Destination = configuration["IcelandAuth:Destination"];
             DestinationSSN = configuration["IcelandAuth:DestinationSSN"];
-            //AuthID = configuration["IcelandAuth:AuthID"];
+            AuthID = configuration["IcelandAuth:AuthID"];
             Authentication = string.IsNullOrEmpty(configuration["IcelandAuth.Authentication"])
                 ? null
                 : configuration["IcelandAuth.Authentication"].Split(',');
@@ -290,7 +289,7 @@ namespace Vettvangur.IcelandAuth
                 }
 
                 var authIdResp = login.Attributes.FirstOrDefault(x => x.Name == "AuthID")?.Value;
-                if (!string.IsNullOrEmpty(AuthID) && !string.IsNullOrEmpty(authIdResp))
+                if (!string.IsNullOrEmpty(AuthID))
                 {
                     if (AuthID == authIdResp)
                     {
