@@ -1,4 +1,4 @@
-$background: beige;
+$background: #f7f5f1;
 $vttv: #ea0d0d;
 $border: #b1b1b1;
 $white: #fff;
@@ -72,11 +72,11 @@ header {
             @media (min-width: 320px) {
                 padding: 0 between(20px, 60px, 320px, 1440px);
             }
-        
+
             @media (min-width: 1440px) {
                 padding: rem(0 60);
             }
-            
+
             svg {
                 width: rem(25);
                 height: auto;
@@ -90,7 +90,7 @@ main {
     flex-direction: column;
     align-items: center;
     height: 75vh;
-    
+
     @media (min-width: 760px) {
         flex-direction: row;
     }
@@ -101,7 +101,7 @@ main {
         align-items: center;
         margin-bottom: rem(20);
         padding: rem(0 10);
- 
+
         @media (min-width: 320px) {
             margin-bottom: between(20px, 50px, 320px, 1440px);
             padding: 0 between(10px, 40px, 320px, 1440px);
@@ -110,7 +110,7 @@ main {
         @media (min-width: 760px) {
             width: 50vw;
         }
-    
+
         @media (min-width: 1440px) {
             margin-bottom: rem(50);
             padding: rem(0 40);
@@ -130,24 +130,28 @@ main {
         display: flex;
         flex-flow: column;
         padding: rem(0 20);
- 
+
         @media (min-width: 320px) {
             padding: between(20px, 90px, 320px, 1440px);
         }
-    
+
         @media (min-width: 1440px) {
             padding: rem(0 90);
         }
-        
+
         .logos {
             display: flex;
             flex-flow: row nowrap;
             justify-content: space-evenly;
             width: 100%;
             padding-top: rem(30);
+
+            path {
+                fill: $font;
+            }
         }
     }
-    
+
     h1 {
         font-size: rem(25);
         margin-bottom: rem(30);
@@ -188,7 +192,8 @@ main {
     border-radius: 3px;
 
     @media (min-width: 320px) {
-        padding: between(10px, 20px, 320px, 1440px) between(20px, 40px, 320px, 1440px);
+        padding: between(10px, 20px, 320px, 1440px)
+            between(20px, 40px, 320px, 1440px);
         font-size: between(14px, 20px, 320px, 1440px);
     }
 
@@ -205,14 +210,14 @@ main {
 .iceland-auth__info {
     display: flex;
     justify-content: space-between;
-    
+
     background: $white;
     color: $vttv;
 
     p {
         text-align: left;
     }
-    
+
     span {
         font-weight: 500;
         padding-right: rem(20);
