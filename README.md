@@ -1,6 +1,6 @@
 # Vettvangur.IcelandAuth <sup>v1.0.0</sup>
 
-Vettvangur.IcelandAuth is an open-source .Net project intended to simplify integrating with the island.is authentication service.
+Vettvangur.IcelandAuth is an open-source .Net [NuGet library](https://www.nuget.org/packages/Vettvangur.IcelandAuth/) intended to simplify integrating with the island.is authentication service.
 
 island.is's authentication service allows for authenticating icelandic nationals using digital certificates / Íslykill.
 
@@ -14,6 +14,9 @@ This project was developed according to fixes and suggestions from [Syndis](http
 At least .Net Framework 4.6.1 or .Net Core 2.
 
 The NetStandard library (NetStandard essentially just contains mappings) and some Microsoft.Extensions packages will be installed if missing. They have a light footprint and are used for abstractions made available in .Net Standard.
+
+## Installation
+Grab the NuGet from [here](https://www.nuget.org/packages/Vettvangur.IcelandAuth/)
 
 ## Signature verification
 
