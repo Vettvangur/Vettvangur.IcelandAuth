@@ -79,7 +79,7 @@ html {
 
 body {
   height: 100%;
-  background-color: beige;
+  background-color: #f7f5f1;
   color: #555;
   max-width: 1440px;
   margin: 0 auto;
@@ -179,6 +179,8 @@ main {
       justify-content: space-evenly;
       width: 100%;
       padding-top: 1.875rem; }
+      main .right .logos path {
+        fill: #555; }
   main h1 {
     font-size: 1.5625rem;
     margin-bottom: 1.875rem; }
