@@ -181,7 +181,6 @@ namespace Vettvangur.IcelandAuth
 
             VerifySignature(login, signedXml, certData);
 
-            DateTime nowTime = DateTime.UtcNow;
             // Retrieve time from conditions and compare
             XmlElement conditions = doc["Response"]?["Assertion"]?["Conditions"];
             if (conditions?.Attributes["NotBefore"]?.Value == null
@@ -191,10 +190,27 @@ namespace Vettvangur.IcelandAuth
                 return login;
             }
 
+            DateTime nowTime = DateTime.UtcNow;
+
             DateTime fromTime =
                 DateTime.Parse(conditions.Attributes["NotBefore"].Value);
             DateTime toTime =
                 DateTime.Parse(conditions.Attributes["NotOnOrAfter"].Value);
+
+            if (nowTime > fromTime && toTime > nowTime)
+            {
+                login.TimeOk = true;
+            }
+            else if (nowTime < fromTime)
+            {
+                Logger?.LogWarning("From time has not passed yet.");
+            }
+            else if (nowTime > toTime)
+            {
+                Logger?.LogInformation("Too much time has passed.");
+            }
+
+            Logger?.LogDebug("Timestamp verified");
 
             if (conditions["AudienceRestriction"]?["Audience"]?.InnerText
                 .Equals(Audience, StringComparison.InvariantCultureIgnoreCase) == true)
@@ -223,21 +239,6 @@ namespace Vettvangur.IcelandAuth
             {
                 login.DestinationOk = true;
             }
-
-            if (nowTime > fromTime && toTime > nowTime)
-            {
-                login.TimeOk = true;
-            }
-            else if (nowTime < fromTime)
-            {
-                Logger?.LogWarning("From time has not passed yet.");
-            }
-            else if (nowTime > toTime)
-            {
-                Logger?.LogInformation("Too much time has passed.");
-            }
-
-            Logger?.LogDebug("Timestamp verified");
 
             // Verify ip address and authentication method if provided
             XmlNodeList attrList = doc["Response"]["Assertion"]["AttributeStatement"]?.ChildNodes;
