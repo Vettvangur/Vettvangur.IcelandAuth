@@ -1,9 +1,5 @@
 # ASP.NET Core (.NET Framework)
-- task: UseDotNet@2
-  inputs:
-    packageType: 'sdk'
-    version: '5.0'
-    includePreviewVersions: true
+
 # Build and test ASP.NET Core projects targeting the full .NET Framework.
 # Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
@@ -26,6 +22,12 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '5.0'
+    includePreviewVersions: true
+    
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
