@@ -311,13 +311,16 @@ namespace Vettvangur.IcelandAuth
             {
                 foreach (XmlNode attrNode in attrList)
                 {
-                    login.Attributes.Add(new IcelandAuthAttribute
+                    if (attrNode.Attributes != null)
                     {
-                        Format = attrNode.Attributes["NameFormat"].Value,
-                        Name = attrNode.Attributes["Name"].Value,
-                        FriendlyName = attrNode.Attributes["FriendlyName"].Value,
-                        Value = attrNode.FirstChild.InnerText
-                    });
+                        login.Attributes.Add(new IcelandAuthAttribute
+                        {
+                            Format = attrNode.Attributes["NameFormat"].Value,
+                            Name = attrNode.Attributes["Name"].Value,
+                            FriendlyName = attrNode.Attributes["FriendlyName"].Value,
+                            Value = attrNode.FirstChild.InnerText
+                        });
+                    }
                 }
 
                 // IPAddress
