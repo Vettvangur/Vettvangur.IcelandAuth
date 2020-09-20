@@ -37,7 +37,8 @@ steps:
     projects: 'src/Vettvangur.IcelandAuth.Tests/Vettvangur.IcelandAuth.Tests.csproj'
     configuration: '$(buildConfiguration)'
 
-- task: VSTest@2
+- task: DotNetCoreCLI@2
   inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    command: 'test'
+    projects: 'src/Vettvangur.IcelandAuth.Tests'
+    arguments: '--no-build --configuration $(buildConfiguration)'
