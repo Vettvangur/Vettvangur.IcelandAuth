@@ -35,4 +35,4 @@ steps:
   inputs:
     command: 'test'
     projects: 'src/Vettvangur.IcelandAuth.Tests'
-    configuration: '$(buildConfiguration)'
+    arguments: '--configuration $(BuildConfiguration)'
