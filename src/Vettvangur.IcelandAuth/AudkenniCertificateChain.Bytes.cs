@@ -2,6 +2,9 @@
 
 namespace Vettvangur.IcelandAuth
 {
+    /// <summary>
+    /// Created with https://www.codeproject.com/Tips/219107/Include-a-binary-file-in-your-source-code-as-a-byt
+    /// </summary>
     partial class AudkenniCertificateChain
     {
         static readonly byte[] AudkennisrotBytes =
