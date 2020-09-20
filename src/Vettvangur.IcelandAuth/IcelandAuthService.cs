@@ -200,7 +200,7 @@ namespace Vettvangur.IcelandAuth
         {
             // We verify required params here to allow consumers to override web.config
             // by setting the public properties on the service
-            if (string.IsNullOrEmpty(Destination))
+            if (true || string.IsNullOrEmpty(Destination))
             {
                 throw new InvalidOperationException(
                     $"Missing {nameof(Destination)} url, either configure in app settings or set the service property."
