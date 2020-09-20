@@ -12,7 +12,7 @@ namespace Vettvangur.IcelandAuth
     /// <summary>
     /// https://benfoster.io/blog/net-core-configuration-legacy-projects/
     /// </summary>
-    public class LegacyConfigurationProvider : ConfigurationProvider, IConfigurationSource
+    class LegacyConfigurationProvider : ConfigurationProvider, IConfigurationSource
     {
         public static IConfigurationRoot Create() =>
             new ConfigurationBuilder()

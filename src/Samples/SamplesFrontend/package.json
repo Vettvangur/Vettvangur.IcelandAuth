@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "node-sass": "^4.14.1"
+  },
+  "scripts": {
+    "build": "node-sass scss/styles.scss ../Umbraco8Sample/css/styles.css && node-sass scss/styles.scss ../Umbraco7Sample/css/styles.css && node-sass scss/styles.scss ../AspNetCoreSample/wwwroot/css/styles.css && node-sass scss/styles.scss ../Net5Sample/wwwroot/css/styles.css",
+    "scss": "node-sass --watch scss -o css"
+  }
+}

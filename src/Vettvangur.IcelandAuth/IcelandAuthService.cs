@@ -177,7 +177,7 @@ namespace Vettvangur.IcelandAuth
             if (req.Method == "POST" && req.Form.ContainsKey("token"))
             {
                 return VerifySaml(
-                    req.Form["token"], 
+                    req.Form["token"],
                     _httpContextAccessor.HttpContext.Connection.RemoteIpAddress.ToString());
             }
 
@@ -484,6 +484,24 @@ namespace Vettvangur.IcelandAuth
             {
                 using (X509Certificate2 cert = new X509Certificate2(certData))
                 {
+#if NET5
+                    // Verify signature only
+                    login.SignatureOk = signedXml.CheckSignature(cert, true);
+
+                    // When using CustomRootTrust with just Audkennisrot trusted there is no need to verify issuer manually
+
+                    using var certChain = new X509Chain();
+                    certChain.ChainPolicy.TrustMode = X509ChainTrustMode.CustomRootTrust;
+                    certChain.ChainPolicy.CustomTrustStore.Add(AudkenniCertificateChain.Audkennisrot);
+                    certChain.ChainPolicy.ExtraStore.Add(AudkenniCertificateChain.TraustAudkenni);
+                    certChain.ChainPolicy.ExtraStore.Add(AudkenniCertificateChain.TrausturBunadur);
+
+                    if (certChain.Build(cert))
+                    {
+                        login.CertOk = true;
+                        Logger?.LogDebug("Certificate verified");
+                    }
+#else
                     // Verify signature
                     login.SignatureOk = signedXml.CheckSignature(cert, false);
 
@@ -501,6 +519,7 @@ namespace Vettvangur.IcelandAuth
                         login.CertOk = true;
                         Logger?.LogDebug("Certificate verified");
                     }
+#endif
                 }
             }
             // Invalid certificate, continue on for further logging but validation has failed at this point.

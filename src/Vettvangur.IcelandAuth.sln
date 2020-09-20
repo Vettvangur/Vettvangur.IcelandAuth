@@ -22,36 +22,38 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6D9D6481
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vettvangur.IcelandAuth.Tests", "Vettvangur.IcelandAuth.Tests\Vettvangur.IcelandAuth.Tests.csproj", "{498177F8-02FF-4375-9728-BB22F5829BFA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vettvangur.IcelandAuth.Sample.Umbraco7", "Samples\Vettvangur.IcelandAuth.Sample.Umbraco7\Vettvangur.IcelandAuth.Sample.Umbraco7.csproj", "{11B18DD8-10EA-48D7-91E3-5CC972B26F63}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vettvangur.IcelandAuth.Umbraco8", "Vettvangur.IcelandAuth.Umbraco8\Vettvangur.IcelandAuth.Umbraco8.csproj", "{9790656B-A50A-43E5-B039-4404E4EB9BB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vettvangur.IcelandAuth.Sample.Umbraco8", "Samples\Vettvangur.IcelandAuth.Sample.Umbraco8\Vettvangur.IcelandAuth.Sample.Umbraco8.csproj", "{CF9DC300-74F5-4578-B9A4-D46B8E736297}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vettvangur.IcelandAuth.Umbraco7", "Vettvangur.IcelandAuth.Umbraco7\Vettvangur.IcelandAuth.Umbraco7.csproj", "{9DF46469-D251-4C25-8079-51CF54986698}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Vettvangur.IcelandAuth.Sample.Frontend", "Samples\Vettvangur.IcelandAuth.Sample.Frontend\", "{246ED192-D031-466D-A263-F66C348D2706}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreSample", "Samples\AspNetCoreSample\AspNetCoreSample.csproj", "{DF8D3F79-6FA6-422E-A7FD-A9AFED9A177F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Net5Sample", "Samples\Net5Sample\Net5Sample.csproj", "{A2DBE8AF-733B-44F6-89BE-9B27CA9D2DEA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umbraco7Sample", "Samples\Umbraco7Sample\Umbraco7Sample.csproj", "{11B18DD8-10EA-48D7-91E3-5CC972B26F63}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umbraco8Sample", "Samples\Umbraco8Sample\Umbraco8Sample.csproj", "{CF9DC300-74F5-4578-B9A4-D46B8E736297}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SamplesFrontend", "Samples\SamplesFrontend\", "{E301303B-6A35-4621-8D15-F23A49E02602}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_13301"
-		Debug.AspNetCompiler.PhysicalPath = "Samples\Vettvangur.IcelandAuth.Sample.Frontend\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_13301\"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_5052"
+		Debug.AspNetCompiler.PhysicalPath = "Samples\SamplesFrontend\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_5052\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_13301"
-		Release.AspNetCompiler.PhysicalPath = "Samples\Vettvangur.IcelandAuth.Sample.Frontend\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_13301\"
+		Release.AspNetCompiler.VirtualPath = "/localhost_5052"
+		Release.AspNetCompiler.PhysicalPath = "Samples\SamplesFrontend\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_5052\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "13301"
-		SlnRelativePath = "Samples\Vettvangur.IcelandAuth.Sample.Frontend\"
+		VWDPort = "5052"
+		SlnRelativePath = "Samples\SamplesFrontend\"
 	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vettvangur.IcelandAuth.Sample.AspNetCore", "Samples\Vettvangur.IcelandAuth.Sample.AspNetCore\Vettvangur.IcelandAuth.Sample.AspNetCore.csproj", "{665F0E91-9E97-4573-B7A1-464847DEEAC0}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vettvangur.IcelandAuth.Umbraco8", "Vettvangur.IcelandAuth.Umbraco8\Vettvangur.IcelandAuth.Umbraco8.csproj", "{9790656B-A50A-43E5-B039-4404E4EB9BB4}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vettvangur.IcelandAuth.Umbraco7", "Vettvangur.IcelandAuth.Umbraco7\Vettvangur.IcelandAuth.Umbraco7.csproj", "{9DF46469-D251-4C25-8079-51CF54986698}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,20 +71,6 @@ Global
 		{498177F8-02FF-4375-9728-BB22F5829BFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{498177F8-02FF-4375-9728-BB22F5829BFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{498177F8-02FF-4375-9728-BB22F5829BFA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{11B18DD8-10EA-48D7-91E3-5CC972B26F63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{11B18DD8-10EA-48D7-91E3-5CC972B26F63}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{11B18DD8-10EA-48D7-91E3-5CC972B26F63}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{11B18DD8-10EA-48D7-91E3-5CC972B26F63}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CF9DC300-74F5-4578-B9A4-D46B8E736297}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CF9DC300-74F5-4578-B9A4-D46B8E736297}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CF9DC300-74F5-4578-B9A4-D46B8E736297}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CF9DC300-74F5-4578-B9A4-D46B8E736297}.Release|Any CPU.Build.0 = Release|Any CPU
-		{246ED192-D031-466D-A263-F66C348D2706}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{246ED192-D031-466D-A263-F66C348D2706}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{665F0E91-9E97-4573-B7A1-464847DEEAC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{665F0E91-9E97-4573-B7A1-464847DEEAC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{665F0E91-9E97-4573-B7A1-464847DEEAC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{665F0E91-9E97-4573-B7A1-464847DEEAC0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9790656B-A50A-43E5-B039-4404E4EB9BB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9790656B-A50A-43E5-B039-4404E4EB9BB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9790656B-A50A-43E5-B039-4404E4EB9BB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -91,16 +79,37 @@ Global
 		{9DF46469-D251-4C25-8079-51CF54986698}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DF46469-D251-4C25-8079-51CF54986698}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DF46469-D251-4C25-8079-51CF54986698}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF8D3F79-6FA6-422E-A7FD-A9AFED9A177F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF8D3F79-6FA6-422E-A7FD-A9AFED9A177F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF8D3F79-6FA6-422E-A7FD-A9AFED9A177F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF8D3F79-6FA6-422E-A7FD-A9AFED9A177F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2DBE8AF-733B-44F6-89BE-9B27CA9D2DEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2DBE8AF-733B-44F6-89BE-9B27CA9D2DEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2DBE8AF-733B-44F6-89BE-9B27CA9D2DEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2DBE8AF-733B-44F6-89BE-9B27CA9D2DEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11B18DD8-10EA-48D7-91E3-5CC972B26F63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11B18DD8-10EA-48D7-91E3-5CC972B26F63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11B18DD8-10EA-48D7-91E3-5CC972B26F63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11B18DD8-10EA-48D7-91E3-5CC972B26F63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF9DC300-74F5-4578-B9A4-D46B8E736297}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF9DC300-74F5-4578-B9A4-D46B8E736297}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF9DC300-74F5-4578-B9A4-D46B8E736297}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF9DC300-74F5-4578-B9A4-D46B8E736297}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E301303B-6A35-4621-8D15-F23A49E02602}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E301303B-6A35-4621-8D15-F23A49E02602}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E301303B-6A35-4621-8D15-F23A49E02602}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{E301303B-6A35-4621-8D15-F23A49E02602}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{498177F8-02FF-4375-9728-BB22F5829BFA} = {6D9D6481-B6C3-4102-8FF7-8749CB44565B}
+		{DF8D3F79-6FA6-422E-A7FD-A9AFED9A177F} = {8659C66E-8DC8-47CF-B2EB-E042227F53E2}
+		{A2DBE8AF-733B-44F6-89BE-9B27CA9D2DEA} = {8659C66E-8DC8-47CF-B2EB-E042227F53E2}
 		{11B18DD8-10EA-48D7-91E3-5CC972B26F63} = {8659C66E-8DC8-47CF-B2EB-E042227F53E2}
 		{CF9DC300-74F5-4578-B9A4-D46B8E736297} = {8659C66E-8DC8-47CF-B2EB-E042227F53E2}
-		{246ED192-D031-466D-A263-F66C348D2706} = {8659C66E-8DC8-47CF-B2EB-E042227F53E2}
-		{665F0E91-9E97-4573-B7A1-464847DEEAC0} = {8659C66E-8DC8-47CF-B2EB-E042227F53E2}
+		{E301303B-6A35-4621-8D15-F23A49E02602} = {8659C66E-8DC8-47CF-B2EB-E042227F53E2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {021250CD-B3C9-4C20-B71E-143525F4586F}

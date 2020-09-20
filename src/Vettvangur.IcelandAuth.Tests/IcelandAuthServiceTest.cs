@@ -1,4 +1,4 @@
-using Microsoft.Extensions.Configuration;
+ using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
@@ -76,8 +76,8 @@ namespace Vettvangur.IcelandAuth.Tests
             Assert.AreEqual("Íslykill", login.Authentication);
         }
 
+#if NET5
         /// <summary>
-        /// Requires audkennisrot in trusted roots
         /// </summary>
         [TestMethod]
         public void VerifiesSignature()
@@ -86,6 +86,7 @@ namespace Vettvangur.IcelandAuth.Tests
 
             Assert.IsTrue(login.SignatureOk);
         }
+#endif
 
         /// <summary>
         /// Accepts matching authentication

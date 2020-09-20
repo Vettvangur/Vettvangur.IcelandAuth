@@ -1,20 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>netcoreapp2.1;net461;netstandard2.0</TargetFrameworks>
+        <TargetFrameworks>net5.0;netcoreapp2.1;net461;netstandard2.0</TargetFrameworks>
         <AssemblyName>Vettvangur.IcelandAuth</AssemblyName>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         
         <!-- Package properties -->
         <PackageId>Vettvangur.IcelandAuth</PackageId>
-        <Version>2.0.0</Version>
+        <Version>2.1.0</Version>
         <Title>Vettvangur.IcelandAuth</Title>
         <Authors>Gunnar Már Óttarsson, Vettvangur</Authors>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageProjectUrl>https://github.com/Vettvangur/Vettvangur.IcelandAuth</PackageProjectUrl>
         <PackageIcon>images\VV_Logo.png</PackageIcon>
         <Description>Enables easy integration with the island.is authentication service</Description>
-        <PackageReleaseNotes>First release.</PackageReleaseNotes>
+        <PackageReleaseNotes>.Net5 edition initial release.</PackageReleaseNotes>
         <Copyright>Copyright 2020</Copyright>
         <PackageTags>Authentication;DigitalCertificates;NationalRegistry;Iceland</PackageTags>
 
@@ -35,6 +35,11 @@
         <None Include="..\..\VV_Logo.png" Pack="true" PackagePath="images\" />
     </ItemGroup>
 
+    <!-- Define for future versions of Net5 and above -->
+    <PropertyGroup Condition=" '$(TargetFramework)' == 'net5.0'">
+        <DefineConstants>NET5</DefineConstants>
+    </PropertyGroup>
+  
     <ItemGroup>
         <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
             <_Parameter1>Vettvangur.IcelandAuth.Umbraco7</_Parameter1>
@@ -65,6 +70,9 @@
     </ItemGroup>
   
     <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.1'">
+      <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.0.0" />
+    </ItemGroup>
+    <ItemGroup Condition=" '$(TargetFramework)' == 'net5.0'">
       <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.0.0" />
     </ItemGroup>
 </Project>

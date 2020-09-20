@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net461;netcoreapp2.1</TargetFrameworks>
+    <TargetFrameworks>net5.0;net461;netcoreapp2.1</TargetFrameworks>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
@@ -16,6 +16,11 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
+
+  <!-- Define for future versions of Net5 and above -->
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net5.0'">
+    <DefineConstants>NET5</DefineConstants>
+  </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Vettvangur.IcelandAuth\Vettvangur.IcelandAuth.csproj" />
