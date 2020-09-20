@@ -1,3 +1,6 @@
+#if NETCOREAPP
+using Microsoft.AspNetCore.Http;
+#endif
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
@@ -8,6 +11,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Cryptography.Xml;
 using System.Text;
+using System.Web;
 using System.Xml;
 
 namespace Vettvangur.IcelandAuth
@@ -32,43 +36,54 @@ namespace Vettvangur.IcelandAuth
 
         private IEnumerable<string> _authentication;
         /// <summary>
-        /// Possible values include:
-        /// "Rafræn skilríki"
-        /// "Rafræn símaskilríki"
-        /// "Íslykill"
+        /// Rafræn skilríki – Digital certificate authentication. <br />
+        /// Rafræn símaskilríki - Digital certificate authentication using a phone. <br />
+        /// Rafræn starfsmannaskilríki – Employee digital certificate authentication. <br />
+        /// Íslykill – Authentication using Íslykill. <br />
+        /// Styrktur Íslykill – 2FA using Íslykill, 2FA delivered via phone or email. <br />
+        /// Styrkt rafræn skilríki – Digital certificate authentication with 2FA via phone/email. <br />
+        /// Styrkt rafræn starfsmannaskilríki – Employee digital certificate authentication with 2FA via phone/email. <br />
         /// </summary>
-        public virtual IEnumerable<string> Authentication 
+        public virtual IEnumerable<string> Authentication
         {
-            get => _authentication; 
+            get => _authentication;
+            set => _authentication = value?.Select(x => x.Trim(' '));
+        }
+
+        /// <summary>
+        /// island.is generates the audience attribute by reading the host
+        /// portion of the destination url.
+        /// 
+        /// </summary>
+        private string _audience;
+
+        private string _destination;
+        /// <summary>
+        /// SAML response url destination. F.x. https://icelandauth.vettvangur.is/umbraco/surface/icelandauth/login
+        /// </summary>
+        public virtual string Destination
+        {
+            get => _destination;
             set
             {
-                if (value != null)
+                if (!string.IsNullOrEmpty(value))
                 {
-                    _authentication = value.Select(x => x.Trim(' '));
+                    var uri = new Uri(value);
+                    _audience = uri.Host;
+                    _destination = value;
                 }
             }
         }
 
         /// <summary>
-        /// Audience will most likely be the sites host name.
-        /// F.x. Vettvangur demo is icelandauth.vettvangur.is
-        /// </summary>
-        public virtual string Audience { get; set; }
-
-        /// <summary>
-        /// SAML response url destination. F.x. https://icelandauth.vettvangur.is/umbraco/surface/icelandauth/login
-        /// </summary>
-        public virtual string Destination { get; set; }
-
-        /// <summary>
-        /// The SSN used for contract with Ísland.is. F.x 5208130550
+        /// The SSN used in the contract with Ísland.is.
         /// </summary>
         public virtual string DestinationSSN { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public virtual string AuthID { get; set; }
+        public virtual Guid? AuthID { get; set; }
 
         /// <summary>
         /// Check if the users IP matches the one seen at authentication.
@@ -90,54 +105,88 @@ namespace Vettvangur.IcelandAuth
         /// .NET Framework constructor, reads key/values from <see cref="ConfigurationManager.AppSettings"/>.
         /// </summary>
         /// <param name="logger"></param>
-        public IcelandAuthService(ILogger logger = null)
+        public IcelandAuthService(ILogger<IcelandAuthService> logger = null)
+            : this(LegacyConfigurationProvider.Create(), logger)
         {
-            Logger = logger;
-
-            Audience = ConfigurationManager.AppSettings["IcelandAuth.Audience"];
-            Destination = ConfigurationManager.AppSettings["IcelandAuth.Destination"];
-            DestinationSSN = ConfigurationManager.AppSettings["IcelandAuth.DestinationSSN"];
-            AuthID = ConfigurationManager.AppSettings["IcelandAuth.AuthID"];
-            Authentication = string.IsNullOrEmpty(ConfigurationManager.AppSettings["IcelandAuth.Authentication"])
-                ? null
-                : ConfigurationManager.AppSettings["IcelandAuth.Authentication"].Split(',');
-            VerifyIPAddress = bool.TryParse(ConfigurationManager.AppSettings["IcelandAuth.VerifyIPAddress"], out var verifyIpAddress)
-                ? verifyIpAddress
-                : true;
-
-            bool.TryParse(ConfigurationManager.AppSettings["IcelandAuth.LogSamlResponse"], out var logSamlResponse);
-            LogSamlResponse = logSamlResponse;
         }
 #endif
+
+#if NETCOREAPP
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
         /// <summary>
         /// .NET Core constructor
         /// </summary>
-        /// <param name="logger"></param>
         public IcelandAuthService(
             IConfiguration configuration,
-            ILogger logger = null
+            ILogger<IcelandAuthService> logger,
+            IHttpContextAccessor httpContextAccessor
+        ) : this(configuration, logger)
+        {
+            _httpContextAccessor = httpContextAccessor;
+        }
+#endif
+
+#if NETCOREAPP || NETFRAMEWORK
+        internal IcelandAuthService(
+#else
+        public IcelandAuthService(
+#endif
+            IConfiguration configuration,
+            ILogger<IcelandAuthService> logger
         )
         {
             Logger = logger;
 
-            Audience = configuration["IcelandAuth:Audience"];
-            Destination = configuration["IcelandAuth:Destination"];
-            DestinationSSN = configuration["IcelandAuth:DestinationSSN"];
-            AuthID = configuration["IcelandAuth:AuthID"];
-            Authentication = string.IsNullOrEmpty(configuration["IcelandAuth.Authentication"])
-                ? null
-                : configuration["IcelandAuth.Authentication"].Split(',');
-            VerifyIPAddress = bool.TryParse(configuration["IcelandAuth:VerifyIPAddress"], out var verifyIpAddress)
-                ? verifyIpAddress
-                : true;
+            if (configuration != null)
+            {
+                Destination = configuration["IcelandAuth:Destination"];
+                DestinationSSN = configuration["IcelandAuth:DestinationSSN"];
+                IslandIsID = configuration["IcelandAuth:ID"];
+                AuthID = string.IsNullOrEmpty(configuration["IcelandAuth:AuthID"])
+                    ? null
+                    // Throw on non-guid
+                    : (Guid?)Guid.Parse(configuration["IcelandAuth:AuthID"]);
+                Authentication = string.IsNullOrEmpty(configuration["IcelandAuth:Authentication"])
+                    ? null
+                    : configuration["IcelandAuth:Authentication"].Split(',');
+                VerifyIPAddress = bool.TryParse(configuration["IcelandAuth:VerifyIPAddress"], out var verifyIpAddress)
+                    ? verifyIpAddress
+                    : true;
 
-            bool.TryParse(configuration["IcelandAuth:LogSamlResponse"], out var logSamlResponse);
-            LogSamlResponse = logSamlResponse;
+                bool.TryParse(configuration["IcelandAuth:LogSamlResponse"], out var logSamlResponse);
+                LogSamlResponse = logSamlResponse;
+            }
         }
 
+#if NETFRAMEWORK
+        public virtual SamlLogin VerifySaml()
+        {
+            var httpCtx = HttpContext.Current;
+            return VerifySaml(httpCtx.Request.Form["token"], httpCtx.Request.UserHostAddress);
+        }
+#elif NETCOREAPP
+        public virtual SamlLogin VerifySaml()
+        {
+            if (_httpContextAccessor == null)
+            {
+                throw new InvalidOperationException("IHttpContextAccessor is required if no token is provided");
+            }
+
+            var req = _httpContextAccessor.HttpContext.Request;
+            if (req.Method == "POST" && req.Form.ContainsKey("token"))
+            {
+                return VerifySaml(
+                    req.Form["token"], 
+                    _httpContextAccessor.HttpContext.Connection.RemoteIpAddress.ToString());
+            }
+
+            return null;
+        }
+#endif
+
         /// <summary>
-        /// Originally based on C# sample provided by Ísland.is
+        /// 
         /// </summary>
         /// <param name="token"></param>
         /// <param name="ipAddress">
@@ -149,6 +198,21 @@ namespace Vettvangur.IcelandAuth
             string token,
             string ipAddress)
         {
+            // We verify required params here to allow consumers to override web.config
+            // by setting the public properties on the service
+            if (string.IsNullOrEmpty(Destination))
+            {
+                throw new InvalidOperationException(
+                    $"Missing {nameof(Destination)} url, either configure in app settings or set the service property."
+                );
+            }
+            if (string.IsNullOrEmpty(DestinationSSN))
+            {
+                throw new InvalidOperationException(
+                    $"Missing {nameof(DestinationSSN)}, either configure in app settings or set the service property."
+                );
+            }
+
             Logger?.LogDebug("Verifying Saml");
 
             var login = new SamlLogin();
@@ -166,7 +230,7 @@ namespace Vettvangur.IcelandAuth
             }
 
             var signedXml = new SignedXml(doc);
-            
+
             // Retrieve signature
             XmlElement signedInfo = doc["Response"]?["Signature"];
             var certText = doc["Response"]?["Signature"]?["KeyInfo"]?["X509Data"]?["X509Certificate"]?.InnerText;
@@ -213,7 +277,7 @@ namespace Vettvangur.IcelandAuth
             Logger?.LogDebug("Timestamp verified");
 
             if (conditions["AudienceRestriction"]?["Audience"]?.InnerText
-                .Equals(Audience, StringComparison.InvariantCultureIgnoreCase) == true)
+                .Equals(_audience, StringComparison.InvariantCultureIgnoreCase) == true)
             {
                 login.AudienceOk = true;
             }
@@ -290,9 +354,9 @@ namespace Vettvangur.IcelandAuth
                 }
 
                 var authIdResp = login.Attributes.FirstOrDefault(x => x.Name == "AuthID")?.Value;
-                if (!string.IsNullOrEmpty(AuthID))
+                if (AuthID != null)
                 {
-                    if (AuthID == authIdResp)
+                    if (Guid.TryParse(authIdResp, out var authId) && AuthID == authId)
                     {
                         login.AuthIdOk = true;
                     }
@@ -359,11 +423,11 @@ namespace Vettvangur.IcelandAuth
 
             if (login.Valid)
             {
-                Logger?.LogInformation("Authentication valid");
+                Logger?.LogInformation("island.is valid");
             }
             else
             {
-                Logger?.LogInformation("Authentication invalid");
+                Logger?.LogInformation("island.is invalid");
             }
 
             return login;

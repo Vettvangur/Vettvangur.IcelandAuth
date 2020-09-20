@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 namespace Vettvangur.IcelandAuth.Umbraco7
 {
     /// <summary>
-    /// Log4net compat for <see cref="Microsoft.Extensions.Logging.ILogger"/>.
+    /// Log4net compat for <see cref="ILogger"/>.
     /// Modified from https://dotnetthoughts.net/how-to-use-log4net-with-aspnetcore-for-logging/
     /// </summary>
-    public class Log4NetLogger : ILogger
+    public class Log4NetLogger : ILogger<IcelandAuthService>
     {
         /// <summary>
         /// The log.

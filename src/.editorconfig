@@ -11,10 +11,10 @@ indent_size = 4
 indent_style = space
 insert_final_newline = true
 
-[*.{js,jsx,ts,tsx}]
+[*.{js,json,jsx,ts,tsx}]
 indent_size = 2
 
-[*.{html,config,nuspec}]
+[*.{html,config,nuspec,csproj}]
 indent_size = 2
 
 [*.{html,cshtml}]

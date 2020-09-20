@@ -467,7 +467,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Vettvangur.IcelandAuth.Umbraco7\Vettvangur.IcelandAuth.Umbraco7.csproj">
-      <Project>{1ff9b47a-d8a3-4516-8942-d55c86ecdbd3}</Project>
+      <Project>{9df46469-d251-4c25-8079-51cf54986698}</Project>
       <Name>Vettvangur.IcelandAuth.Umbraco7</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Vettvangur.IcelandAuth\Vettvangur.IcelandAuth.csproj">
