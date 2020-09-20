@@ -19,11 +19,10 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- task: NuGetToolInstaller@1
-
-- task: NuGetCommand@2
+- task: UseDotNet@2
   inputs:
-    restoreSolution: '$(solution)'
+    packageType: 'sdk'
+    version: '2.x'
 
 - task: UseDotNet@2
   inputs:
