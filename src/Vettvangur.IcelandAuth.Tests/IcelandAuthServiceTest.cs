@@ -86,6 +86,17 @@ namespace Vettvangur.IcelandAuth.Tests
 
             Assert.IsTrue(login.SignatureOk);
         }
+
+        /// <summary>
+        /// </summary>
+        [TestMethod]
+        public void RecognizesInvalidSignature()
+        {
+            var login = svc.VerifySaml(Resources.SamlWithLongDuration_InvalidSignature, null);
+
+            Assert.IsFalse(login.SignatureOk);
+            Assert.IsTrue(login.TimeOk);
+        }
 #endif
 
         /// <summary>
