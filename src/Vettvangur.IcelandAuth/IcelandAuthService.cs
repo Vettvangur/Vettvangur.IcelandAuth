@@ -286,22 +286,15 @@ namespace Vettvangur.IcelandAuth
                 Logger?.LogWarning($"Audience mismatch, received {conditions["AudienceRestriction"]?["Audience"]?.InnerText}");
             }
 
-            if (!string.IsNullOrEmpty(Destination))
-            {
-                var destination = doc.DocumentElement.Attributes["Destination"].Value;
+            var destination = doc.DocumentElement.Attributes["Destination"].Value;
 
-                if (Destination.Equals(destination, StringComparison.InvariantCultureIgnoreCase))
-                {
-                    login.DestinationOk = true;
-                }
-                else
-                {
-                    Logger?.LogWarning("Destination mismatch, received " + destination);
-                }
+            if (Destination.Equals(destination, StringComparison.InvariantCultureIgnoreCase))
+            {
+                login.DestinationOk = true;
             }
             else
             {
-                login.DestinationOk = true;
+                Logger?.LogWarning("Destination mismatch, received " + destination);
             }
 
             // Verify ip address and authentication method if provided
