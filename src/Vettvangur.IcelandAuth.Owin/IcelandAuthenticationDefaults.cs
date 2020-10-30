@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Vettvangur.IcelandAuth.Owin
 {
-    public static class IcelandAuthenticationDefaults
+    static class IcelandAuthenticationDefaults
     {
         public const string AuthenticationType = "IcelandAuth";
-
-
     }
 }

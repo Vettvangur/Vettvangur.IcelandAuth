@@ -24,7 +24,7 @@ namespace Vettvangur.IcelandAuth.Owin
         /// <summary>
         /// Override default configuration for the IcelandAuthService used to process
         /// island.is Saml responses.
-        /// Do not set the AuthID property, it is used by the authentication handler for redirect tracking.
+        /// <para>Do not set the AuthID property, it is used by the authentication handler for post redirect state retrieval.</para>
         /// </summary>
         public Func<IOwinContext, IcelandAuthService> IcelandAuthService { get; set; }
 

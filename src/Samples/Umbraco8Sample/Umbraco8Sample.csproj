@@ -257,9 +257,6 @@
     <Reference Include="Umbraco.Examine, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\UmbracoCms.Web.8.6.3\lib\net472\Umbraco.Examine.dll</HintPath>
     </Reference>
-    <Reference Include="Umbraco.IdentityExtensions, Version=1.0.7156.26635, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\UmbracoCms.IdentityExtensions.2.0.0\lib\net472\Umbraco.IdentityExtensions.dll</HintPath>
-    </Reference>
     <Reference Include="Umbraco.ModelsBuilder.Embedded, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\UmbracoCms.Web.8.6.3\lib\net472\Umbraco.ModelsBuilder.Embedded.dll</HintPath>
     </Reference>

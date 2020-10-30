@@ -42,8 +42,6 @@ namespace Vettvangur.IcelandAuth.Owin
                     Options.CallbackPath = PathString.FromUriComponent(redirectUri);
                 }
             }
-
-
         }
 
         /// <summary>

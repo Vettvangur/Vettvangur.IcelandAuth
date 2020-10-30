@@ -1,4 +1,3 @@
-using IdentityModel;
 using Microsoft.Owin;
 using Microsoft.Owin.Logging;
 using Microsoft.Owin.Security;
@@ -48,6 +47,12 @@ namespace Vettvangur.IcelandAuth.Owin
 
         protected override async Task<AuthenticationTicket> AuthenticateCoreAsync()
         {
+            if (Options.CallbackPath.HasValue
+            && Options.CallbackPath != Request.PathBase + Request.Path)
+            {
+                return null;
+            }
+
             SamlLogin login = null;
 
             if (string.Equals(Request.Method, "POST", StringComparison.OrdinalIgnoreCase)
@@ -81,7 +86,6 @@ namespace Vettvangur.IcelandAuth.Owin
                 // Identity authenticationType "UmbracoExternalCookie"
                 // Not to be confused with the issuer provided below from Options.AuthenticationType
                 var claimsIdentity = new ClaimsIdentity(Options.SignInAsAuthenticationType);
-                //var claimsIdentity = new ClaimsIdentity(Options.AuthenticationType);
                 AddClaimsFromSaml(claimsIdentity, login);
 
                 var properties = SimpleStateTracking.RetrieveRedirect(login);
@@ -109,18 +113,17 @@ namespace Vettvangur.IcelandAuth.Owin
                 ClaimValueTypes.String,
                 Options.AuthenticationType)
             );
-            claimsIdentity.AddClaim(new Claim(
-                JwtClaimTypes.Issuer,
-                Options.AuthenticationType,
-                ClaimValueTypes.String,
-                Options.AuthenticationType)
-            );
+            
+            // Used for auto-linking which is discouraged for this provider
             claimsIdentity.AddClaim(new Claim(
                 ClaimTypes.Email,
                 $"{samlLogin.UserSSN}@example.com",
                 ClaimValueTypes.String,
                 Options.AuthenticationType)
             );
+
+            // Unused claims follow
+
             claimsIdentity.AddClaim(new Claim(
                 ClaimTypes.Upn,
                 samlLogin.UserSSN,
@@ -161,12 +164,6 @@ namespace Vettvangur.IcelandAuth.Owin
         /// <returns>True if the request was handled, false if the next middleware should be invoked.</returns>
         public override async Task<bool> InvokeAsync()
         {
-            if (Options.CallbackPath.HasValue
-            && Options.CallbackPath != Request.PathBase + Request.Path)
-            {
-                return false;
-            }
-
             AuthenticationTicket ticket = await AuthenticateAsync();
 
             if (ticket != null)
