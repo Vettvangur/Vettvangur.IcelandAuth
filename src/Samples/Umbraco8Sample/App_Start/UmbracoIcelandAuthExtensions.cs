@@ -15,35 +15,18 @@ namespace Umbraco8Sample.App_Start
     public static class UmbracoIcelandAuthExtensions
     {
         ///  <summary>
-        ///  Configure ActiveDirectory sign-in
+        ///  Configure island.is sign-in
+        ///  
+        /// ToDo: Install with owin nupkg
+        /// 
         ///  </summary>
         ///  <param name="app"></param>
-        ///  <param name="tenant">
-        ///  Your tenant ID i.e. YOURDIRECTORYNAME.onmicrosoft.com OR this could be the GUID of your tenant ID
-        ///  </param>
-        ///  <param name="clientId">
-        ///  Also known as the Application Id in the azure portal
-        ///  </param>
         ///  <param name="postLoginRedirectUri">
         ///  The URL that will be redirected to after login is successful, example: http://mydomain.com/umbraco/;
-        ///  </param>
-        ///  <param name="issuerId">
-        /// 
-        ///  This is the "Issuer Id" for you Azure AD application. This is a GUID value of your tenant ID.
-        /// 
-        ///  If this value is not set correctly then accounts won't be able to be detected 
-        ///  for un-linking in the back office. 
-        /// 
         ///  </param>
         /// <param name="caption"></param>
         /// <param name="style"></param>
         /// <param name="icon"></param>
-        /// <remarks>
-        /// 
-        ///  ActiveDirectory account documentation for ASP.Net Identity can be found:
-        ///  https://github.com/AzureADSamples/WebApp-WebAPI-OpenIDConnect-DotNet
-        /// 
-        ///  </remarks>
         public static void ConfigureBackOfficeIcelandAuth(
             this IAppBuilder app,
             string postLoginRedirectUri,
