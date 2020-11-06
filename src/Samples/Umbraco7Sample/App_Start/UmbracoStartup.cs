@@ -45,8 +45,10 @@ namespace Umbraco7Sample.App_Start
                 // Create member with random pw
                 // This ensures users can only login using Ísland.is authentication method
                 byte[] pwBytes = new byte[32];
-                var rngCsp = new RNGCryptoServiceProvider();
-                rngCsp.GetBytes(pwBytes);
+                using (var rngCsp = new RNGCryptoServiceProvider())
+                {
+                    rngCsp.GetBytes(pwBytes);
+                }
 
                 ms.AssignRole(member.Id, "Members");
                 ms.SavePassword(member, Convert.ToBase64String(pwBytes));
