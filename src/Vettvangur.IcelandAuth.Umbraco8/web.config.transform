@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <configuration>
     <appSettings>
-        <add key="IcelandAuth.Audience" value="" />
-        <add key="IcelandAuth.VerifyIPAddress" value="True" />
+        <add key="IcelandAuth:ID" value="" />
+        <add key="IcelandAuth:Destination" value="" />
+        <add key="IcelandAuth:DestinationSSN" value="" />
+        <add key="IcelandAuth:VerifyIPAddress" value="True" />
     </appSettings>
 </configuration>
