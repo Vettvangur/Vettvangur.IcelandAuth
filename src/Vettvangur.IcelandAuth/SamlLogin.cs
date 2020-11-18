@@ -1,25 +1,40 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Vettvangur.IcelandAuth
 {
     public class SamlLogin
     {
-        public string Name { get; set; }
+        public string Name => Attributes.FirstOrDefault(x => x.Name == "Name")?.Value;
 
-        public string UserSSN { get; set; }
+        public string UserSSN => Attributes.FirstOrDefault(x => x.Name == "UserSSN")?.Value;
 
         /// <summary>
         /// Users mobile
         /// </summary>
-        public string UserPhone { get; set; }
+        public string UserPhone => Attributes.FirstOrDefault(x => x.Name == "Mobile")?.Value;
 
-        public string OnbehalfRight { get; set; }
-        public string OnBehalfName { get; set; }
-        public string OnbehalfSSN { get; set; }
-        public string OnbehalfValue { get; set; }
-        public DateTime OnbehalfValidity { get; set; }
+        public string UserAgent => Attributes.FirstOrDefault(x => x.Name == "UserAgent")?.Value;
+
+        public string OnbehalfRight => Attributes.FirstOrDefault(i => i.Name == "BehalfRight")?.Value;
+        public string OnBehalfName => Attributes.FirstOrDefault(i => i.Name == "OnBehalfName")?.Value;
+        public string OnbehalfSSN => Attributes.FirstOrDefault(i => i.Name == "OnBehalfUserSSN")?.Value;
+        public string OnbehalfValue => Attributes.FirstOrDefault(i => i.Name == "BehalfValue")?.Value;
+        public DateTime? OnbehalfValidity
+        {
+            get
+            {
+                var behalfValidityAttr = Attributes.FirstOrDefault(i => i.Name == "BehalfValidity");
+                if (DateTime.TryParse(behalfValidityAttr?.Value, out var val))
+                {
+                    return val;
+                }
+
+                return null;
+            }
+        }
 
         /// <summary>
         /// Possible values include:
@@ -27,7 +42,40 @@ namespace Vettvangur.IcelandAuth
         /// "Rafræn símaskilríki"
         /// "Íslykill"
         /// </summary>
-        public string Authentication { get; set; }
+        public IEnumerable<string> Authentication
+        {
+            get
+            {
+                var val = Attributes.FirstOrDefault(x => x.Name == "Authentication")?.Value;
+
+                if (val != null)
+                {
+                    return val.Split(',').Select(x => x.Trim(' '));
+                }
+
+                return Enumerable.Empty<string>();
+            }
+        }
+
+        /// <summary>
+        /// Client IP Address
+        /// </summary>
+        public string IPAddress => Attributes.FirstOrDefault(x => x.Name == "IPAddress")?.Value;
+
+        public Guid? AuthID
+        {
+            get
+            {
+                var val = Attributes.FirstOrDefault(x => x.Name == "AuthID")?.Value;
+
+                if (Guid.TryParse(val, out var key))
+                {
+                    return key;
+                }
+
+                return null;
+            }
+        }
 
         public bool SignatureOk { get; set; }
         public bool CertOk { get; set; }

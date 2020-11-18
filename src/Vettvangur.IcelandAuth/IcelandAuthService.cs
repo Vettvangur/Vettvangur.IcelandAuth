@@ -334,7 +334,6 @@ namespace Vettvangur.IcelandAuth
 
                 // Authentication method used, f.x. phone certificate.
                 var authenticationResp = login.Attributes.First(x => x.Name == "Authentication").Value;
-                login.Authentication = authenticationResp;
                 if (Authentication?.Any() == true)
                 {
                     login.AuthMethodOk = Authentication.Contains(authenticationResp);
@@ -381,21 +380,6 @@ namespace Vettvangur.IcelandAuth
                 else
                 {
                     login.DestinationSsnOk = true;
-                }
-
-                login.UserSSN = login.Attributes.FirstOrDefault(x => x.Name == "UserSSN")?.Value;
-
-                login.Name = login.Attributes.FirstOrDefault(x => x.Name == "Name")?.Value;
-
-                login.OnbehalfRight = login.Attributes.FirstOrDefault(i => i.Name == "BehalfRight")?.Value;
-                login.OnBehalfName = login.Attributes.FirstOrDefault(i => i.Name == "OnBehalfName")?.Value;
-                login.OnbehalfSSN = login.Attributes.FirstOrDefault(i => i.Name == "OnBehalfUserSSN")?.Value;
-                login.OnbehalfValue = login.Attributes.FirstOrDefault(i => i.Name == "BehalfValue")?.Value;
-
-                var behalfValidityAttr = login.Attributes.FirstOrDefault(i => i.Name == "BehalfValidity");
-                if (DateTime.TryParse(behalfValidityAttr?.Value, out var val))
-                {
-                    login.OnbehalfValidity = val;
                 }
 
                 Logger?.LogDebug("Attributes read");
