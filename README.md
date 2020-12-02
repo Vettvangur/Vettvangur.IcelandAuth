@@ -16,6 +16,8 @@ This project was developed according to fixes and suggestions from [Syndis](http
     * [AspNet Core](#aspnet-core)
     * [AspNet Umbraco 7/8](#aspnet-umbraco-78)
   * [Signature verification (skip when targetting Net5)](#signature-verification-skip-when-targetting-net5)
+    * [Windows Setup](#windows-audkennisrot-setup)
+    * [Other](#other)
 - [Configuration](#configuration)
   * [Runtime Configuration](#runtime-configuration)
   + [Asp.Net Core appSettings.json structure](#aspnet-core-appsettingsjson-structure)
@@ -75,13 +77,28 @@ Hook into the ControllerBehavior.Success and Error events to handle authenticati
 
 To be able to verify the signature returned from island.is you will need to install the audkenni certificate chain, http://www.audkenni.is/adstod/skilrikjakedjur.cfm.
 
+[The .Net 5](#net5) version utilises the CustomRootTrust option to build a chain and comes bundled with the audkenni certificates. 
+
+### Windows audkennisrot setup
+
+Run the following powershell code with elevated privileges (admin)
+
+```
+Invoke-WebRequest http://skrar.audkenni.is/skilrikjakedjur/audkennisrot/Audkennisrot_Kedja.p7b -OutFile Audkennisrot_Kedja.p7b
+Import-Certificate .\Audkennisrot_Kedja.p7b -CertStoreLocation cert:\localmachine\ca
+$crt = Get-ChildItem -Path cert:\localmachine\ca\6f7207dc27299adc7ae785c050ecec47c7b5ff4e
+Export-Certificate -Cert $crt -FilePath $Env:TEMP\tmpcrt.crt
+Import-Certificate $Env:TEMP\tmpcrt.crt -CertStoreLocation cert:\localmachine\root
+Remove-Item $env:TEMP\tmpcrt.crt
+```
+
+### Other
+
 The certificate Auðkennisrót needs to be installed into trusted roots in the server hosts certificate store.
 
 The intermediate certificates should be added to Intermediate Certification Authorities.
 
 Installing root certificates is outside the scope of this documentation but a detailed step-by-step can for example be found [here](https://docs.microsoft.com/en-us/skype-sdk/sdn/articles/installing-the-trusted-root-certificate).
-
-[The .Net 5](#net5) version utilises the CustomRootTrust option to build a chain and comes bundled with the audkenni certificates. 
 
 # Configuration
 
