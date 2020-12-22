@@ -13,7 +13,9 @@ namespace Vettvangur.IcelandAuth.Tests
         [TestMethod]
         public void ThrowsOnMissingIslandId()
         {
-            Assert.ThrowsException<InvalidOperationException>(() => IcelandAuthService.CreateUrl(null));
+            string nullString = null;
+            Assert.ThrowsException<InvalidOperationException>(
+                () => IcelandAuthService.CreateUrl(nullString));
 
             var svc = new IcelandAuthService(Mock.Of<IConfiguration>(), null);
             Assert.ThrowsException<InvalidOperationException>(svc.CreateLoginUrl);
