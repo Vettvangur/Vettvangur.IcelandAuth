@@ -10,9 +10,17 @@ namespace Vettvangur.IcelandAuth
     public partial class IcelandAuthService
     {
 #if NETFRAMEWORK
-        public static string CreateUrl()
+        public static string CreateUrl(IEnumerable<string> authentication = null, Guid? authId = null)
         {
             var svc = new IcelandAuthService(null);
+            if (authentication != null)
+            {
+                svc.Authentication = authentication;
+            }
+            if (authId != null)
+            {
+                svc.AuthID = authId;
+            }
 
             return svc.CreateLoginUrl();
         }
@@ -31,7 +39,7 @@ namespace Vettvangur.IcelandAuth
             return svc.CreateLoginUrl();
         }
 
-        const string IslandIsUrl = "https://innskraning.island.is/";
+        const string _islandIsUrl = "https://innskraning.island.is/";
 
         /// <summary>
         /// island.is ID - Required for url helper
@@ -70,7 +78,7 @@ namespace Vettvangur.IcelandAuth
                 queryString.Add("authid", AuthID.Value.ToString());
             }
 
-            return $"{IslandIsUrl}?{queryString}";
+            return $"{_islandIsUrl}?{queryString}";
         }
     }
 }
