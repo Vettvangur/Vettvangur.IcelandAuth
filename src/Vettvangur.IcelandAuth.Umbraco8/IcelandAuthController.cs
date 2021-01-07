@@ -12,8 +12,8 @@ namespace Vettvangur.IcelandAuth.Umbraco8
     /// </summary>
     public class IcelandAuthController : SurfaceController
     {
-        protected readonly Umbraco.Core.Logging.ILogger Log;
-        protected readonly ControllerBehavior AuthHandler;
+        protected Umbraco.Core.Logging.ILogger Log;
+        protected ControllerBehavior AuthHandler;
 
         public IcelandAuthController(Umbraco.Core.Logging.ILogger logger)
         {

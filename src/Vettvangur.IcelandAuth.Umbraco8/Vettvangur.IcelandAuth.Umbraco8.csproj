@@ -7,7 +7,7 @@
         
         <!-- Package properties -->
         <PackageId>Vettvangur.IcelandAuth.Umbraco8</PackageId>
-        <Version>3.0.0-beta.3</Version>
+        <Version>3.0.0-beta.4</Version>
         <Title>Vettvangur.IcelandAuth.Umbraco8</Title>
         <Authors>Gunnar Már Óttarsson, Vettvangur</Authors>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>

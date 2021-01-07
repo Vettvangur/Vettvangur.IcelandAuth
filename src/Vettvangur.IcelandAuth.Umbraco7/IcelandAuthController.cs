@@ -13,11 +13,8 @@ namespace Vettvangur.IcelandAuth.Umbraco7
     /// </summary>
     public class IcelandAuthController : SurfaceController
     {
-        protected readonly string SuccessRedirect;
-        protected readonly string ErrorRedirect;
-
-        protected readonly ControllerBehavior AuthHandler;
-        protected readonly ILog Log;
+        protected ILog Log;
+        protected ControllerBehavior AuthHandler;
 
         public IcelandAuthController()
         {
