@@ -81,7 +81,7 @@ namespace Vettvangur.IcelandAuth
         public virtual string DestinationSSN { get; set; }
 
         /// <summary>
-        /// 
+        /// An optional Guid that will be sent along with the token to the configured destination url
         /// </summary>
         public virtual Guid? AuthID { get; set; }
 
