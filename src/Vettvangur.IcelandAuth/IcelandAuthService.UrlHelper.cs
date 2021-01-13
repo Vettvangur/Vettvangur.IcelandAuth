@@ -18,7 +18,10 @@ namespace Vettvangur.IcelandAuth
         /// Two-letter country code as defined in ISO 3166-1
         /// </param>
         /// <returns></returns>
-        public static string CreateUrl(string lang = null, IEnumerable<string> authentication = null, Guid? authId = null)
+        public static string CreateUrl(
+            string lang = null,
+            IEnumerable<string> authentication = null,
+            Guid? authId = null)
         {
             var svc = new IcelandAuthService(null);
             if (authentication != null)
@@ -55,7 +58,11 @@ namespace Vettvangur.IcelandAuth
         /// An optional Guid that will be sent along with the token to the configured destination url
         /// </param>
         /// <returns></returns>
+#if NETFRAMEWORK
+        public static string CreateUrlWithId(
+#else
         public static string CreateUrl(
+#endif
             string islandIsId,
             string lang = null,
             IEnumerable<string> authentication = null, 
