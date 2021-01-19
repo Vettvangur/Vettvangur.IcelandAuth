@@ -11,7 +11,7 @@ namespace Vettvangur.IcelandAuth
     {
 #if NETFRAMEWORK
         /// <summary>
-        /// Creates an island.is login url, reading configuration from Web.config
+        /// Creates an island.is login url, reading key/values from <see cref="ConfigurationManager.AppSettings"/>.
         /// </summary>
         /// <param name="lang">
         /// Allows configuration of display language in island.is portal. <br />
