@@ -12,18 +12,23 @@ namespace Vettvangur.IcelandAuth.Umbraco8
     /// </summary>
     public class IcelandAuthController : SurfaceController
     {
-        protected Umbraco.Core.Logging.ILogger Log;
-        protected ControllerBehavior AuthHandler;
+        private Umbraco.Core.Logging.ILogger Log;
+        private ControllerBehavior AuthHandler;
 
-        public IcelandAuthController(Umbraco.Core.Logging.ILogger logger)
+        public IcelandAuthController(
+            Umbraco.Core.Logging.ILogger logger, 
+            IcelandAuthService icelandAuthService = null)
         {
             Log = logger;
-            var log = new UmbracoLogger(Log, typeof(IcelandAuthService));
-            var icelandAuthService = new IcelandAuthService(log);
+            if (icelandAuthService == null)
+            {
+                var log = new UmbracoLogger(Log, typeof(IcelandAuthService));
+                icelandAuthService = new IcelandAuthService(log);
+            }
             AuthHandler = new ControllerBehavior(icelandAuthService);
         }
 
-        public virtual ActionResult Login()
+        public ActionResult Login()
         {
             return Redirect(AuthHandler.Login());
         }
