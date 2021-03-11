@@ -7,8 +7,10 @@
 
 trigger:
 - master
+- master-3
 pr:
 - master
+- master-3
 
 pool:
   vmImage: 'windows-latest'
