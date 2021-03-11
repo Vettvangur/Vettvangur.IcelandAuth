@@ -13,21 +13,20 @@ namespace Vettvangur.IcelandAuth.Umbraco7
     /// </summary>
     public class IcelandAuthController : SurfaceController
     {
-        protected readonly string SuccessRedirect;
-        protected readonly string ErrorRedirect;
-
-        protected readonly ControllerBehavior AuthHandler;
-        protected readonly ILog Log;
+        private ControllerBehavior AuthHandler;
 
         public IcelandAuthController()
         {
-            Log = LogManager.GetLogger(typeof(IcelandAuthService));
-            var log = new Log4NetLogger(Log);
+            var log = new Log4NetLogger(LogManager.GetLogger(typeof(IcelandAuthService)));
             var icelandAuthService = new IcelandAuthService(log);
             AuthHandler = new ControllerBehavior(icelandAuthService);
         }
+        public IcelandAuthController(IcelandAuthService icelandAuthService)
+        {
+            AuthHandler = new ControllerBehavior(icelandAuthService);
+        }
 
-        public virtual ActionResult Login()
+        public ActionResult Login()
         {
             return Redirect(AuthHandler.Login());
         }

@@ -1,4 +1,4 @@
-# Vettvangur.IcelandAuth <sup>v2.1.0</sup>
+# Vettvangur.IcelandAuth <sup>v3.0.0</sup>
 
 Vettvangur.IcelandAuth is an open-source .Net [NuGet library](https://www.nuget.org/packages/Vettvangur.IcelandAuth/) intended to simplify integrating with the island.is authentication service.
 
@@ -43,7 +43,7 @@ This project was developed according to fixes and suggestions from [Syndis](http
 # Getting Started
 
 ## Running the samples locally
-Feel free to try out the samples locally configure with our test island.is contract. 
+Feel free to try out the samples locally configured with our test island.is contract. 
 
 Samples listen on port 80. You will also need to configure a dns record mapping:
 
@@ -74,6 +74,7 @@ Configure library using Web.config
 Hook into the ControllerBehavior.Success and Error events to handle authentication events
 
 Note: Umbraco 7 projects configured with dependency injection will need to register an implementation of IcelandAuthService.
+
 Note: Umbraco 8 projects wanting to override the default IcelandAuthService implementation should use Umbraco's RegisterUnique Composition extension method.
 
 ## Signature verification (skip when targetting Net5)
@@ -213,7 +214,7 @@ This simplifies setup by removing the requirement to install certificates locall
 
 # Contribution
 
-Building now requires VS 2019 Preview as Net5 is one of it's targets.
+Building now requires latest VS 2019 as Net5 is one of it's targets.
 
 Looking to contribute something? Pull requests are welcome!
 

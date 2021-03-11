@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
+using System.Linq;
 
 namespace Vettvangur.IcelandAuth.Tests
 {
@@ -73,7 +74,7 @@ namespace Vettvangur.IcelandAuth.Tests
             Assert.IsTrue(login.AuthIdOk);
 
             Assert.AreEqual("2008862919", login.UserSSN);
-            Assert.AreEqual("Íslykill", login.Authentication);
+            Assert.AreEqual("Íslykill", login.Authentication.First());
         }
 
 #if NET5
