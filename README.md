@@ -73,6 +73,9 @@ Install appropriate Umbraco integration NuGet
 Configure library using Web.config
 Hook into the ControllerBehavior.Success and Error events to handle authentication events
 
+Note: Umbraco 7 projects configured with dependency injection will need to register an implementation of IcelandAuthService.
+Note: Umbraco 8 projects wanting to override the default IcelandAuthService implementation should use Umbraco's RegisterUnique Composition extension method.
+
 ## Signature verification (skip when targetting Net5)
 
 To be able to verify the signature returned from island.is you will need to install the audkenni certificate chain, http://www.audkenni.is/adstod/skilrikjakedjur.cfm.
