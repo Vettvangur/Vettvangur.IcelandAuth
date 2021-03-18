@@ -7,14 +7,14 @@
         
         <!-- Package properties -->
         <PackageId>Vettvangur.IcelandAuth.Umbraco7</PackageId>
-        <Version>3.0.0</Version>
+        <Version>3.0.1</Version>
         <Title>Vettvangur.IcelandAuth.Umbraco7</Title>
         <Authors>Gunnar Már Óttarsson, Vettvangur</Authors>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageProjectUrl>https://github.com/Vettvangur/Vettvangur.IcelandAuth</PackageProjectUrl>
         <PackageIcon>images\VV_Logo.png</PackageIcon>
         <Description>Enables easy integration with the island.is authentication service using Umbraco 7</Description>
-        <PackageReleaseNotes>v2.0</PackageReleaseNotes>
+        <PackageReleaseNotes>Migrate to xdt transforms</PackageReleaseNotes>
         <Copyright>Copyright 2020</Copyright>
         <PackageTags>Authentication;DigitalCertificates;NationalRegistry;Iceland;Umbraco;Umbraco7</PackageTags>
 
@@ -32,7 +32,7 @@
 
     <ItemGroup>
       <None Remove="Views\web.config.transform" />
-      <None Remove="web.config.transform" />
+      <None Remove="web.config.install.xdt" />
     </ItemGroup>
 
     <ItemGroup>
@@ -51,7 +51,7 @@
 
     <ItemGroup>
       <Content Include="Views\web.config.transform" />
-      <Content Include="web.config.transform" />
+      <Content Include="web.config.install.xdt" />
     </ItemGroup>
 
     <ItemGroup>
