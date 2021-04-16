@@ -241,7 +241,7 @@ namespace Vettvangur.IcelandAuth
             }
 
             signedXml.LoadXml(signedInfo);
-            byte[] certData = Encoding.UTF8.GetBytes(certText);
+            byte[] certData = Convert.FromBase64String(certText);
 
             VerifySignature(login, signedXml, certData);
 
