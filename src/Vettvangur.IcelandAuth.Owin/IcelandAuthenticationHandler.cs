@@ -113,7 +113,7 @@ namespace Vettvangur.IcelandAuth.Owin
                 ClaimValueTypes.String,
                 Options.AuthenticationType)
             );
-            
+
             // Used for auto-linking which is discouraged for this provider
             claimsIdentity.AddClaim(new Claim(
                 ClaimTypes.Email,
@@ -130,12 +130,16 @@ namespace Vettvangur.IcelandAuth.Owin
                 ClaimValueTypes.String,
                 Options.AuthenticationType)
             );
-            claimsIdentity.AddClaim(new Claim(
-                ClaimTypes.AuthenticationMethod,
-                samlLogin.Authentication,
-                ClaimValueTypes.String,
-                Options.AuthenticationType)
-            );
+
+            foreach (var authMethod in samlLogin.Authentication)
+            {
+                claimsIdentity.AddClaim(new Claim(
+                    ClaimTypes.AuthenticationMethod,
+                    authMethod,
+                    ClaimValueTypes.String,
+                    Options.AuthenticationType)
+                );
+            }
 
             if (!string.IsNullOrEmpty(samlLogin.UserPhone))
             {
