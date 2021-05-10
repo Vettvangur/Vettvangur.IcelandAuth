@@ -28,12 +28,12 @@ namespace Vettvangur.IcelandAuth.UmbracoShared
         {
             IcelandAuthService = icelandAuthService;
 
-            SuccessRedirect = string.IsNullOrEmpty(ConfigurationManager.AppSettings["IcelandAuth.SuccessRedirect"])
+            SuccessRedirect = string.IsNullOrEmpty(ConfigurationManager.AppSettings["IcelandAuth:SuccessRedirect"])
                 ? "/"
-                : ConfigurationManager.AppSettings["IcelandAuth.SuccessRedirect"];
-            ErrorRedirect = string.IsNullOrEmpty(ConfigurationManager.AppSettings["IcelandAuth.ErrorRedirect"])
+                : ConfigurationManager.AppSettings["IcelandAuth:SuccessRedirect"];
+            ErrorRedirect = string.IsNullOrEmpty(ConfigurationManager.AppSettings["IcelandAuth:ErrorRedirect"])
                 ? "/"
-                : ConfigurationManager.AppSettings["IcelandAuth.ErrorRedirect"];
+                : ConfigurationManager.AppSettings["IcelandAuth:ErrorRedirect"];
         }
 
         public virtual string Login(HttpRequestBase request = null)

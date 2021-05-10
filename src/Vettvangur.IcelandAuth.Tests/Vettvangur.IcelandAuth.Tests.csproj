@@ -22,6 +22,12 @@
     <DefineConstants>NET5</DefineConstants>
   </PropertyGroup>
 
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net461'">
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.8" />
+    <Reference Include="System.Web" />
+    <Reference Include="System" />
+  </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Vettvangur.IcelandAuth\Vettvangur.IcelandAuth.csproj" />
   </ItemGroup>
