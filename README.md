@@ -4,7 +4,7 @@ Vettvangur.IcelandAuth is an open-source .Net [NuGet library](https://www.nuget.
 
 island.is's free authentication service allows for authenticating icelandic nationals using digital certificates / Íslykill.
 
-A prior contract with island.is is needed for production use, see https://island.is/#permit-884. General information on the island.is authentication service can be found [here](https://island.is/um-island-is/innskraningarthjonustan/).
+A prior contract with island.is is needed for production use, see https://island.is/innskraningarthjonusta.
 
 This project was developed according to fixes and suggestions from [Syndis](https://www.syndis.is/) and influenced in part by the work done [here](https://github.com/digitaliceland/innskraningar-daemi/).
 
