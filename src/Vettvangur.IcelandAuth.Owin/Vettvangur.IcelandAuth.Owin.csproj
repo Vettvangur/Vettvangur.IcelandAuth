@@ -1,0 +1,58 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net461</TargetFramework>
+    <AssemblyName>Vettvangur.IcelandAuth.Owin</AssemblyName>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+
+    <!-- Package properties -->
+    <PackageId>Vettvangur.IcelandAuth.Owin</PackageId>
+    <Version>1.0.0</Version>
+    <Title>Vettvangur.IcelandAuth.Owin</Title>
+    <Authors>Gunnar Már Óttarsson, Vettvangur</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/Vettvangur/Vettvangur.IcelandAuth</PackageProjectUrl>
+    <PackageIcon>images\VV_Logo.png</PackageIcon>
+    <Description>Enables easy integration with the island.is authentication service using Owin middleware</Description>
+    <PackageReleaseNotes>Initial release</PackageReleaseNotes>
+    <Copyright>Copyright 2020</Copyright>
+    <PackageTags>Authentication;DigitalCertificates;NationalRegistry;Iceland;Owin</PackageTags>
+
+    <!-- Optional: Publish the repository URL in the built .nupkg (in the NuSpec <Repository> element) -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+
+    <!-- Optional: Embed source files that are not tracked by the source control manager in the PDB -->
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+
+    <!-- Optional: Build symbol package (.snupkg) to distribute the PDB containing Source Link -->
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Package icon -->
+    <None Include="..\..\VV_Logo.png" Pack="true" PackagePath="images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+      <_Parameter1>Vettvangur.IcelandAuth.Tests</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Owin.Security" Version="4.1.1" />
+    <PackageReference Include="Vettvangur.IcelandAuth" Version="[3.0.2,4.0)" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Vettvangur.IcelandAuth\Vettvangur.IcelandAuth.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net461'">
+    <Reference Include="System.Runtime.Caching" />
+  </ItemGroup>
+
+</Project>
