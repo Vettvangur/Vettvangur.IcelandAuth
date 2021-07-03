@@ -28,7 +28,7 @@ namespace Vettvangur.IcelandAuth
         /// <summary>
         /// Name of issuing CA
         /// </summary>
-        protected const string IssuerName = "Traustur bunadur";
+        protected const string IssuerName = "Fullgilt audkenni";
         /// <summary>
         /// SSN of issuing CA (Auðkenni)
         /// </summary>
@@ -472,9 +472,8 @@ namespace Vettvangur.IcelandAuth
 
                     using var certChain = new X509Chain();
                     certChain.ChainPolicy.TrustMode = X509ChainTrustMode.CustomRootTrust;
-                    certChain.ChainPolicy.CustomTrustStore.Add(AudkenniCertificateChain.Audkennisrot);
-                    certChain.ChainPolicy.ExtraStore.Add(AudkenniCertificateChain.TraustAudkenni);
-                    certChain.ChainPolicy.ExtraStore.Add(AudkenniCertificateChain.TrausturBunadur);
+                    certChain.ChainPolicy.CustomTrustStore.Add(IslandsrotCertificateChain.Islandsrot);
+                    certChain.ChainPolicy.ExtraStore.Add(IslandsrotCertificateChain.FullgiltAudkenni);
 
                     if (certChain.Build(cert))
                     {
