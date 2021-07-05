@@ -79,18 +79,20 @@ Note: Umbraco 8 projects wanting to override the default IcelandAuthService impl
 
 ## Signature verification (skip when targetting Net5)
 
-To be able to verify the signature returned from island.is you will need to install the audkenni certificate chain, http://www.audkenni.is/adstod/skilrikjakedjur.cfm.
+To be able to verify the signature returned from island.is you will need to install Íslandsrót in your trusted roots, https://skrar.audkenni.is/skilrikjakedjur/islandsrot/Islandsrot.cer.
 
-[The .Net 5](#net5) version utilises the CustomRootTrust option to build a chain and comes bundled with the audkenni certificates. 
+[The .Net 5](#net5) version utilises the CustomRootTrust option to build a chain and comes bundled with the Íslandsrót certificate. 
 
-### Windows audkennisrot setup
+### Windows Íslandsrót setup
 
 Run the following powershell code with elevated privileges (admin)
 
 ```
-Invoke-WebRequest http://skrar.audkenni.is/skilrikjakedjur/audkennisrot/Audkennisrot_Kedja.p7b -OutFile Audkennisrot_Kedja.p7b
-Import-Certificate .\Audkennisrot_Kedja.p7b -CertStoreLocation cert:\localmachine\ca
-$crt = Get-ChildItem -Path cert:\localmachine\ca\6f7207dc27299adc7ae785c050ecec47c7b5ff4e
+Invoke-WebRequest https://skrar.audkenni.is/skilrikjakedjur/islandsrot/Islandsrot.cer -OutFile Islandsrot.cer
+Invoke-WebRequest https://skrar.audkenni.is/skilrikjakedjur/islandsrot/Milliskilriki.cer -OutFile Milliskilriki.cer
+Import-Certificate .\Islandsrot.cer -CertStoreLocation cert:\localmachine\ca
+Import-Certificate .\Milliskilriki.cer -CertStoreLocation cert:\localmachine\ca
+$crt = Get-ChildItem -Path cert:\localmachine\ca\9965F6AF08D9BC5E21054AF2B348C19B72D94AE0
 Export-Certificate -Cert $crt -FilePath $Env:TEMP\tmpcrt.crt
 Import-Certificate $Env:TEMP\tmpcrt.crt -CertStoreLocation cert:\localmachine\root
 Remove-Item $env:TEMP\tmpcrt.crt
@@ -98,9 +100,9 @@ Remove-Item $env:TEMP\tmpcrt.crt
 
 ### Other
 
-The certificate Auðkennisrót needs to be installed into trusted roots in the server hosts certificate store.
+The certificate Íslandsrót needs to be installed into trusted roots in the server hosts certificate store.
 
-The intermediate certificates should be added to Intermediate Certification Authorities.
+The intermediate certificate (https://skrar.audkenni.is/skilrikjakedjur/islandsrot/Milliskilriki.cer) should be added to Intermediate Certification Authorities.
 
 Installing root certificates is outside the scope of this documentation but a detailed step-by-step can for example be found [here](https://docs.microsoft.com/en-us/skype-sdk/sdn/articles/installing-the-trusted-root-certificate).
 
