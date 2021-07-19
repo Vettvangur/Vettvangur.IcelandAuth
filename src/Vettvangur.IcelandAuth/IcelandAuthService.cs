@@ -88,7 +88,7 @@ namespace Vettvangur.IcelandAuth
         /// <summary>
         /// Check if the users IP matches the one seen at authentication.
         /// Not always a reliable check, breaks when site is hosted on internal network
-        /// Default true
+        /// Default false
         /// </summary>
         public virtual bool VerifyIPAddress { get; set; }
 
@@ -152,7 +152,7 @@ namespace Vettvangur.IcelandAuth
                     : configuration["IcelandAuth:Authentication"].Split(',');
                 VerifyIPAddress = bool.TryParse(configuration["IcelandAuth:VerifyIPAddress"], out var verifyIpAddress)
                     ? verifyIpAddress
-                    : true;
+                    : false;
 
                 bool.TryParse(configuration["IcelandAuth:LogSamlResponse"], out var logSamlResponse);
                 LogSamlResponse = logSamlResponse;

@@ -187,10 +187,10 @@ Only Guid values are supported.
 ##### Verify IP Address
 Check if the users IP matches the one seen at authentication.
 This usually fails during development as island.is will see the public ip of the development machine. Meanwhile the development server, if hosted on your internal network, will see your intranet address.
+Also unsupported with Cloudflare and will break if user roams during authentication. Not an ideal setting in this day and age.
 
-Recommendation is to disable in development and enable live
 ```js
-IcelandAuth:VerifyIPAddress - true // default
+IcelandAuth:VerifyIPAddress - false // default
 ```
 ##### Log the Saml response received from island.is
 Take care to only enable this option in development!
