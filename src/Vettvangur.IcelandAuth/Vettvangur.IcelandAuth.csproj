@@ -7,14 +7,14 @@
         
         <!-- Package properties -->
         <PackageId>Vettvangur.IcelandAuth</PackageId>
-        <Version>3.0.4</Version>
+        <Version>3.0.5</Version>
         <Title>Vettvangur.IcelandAuth</Title>
         <Authors>Gunnar Már Óttarsson, Vettvangur</Authors>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageProjectUrl>https://github.com/Vettvangur/Vettvangur.IcelandAuth</PackageProjectUrl>
         <PackageIcon>images\VV_Logo.png</PackageIcon>
         <Description>Enables easy integration with the island.is authentication service</Description>
-        <PackageReleaseNotes>Support new certificate chain - https://island.is/rof-innskraning/leidbeiningar-fyrir-taeknifolk</PackageReleaseNotes>
+        <PackageReleaseNotes>Support unstandard ports for audience / destination</PackageReleaseNotes>
         <Copyright>Copyright 2020</Copyright>
         <PackageTags>Authentication;DigitalCertificates;NationalRegistry;Iceland</PackageTags>
 
