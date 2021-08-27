@@ -69,7 +69,7 @@ namespace Vettvangur.IcelandAuth
                 if (!string.IsNullOrEmpty(value))
                 {
                     var uri = new Uri(value);
-                    _audience = uri.Host;
+                    _audience = uri.Authority;
                     _destination = value;
                 }
             }
