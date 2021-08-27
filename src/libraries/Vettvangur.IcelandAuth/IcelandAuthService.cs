@@ -464,7 +464,7 @@ namespace Vettvangur.IcelandAuth
             {
                 using (X509Certificate2 cert = new X509Certificate2(certData))
                 {
-#if NET5
+#if NET5_0
                     // Verify signature only
                     login.SignatureOk = signedXml.CheckSignature(cert, true);
 

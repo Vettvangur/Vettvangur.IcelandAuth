@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Vettvangur.IcelandAuth\Vettvangur.IcelandAuth.csproj" />
+    <ProjectReference Include="..\..\libraries\Vettvangur.IcelandAuth\Vettvangur.IcelandAuth.csproj" />
   </ItemGroup>
 
 </Project>

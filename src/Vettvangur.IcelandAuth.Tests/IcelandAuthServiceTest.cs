@@ -77,7 +77,7 @@ namespace Vettvangur.IcelandAuth.Tests
             Assert.AreEqual("Íslykill", login.Authentication.First());
         }
 
-#if NET5
+#if NET5_0
         /// <summary>
         /// </summary>
         [TestMethod]

@@ -485,26 +485,26 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Vettvangur.IcelandAuth.Owin\Vettvangur.IcelandAuth.Owin.csproj">
-      <Project>{95869c4e-491f-4521-9603-77a51cab6f60}</Project>
-      <Name>Vettvangur.IcelandAuth.Owin</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Vettvangur.IcelandAuth.Umbraco7\Vettvangur.IcelandAuth.Umbraco7.csproj">
-      <Project>{9df46469-d251-4c25-8079-51cf54986698}</Project>
-      <Name>Vettvangur.IcelandAuth.Umbraco7</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Vettvangur.IcelandAuth\Vettvangur.IcelandAuth.csproj">
-      <Project>{e1458e3f-4385-4f2f-91f6-e471882de8bb}</Project>
-      <Name>Vettvangur.IcelandAuth</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Analyzer Include="..\..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
     <Analyzer Include="..\..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\MacroPartials\" />
     <Folder Include="Views\Partials\Navigation\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\libraries\Vettvangur.IcelandAuth.Owin\Vettvangur.IcelandAuth.Owin.csproj">
+      <Project>{18086663-4848-4a16-841a-61ea2a9d18c1}</Project>
+      <Name>Vettvangur.IcelandAuth.Owin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\libraries\Vettvangur.IcelandAuth.Umbraco7\Vettvangur.IcelandAuth.Umbraco7.csproj">
+      <Project>{1bc38b0a-8cd5-4c24-a960-0193f41b0fdb}</Project>
+      <Name>Vettvangur.IcelandAuth.Umbraco7</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\libraries\Vettvangur.IcelandAuth\Vettvangur.IcelandAuth.csproj">
+      <Project>{9e73b0bb-b2e2-4f6c-861f-6979df2a5a23}</Project>
+      <Name>Vettvangur.IcelandAuth</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

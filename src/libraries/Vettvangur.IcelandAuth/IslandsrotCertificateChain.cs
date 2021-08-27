@@ -1,4 +1,4 @@
-#if NET5
+#if NET5_0
 using System;
 using System.Security.Cryptography.X509Certificates;
 

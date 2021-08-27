@@ -7,26 +7,12 @@
         
         <!-- Package properties -->
         <PackageId>Vettvangur.IcelandAuth.Umbraco8</PackageId>
-        <Version>3.0.1</Version>
+        <Version>3.0.2</Version>
         <Title>Vettvangur.IcelandAuth.Umbraco8</Title>
-        <Authors>Gunnar Már Óttarsson, Vettvangur</Authors>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageProjectUrl>https://github.com/Vettvangur/Vettvangur.IcelandAuth</PackageProjectUrl>
-        <PackageIcon>images\VV_Logo.png</PackageIcon>
         <Description>Enables easy integration with the island.is authentication service using Umbraco 8</Description>
         <PackageReleaseNotes>Migrate to xdt transforms</PackageReleaseNotes>
         <Copyright>Copyright 2020</Copyright>
         <PackageTags>Authentication;DigitalCertificates;NationalRegistry;Iceland;Umbraco;Umbraco8</PackageTags>
-
-        <!-- Optional: Publish the repository URL in the built .nupkg (in the NuSpec <Repository> element) -->
-        <PublishRepositoryUrl>true</PublishRepositoryUrl>
-
-        <!-- Optional: Embed source files that are not tracked by the source control manager in the PDB -->
-        <EmbedUntrackedSources>true</EmbedUntrackedSources>
-
-        <!-- Optional: Build symbol package (.snupkg) to distribute the PDB containing Source Link -->
-        <IncludeSymbols>true</IncludeSymbols>
-        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
 
     </PropertyGroup>
 
@@ -36,8 +22,6 @@
     </ItemGroup>
 
     <ItemGroup>
-    <!-- Package icon -->
-      <None Include="..\..\VV_Logo.png" Pack="true" PackagePath="images\" />
       <Compile Include="..\Vettvangur.IcelandAuth.UmbracoShared\ControllerBehavior.cs">
         <Link>ControllerBehavior.cs</Link>
       </Compile>

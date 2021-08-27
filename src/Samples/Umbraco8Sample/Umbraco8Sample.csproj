@@ -346,21 +346,21 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Vettvangur.IcelandAuth.Owin\Vettvangur.IcelandAuth.Owin.csproj">
-      <Project>{95869c4e-491f-4521-9603-77a51cab6f60}</Project>
-      <Name>Vettvangur.IcelandAuth.Owin</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Vettvangur.IcelandAuth.Umbraco8\Vettvangur.IcelandAuth.Umbraco8.csproj">
-      <Project>{9790656b-a50a-43e5-b039-4404e4eb9bb4}</Project>
-      <Name>Vettvangur.IcelandAuth.Umbraco8</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Vettvangur.IcelandAuth\Vettvangur.IcelandAuth.csproj">
-      <Project>{e1458e3f-4385-4f2f-91f6-e471882de8bb}</Project>
-      <Name>Vettvangur.IcelandAuth</Name>
-    </ProjectReference>
+    <Folder Include="Views\MacroPartials\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\MacroPartials\" />
+    <ProjectReference Include="..\..\libraries\Vettvangur.IcelandAuth.Owin\Vettvangur.IcelandAuth.Owin.csproj">
+      <Project>{18086663-4848-4a16-841a-61ea2a9d18c1}</Project>
+      <Name>Vettvangur.IcelandAuth.Owin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\libraries\Vettvangur.IcelandAuth.Umbraco8\Vettvangur.IcelandAuth.Umbraco8.csproj">
+      <Project>{76b747f1-0969-4702-a0dc-734288b0caeb}</Project>
+      <Name>Vettvangur.IcelandAuth.Umbraco8</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\libraries\Vettvangur.IcelandAuth\Vettvangur.IcelandAuth.csproj">
+      <Project>{9e73b0bb-b2e2-4f6c-861f-6979df2a5a23}</Project>
+      <Name>Vettvangur.IcelandAuth</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
