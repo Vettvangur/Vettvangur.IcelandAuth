@@ -283,7 +283,7 @@ namespace Vettvangur.IcelandAuth
             }
             else
             {
-                Logger?.LogWarning($"Audience mismatch, received {conditions["AudienceRestriction"]?["Audience"]?.InnerText}. Ensure IcelandAuth:Destination is correctly configured.");
+                Logger?.LogWarning($"Audience mismatch, received {conditions["AudienceRestriction"]?["Audience"]?.InnerText} compared To {_audience}. Ensure IcelandAuth:Destination is correctly configured.");
             }
 
             var destination = doc.DocumentElement.Attributes["Destination"].Value;
