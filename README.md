@@ -1,4 +1,4 @@
-# Vettvangur.IcelandAuth <sup>v3.0.2</sup>
+# Vettvangur.IcelandAuth <sup>v3.0.6</sup>
 
 Vettvangur.IcelandAuth is an open-source .Net [NuGet library](https://www.nuget.org/packages/Vettvangur.IcelandAuth/) intended to simplify integrating with the island.is authentication service.
 
