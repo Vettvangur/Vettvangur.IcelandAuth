@@ -15,6 +15,7 @@ This project was developed according to fixes and suggestions from [Syndis](http
   * [Installation & Usage](#installation--usage)
     * [AspNet Core](#aspnet-core)
     * [AspNet Umbraco 7/8](#aspnet-umbraco-78)
+    * [AspNet Umbraco 9](#aspnet-umbraco-9)
   * [Signature verification (skip when targetting Net5)](#signature-verification-skip-when-targetting-net5)
     * [Windows Setup](#windows-audkennisrot-setup)
     * [Other](#other)
@@ -76,6 +77,14 @@ Hook into the ControllerBehavior.Success and Error events to handle authenticati
 Note: Umbraco 7 projects configured with dependency injection will need to register an implementation of IcelandAuthService.
 
 Note: Umbraco 8 projects wanting to override the default IcelandAuthService implementation should use Umbraco's RegisterUnique Composition extension method.
+
+##### AspNet Umbraco 9
+Install appropriate Umbraco integration NuGet
+Configure library using appSettings
+Hook into the ControllerBehavior.Success and Error events to handle authentication events
+
+Add the following to your Startup.cs / Program.cs
+services.AddScoped<IcelandAuthService>();
 
 ## Signature verification (skip when targetting Net5)
 
