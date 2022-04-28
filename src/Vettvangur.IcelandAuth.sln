@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30204.135
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{55717B31-E08A-4541-AA5A-93DA4E08CEA5}"
 	ProjectSection(SolutionItems) = preProject
@@ -28,7 +28,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umbraco7Sample", "Samples\U
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SamplesFrontend", "Samples\SamplesFrontend\", "{E301303B-6A35-4621-8D15-F23A49E02602}"
 	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_5052"
 		Debug.AspNetCompiler.PhysicalPath = "Samples\SamplesFrontend\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_5052\"
@@ -44,7 +44,6 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SamplesFrontend", "Samples\
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "5052"
-		SlnRelativePath = "Samples\SamplesFrontend\"
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umbraco8Sample", "Samples\Umbraco8Sample\Umbraco8Sample.csproj", "{CF9DC300-74F5-4578-B9A4-D46B8E736297}"
@@ -58,6 +57,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vettvangur.IcelandAuth.Umbraco7", "libraries\Vettvangur.IcelandAuth.Umbraco7\Vettvangur.IcelandAuth.Umbraco7.csproj", "{1BC38B0A-8CD5-4C24-A960-0193F41B0FDB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vettvangur.IcelandAuth.Umbraco8", "libraries\Vettvangur.IcelandAuth.Umbraco8\Vettvangur.IcelandAuth.Umbraco8.csproj", "{76B747F1-0969-4702-A0DC-734288B0CAEB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vettvangur.IcelandAuth.Umbraco9", "libraries\Vettvangur.IcelandAuth.Umbraco9\Vettvangur.IcelandAuth.Umbraco9.csproj", "{18B96786-E62E-462F-A7B9-382E2D15239A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -103,6 +104,10 @@ Global
 		{76B747F1-0969-4702-A0DC-734288B0CAEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76B747F1-0969-4702-A0DC-734288B0CAEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76B747F1-0969-4702-A0DC-734288B0CAEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18B96786-E62E-462F-A7B9-382E2D15239A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18B96786-E62E-462F-A7B9-382E2D15239A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18B96786-E62E-462F-A7B9-382E2D15239A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18B96786-E62E-462F-A7B9-382E2D15239A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -118,6 +123,7 @@ Global
 		{18086663-4848-4A16-841A-61EA2A9D18C1} = {81D2AA39-3773-45D1-8386-C66270C5DDD6}
 		{1BC38B0A-8CD5-4C24-A960-0193F41B0FDB} = {81D2AA39-3773-45D1-8386-C66270C5DDD6}
 		{76B747F1-0969-4702-A0DC-734288B0CAEB} = {81D2AA39-3773-45D1-8386-C66270C5DDD6}
+		{18B96786-E62E-462F-A7B9-382E2D15239A} = {81D2AA39-3773-45D1-8386-C66270C5DDD6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {021250CD-B3C9-4C20-B71E-143525F4586F}
