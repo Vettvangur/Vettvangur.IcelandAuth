@@ -64,14 +64,19 @@ It's best to follow the appropriate sample depending on the framework you target
 
 ##### AspNet Core
 Install core library NuGet
+
 Add services.AddIcelandAuth() to Startup
+
 Configure library using appSettings.json
+
 Use in view or controller
 	@inject IcelandAuthService AuthService
 
 ##### AspNet Umbraco 7/8
 Install appropriate Umbraco integration NuGet
+
 Configure library using Web.config
+
 Hook into the ControllerBehavior.Success and Error events to handle authentication events
 
 Note: Umbraco 7 projects configured with dependency injection will need to register an implementation of IcelandAuthService.
@@ -80,10 +85,13 @@ Note: Umbraco 8 projects wanting to override the default IcelandAuthService impl
 
 ##### AspNet Umbraco 9
 Install appropriate Umbraco integration NuGet
+
 Configure library using appSettings
+
 Hook into the ControllerBehavior.Success and Error events to handle authentication events
 
 Add the following to your Startup.cs / Program.cs
+
 services.AddScoped<IcelandAuthService>();
 
 ## Signature verification (skip when targetting Net5)
@@ -195,7 +203,9 @@ Only Guid values are supported.
 
 ##### Verify IP Address
 Check if the users IP matches the one seen at authentication.
+    
 This usually fails during development as island.is will see the public ip of the development machine. Meanwhile the development server, if hosted on your internal network, will see your intranet address.
+    
 Also unsupported with Cloudflare and will break if user roams during authentication. Not an ideal setting in this day and age.
 
 ```js
