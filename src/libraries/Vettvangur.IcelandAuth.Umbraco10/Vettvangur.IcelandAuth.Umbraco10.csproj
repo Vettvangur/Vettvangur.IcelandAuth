@@ -2,17 +2,17 @@
 
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
-        <AssemblyName>Vettvangur.IcelandAuth.Umbraco9</AssemblyName>
+        <AssemblyName>Vettvangur.IcelandAuth.Umbraco10</AssemblyName>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         
         <!-- Package properties -->
-        <PackageId>Vettvangur.IcelandAuth.Umbraco9</PackageId>
+        <PackageId>Vettvangur.IcelandAuth.Umbraco10</PackageId>
         <Version>3.0.6</Version>
-        <Title>Vettvangur.IcelandAuth.Umbraco9</Title>
-        <Description>Enables easy integration with the island.is authentication service using Umbraco 9</Description>
+        <Title>Vettvangur.IcelandAuth.Umbraco10</Title>
+        <Description>Enables easy integration with the island.is authentication service using Umbraco 10</Description>
         <PackageReleaseNotes>Migrate to xdt transforms</PackageReleaseNotes>
         <Copyright>Copyright 2020</Copyright>
-        <PackageTags>Authentication;DigitalCertificates;NationalRegistry;Iceland;Umbraco;Umbraco9</PackageTags>
+        <PackageTags>Authentication;DigitalCertificates;NationalRegistry;Iceland;Umbraco;Umbraco10</PackageTags>
 
     </PropertyGroup>
 
@@ -23,8 +23,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Umbraco.Cms.Web.Common" Version="9.0.0" />
-        <PackageReference Include="Umbraco.Cms.Web.Website" Version="9.0.0" />
+        <PackageReference Include="Umbraco.Cms.Web.Common" Version="10.0.0" />
+        <PackageReference Include="Umbraco.Cms.Web.Website" Version="10.0.0" />
         <PackageReference Include="Vettvangur.IcelandAuth" Version="[3.0.*,4.0)" />
         <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
     </ItemGroup>

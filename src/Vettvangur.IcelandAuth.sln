@@ -44,6 +44,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SamplesFrontend", "Samples\
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "5052"
+		SlnRelativePath = "Samples\SamplesFrontend\"
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umbraco8Sample", "Samples\Umbraco8Sample\Umbraco8Sample.csproj", "{CF9DC300-74F5-4578-B9A4-D46B8E736297}"
@@ -59,6 +60,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vettvangur.IcelandAuth.Umbraco8", "libraries\Vettvangur.IcelandAuth.Umbraco8\Vettvangur.IcelandAuth.Umbraco8.csproj", "{76B747F1-0969-4702-A0DC-734288B0CAEB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vettvangur.IcelandAuth.Umbraco9", "libraries\Vettvangur.IcelandAuth.Umbraco9\Vettvangur.IcelandAuth.Umbraco9.csproj", "{18B96786-E62E-462F-A7B9-382E2D15239A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vettvangur.IcelandAuth.Umbraco10", "libraries\Vettvangur.IcelandAuth.Umbraco10\Vettvangur.IcelandAuth.Umbraco10.csproj", "{E099E692-F6FD-40E4-97EF-8E6798E2420C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -108,6 +111,10 @@ Global
 		{18B96786-E62E-462F-A7B9-382E2D15239A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18B96786-E62E-462F-A7B9-382E2D15239A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18B96786-E62E-462F-A7B9-382E2D15239A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E099E692-F6FD-40E4-97EF-8E6798E2420C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E099E692-F6FD-40E4-97EF-8E6798E2420C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E099E692-F6FD-40E4-97EF-8E6798E2420C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E099E692-F6FD-40E4-97EF-8E6798E2420C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -124,6 +131,7 @@ Global
 		{1BC38B0A-8CD5-4C24-A960-0193F41B0FDB} = {81D2AA39-3773-45D1-8386-C66270C5DDD6}
 		{76B747F1-0969-4702-A0DC-734288B0CAEB} = {81D2AA39-3773-45D1-8386-C66270C5DDD6}
 		{18B96786-E62E-462F-A7B9-382E2D15239A} = {81D2AA39-3773-45D1-8386-C66270C5DDD6}
+		{E099E692-F6FD-40E4-97EF-8E6798E2420C} = {81D2AA39-3773-45D1-8386-C66270C5DDD6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {021250CD-B3C9-4C20-B71E-143525F4586F}
