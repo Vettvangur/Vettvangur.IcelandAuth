@@ -74,7 +74,7 @@ namespace Vettvangur.IcelandAuth.Tests
             Assert.IsTrue(login.AuthIdOk);
 
             Assert.AreEqual("2008862919", login.UserSSN);
-            Assert.AreEqual("Íslykill", login.Authentication.First());
+            Assert.AreEqual("Styrktur Íslykill", login.Authentication.First());
         }
 
 #if NET5_0
@@ -106,7 +106,7 @@ namespace Vettvangur.IcelandAuth.Tests
         [TestMethod]
         public void AcceptsMatchingAuthentication()
         {
-            svc.Authentication = new string[] { "Íslykill" };
+            svc.Authentication = new string[] { "Styrktur Íslykill" };
 
             var login = svc.VerifySaml(Resources.OnetimeValidSaml, null);
 
