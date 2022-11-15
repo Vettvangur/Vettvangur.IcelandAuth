@@ -36,7 +36,7 @@
         <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
         <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.8" />
         <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.8" />
-        <PackageReference Include="System.Security.Cryptography.Xml" Version="4.7.0" />
+        <PackageReference Include="System.Security.Cryptography.Xml" Version="4.7.1" />
     </ItemGroup>
 
     <ItemGroup Condition=" '$(TargetFramework)' == 'net461'">
