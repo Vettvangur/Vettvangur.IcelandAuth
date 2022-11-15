@@ -1,5 +1,5 @@
 # Azure DevOps should one day handle publishing
-nuget restore src
+dotnet restore src
 dotnet pack ./src/libraries/Vettvangur.IcelandAuth/ -t:Build,Pack -p:Configuration=Release --include-symbols -o .
 dotnet pack ./src/libraries/Vettvangur.IcelandAuth.Umbraco7/ -t:Build,Pack -p:Configuration=Release --include-symbols -o .
 dotnet pack ./src/libraries/Vettvangur.IcelandAuth.Umbraco8/ -t:Build,Pack -p:Configuration=Release --include-symbols -o .
