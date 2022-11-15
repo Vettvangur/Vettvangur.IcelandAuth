@@ -15,7 +15,7 @@ namespace Vettvangur.IcelandAuth.UmbracoShared
     /// <summary>
     /// /umbraco/surface/icelandAuth/Login
     /// </summary>
-    public class ControllerBehavior
+    public class ControllerBehaviorCore
     {
         public static event SuccessCallback Success;
         public static event ErrorCallback Error;
@@ -25,19 +25,21 @@ namespace Vettvangur.IcelandAuth.UmbracoShared
 
         protected readonly IcelandAuthService IcelandAuthService;
 
-        public ControllerBehavior(IcelandAuthService icelandAuthService, IConfiguration configuration)
+        public ControllerBehaviorCore(IcelandAuthService icelandAuthService, IConfiguration configuration)
         {
             IcelandAuthService = icelandAuthService;
 
-            SuccessRedirect = string.IsNullOrEmpty(configuration["IcelandAuth:SuccessRedirect"])
+            SuccessRedirect 
+                = string.IsNullOrEmpty(configuration["IcelandAuth:SuccessRedirect"])
                 ? "/"
                 : configuration["IcelandAuth:SuccessRedirect"];
-            ErrorRedirect = string.IsNullOrEmpty(configuration["IcelandAuth:ErrorRedirect"])
+            ErrorRedirect 
+                = string.IsNullOrEmpty(configuration["IcelandAuth:ErrorRedirect"])
                 ? "/"
                 : configuration["IcelandAuth:ErrorRedirect"];
         }
 
-        public virtual string Login(HttpRequest request)
+        public virtual async Task<string> Login(HttpRequest request)
         {
             string callbackRedirect;
 
@@ -52,17 +54,17 @@ namespace Vettvangur.IcelandAuth.UmbracoShared
 
                 if (login?.Valid == true)
                 {
-                    callbackRedirect = Success?.Invoke(login);
+                    callbackRedirect = await Success?.Invoke(login);
                     return callbackRedirect ?? SuccessRedirect;
                 }
             }
 
-            callbackRedirect = Error?.Invoke(login);
+            callbackRedirect = await Error?.Invoke(login);
 
             return callbackRedirect ?? ErrorRedirect;
         }
     }
 
-    public delegate string SuccessCallback(SamlLogin login);
-    public delegate string ErrorCallback(SamlLogin login);
+    public delegate Task<string> SuccessCallback(SamlLogin login);
+    public delegate Task<string> ErrorCallback(SamlLogin login);
 }

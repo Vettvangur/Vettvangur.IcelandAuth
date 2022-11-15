@@ -7,7 +7,7 @@
         
         <!-- Package properties -->
         <PackageId>Vettvangur.IcelandAuth.Umbraco10</PackageId>
-        <Version>3.0.6</Version>
+        <Version>3.0.7</Version>
         <Title>Vettvangur.IcelandAuth.Umbraco10</Title>
         <Description>Enables easy integration with the island.is authentication service using Umbraco 10</Description>
         <PackageReleaseNotes>Migrate to xdt transforms</PackageReleaseNotes>
@@ -32,4 +32,11 @@
     <ItemGroup>
       <ProjectReference Include="..\Vettvangur.IcelandAuth\Vettvangur.IcelandAuth.csproj" />
     </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Vettvangur.IcelandAuth.UmbracoShared\ControllerBehaviorCore.cs">
+      <Link>ControllerBehaviorCore.cs</Link>
+    </Compile>
+  </ItemGroup>
+
 </Project>

@@ -12,6 +12,7 @@ using Umbraco.Cms.Web.Website.Controllers;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using System.Threading.Tasks;
 
 namespace Vettvangur.IcelandAuth.Umbraco10
 {
@@ -20,7 +21,7 @@ namespace Vettvangur.IcelandAuth.Umbraco10
     /// </summary>
     public class IcelandAuthController : SurfaceController
     {
-        private ControllerBehavior AuthHandler;
+        private ControllerBehaviorCore AuthHandler;
         public IcelandAuthController(
             IUmbracoContextAccessor umbracoContextAccessor,
             IUmbracoDatabaseFactory databaseFactory,
@@ -32,12 +33,14 @@ namespace Vettvangur.IcelandAuth.Umbraco10
             IConfiguration configuration)
             : base(umbracoContextAccessor, databaseFactory, services, appCaches, profilingLogger, publishedUrlProvider)
         {
-            AuthHandler = new ControllerBehavior(icelandAuthService, configuration);
+            AuthHandler = new ControllerBehaviorCore(icelandAuthService, configuration);
         }
 
-        public ActionResult Login()
+        [HttpPost]
+        [IgnoreAntiforgeryToken]
+        public async Task<ActionResult> Login()
         {
-            return Redirect(AuthHandler.Login(Request));
+            return Redirect(await AuthHandler.Login(Request));
         }
     }
 }
