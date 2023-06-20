@@ -403,11 +403,11 @@ namespace Vettvangur.IcelandAuth
 
             if (login.Valid)
             {
-                Logger?.LogInformation("island.is valid");
+                Logger?.LogDebug("island.is valid");
             }
             else
             {
-                Logger?.LogInformation("island.is invalid");
+                Logger?.LogDebug("island.is invalid");
             }
 
             return login;

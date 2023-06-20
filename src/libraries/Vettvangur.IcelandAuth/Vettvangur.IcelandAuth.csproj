@@ -7,10 +7,10 @@
         
         <!-- Package properties -->
         <PackageId>Vettvangur.IcelandAuth</PackageId>
-        <Version>3.0.6</Version>
+        <Version>3.0.7</Version>
         <Title>Vettvangur.IcelandAuth</Title>
         <Description>Enables easy integration with the island.is authentication service</Description>
-        <PackageReleaseNotes>Support unstandard ports for audience / destination</PackageReleaseNotes>
+        <PackageReleaseNotes>Change information log to debug mode for valid login</PackageReleaseNotes>
         <Copyright>Copyright 2020</Copyright>
         <PackageTags>Authentication;DigitalCertificates;NationalRegistry;Iceland</PackageTags>
 
