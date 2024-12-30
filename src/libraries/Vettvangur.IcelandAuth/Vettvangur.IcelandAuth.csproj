@@ -7,10 +7,10 @@
         
         <!-- Package properties -->
         <PackageId>Vettvangur.IcelandAuth</PackageId>
-        <Version>3.0.7</Version>
+        <Version>3.0.8</Version>
         <Title>Vettvangur.IcelandAuth</Title>
         <Description>Enables easy integration with the island.is authentication service</Description>
-        <PackageReleaseNotes>Change information log to debug mode for valid login</PackageReleaseNotes>
+        <PackageReleaseNotes>Update Packages</PackageReleaseNotes>
         <Copyright>Copyright 2020</Copyright>
         <PackageTags>Authentication;DigitalCertificates;NationalRegistry;Iceland</PackageTags>
 
@@ -34,21 +34,21 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
-        <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.8" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
         <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.8" />
-        <PackageReference Include="System.Security.Cryptography.Xml" Version="4.7.0" />
+        <PackageReference Include="System.Security.Cryptography.Xml" Version="4.7.1" />
     </ItemGroup>
 
     <ItemGroup Condition=" '$(TargetFramework)' == 'net461'">
-      <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.8" />
+      <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
       <Reference Include="System.Web" />
       <Reference Include="System" />
     </ItemGroup>
   
     <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.1'">
-      <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.0.0" />
+      <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.1.34" />
     </ItemGroup>
     <ItemGroup Condition=" '$(TargetFramework)' == 'net5.0'">
-      <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.0.0" />
+      <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.1.34" />
     </ItemGroup>
 </Project>

@@ -7,10 +7,10 @@
         
         <!-- Package properties -->
         <PackageId>Vettvangur.IcelandAuth.Umbraco8</PackageId>
-        <Version>3.0.2</Version>
+        <Version>3.0.3</Version>
         <Title>Vettvangur.IcelandAuth.Umbraco8</Title>
         <Description>Enables easy integration with the island.is authentication service using Umbraco 8</Description>
-        <PackageReleaseNotes>Migrate to xdt transforms</PackageReleaseNotes>
+        <PackageReleaseNotes>Update Umbraco to latest version</PackageReleaseNotes>
         <Copyright>Copyright 2020</Copyright>
         <PackageTags>Authentication;DigitalCertificates;NationalRegistry;Iceland;Umbraco;Umbraco8</PackageTags>
 
@@ -41,11 +41,7 @@
     <ItemGroup>
         <PackageReference Include="Vettvangur.IcelandAuth" Version="[3.0.*,4.0)" />
         <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
-        <PackageReference Include="UmbracoCms.Core" Version="8.0.0" />
-        <PackageReference Include="UmbracoCms.Web" Version="8.0.0" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\Vettvangur.IcelandAuth\Vettvangur.IcelandAuth.csproj" />
+        <PackageReference Include="UmbracoCms.Core" Version="8.18.15" />
+        <PackageReference Include="UmbracoCms.Web" Version="8.18.15" />
     </ItemGroup>
 </Project>
